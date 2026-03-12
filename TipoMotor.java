@@ -2,10 +2,9 @@
 /**
  * Enumeration class TipoMotor - write a description of the enum class here
  * 
- * @author (your name here)
- * @version (version number or date here)
+ * @author Nicolás Míguez Ramos
+ * @version 1.0.0
  */
-public enum TipoMotor
-{
-    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+public enum TipoMotor {
+    ELECTRICO,GASOLINA,HIBRIDO
 }

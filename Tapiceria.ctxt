@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Tapiceria
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Tapiceria\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=TipoTapiceria\ getTipoTapiceria()
+comment2.params=tipoTapiceria
+comment2.target=void\ setTipoTapiceria(TipoTapiceria)
+comment3.params=
+comment3.target=int\ getColor()
+comment4.params=color
+comment4.target=void\ setColor(int)
+comment5.params=
+comment5.target=int\ getmTela()
+comment6.params=mTela
+comment6.target=void\ setmTela(int)
+numComments=7
