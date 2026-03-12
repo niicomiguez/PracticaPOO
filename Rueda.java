@@ -12,6 +12,10 @@ public class Rueda {
     private double diametro;
     private int indiceCarga;
     private int codigoVelocidad;
+    
+    public enum TipoRueda {
+    NORMAL,DEPORTIVO,TODOTERRENO
+    }
 
     public TipoRueda getTipoRueda() {
         return tipoRueda;

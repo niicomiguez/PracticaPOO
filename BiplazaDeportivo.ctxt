@@ -1,5 +1,3 @@
 #BlueJ class context
 comment0.target=BiplazaDeportivo
-comment1.params=color\ taraVehiculo\ pesoMax\ motor\ tapiceria\ ruedas
-comment1.target=BiplazaDeportivo(java.lang.String,\ int,\ double,\ Motor,\ Tapiceria,\ java.util.List)
-numComments=2
+numComments=1

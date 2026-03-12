@@ -2,13 +2,13 @@
 comment0.target=Motor
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Motor\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
-comment1.target=TipoMotor\ getTipoMotor()
+comment1.target=Motor.TipoMotor\ getTipoMotor()
 comment10.params=
 comment10.target=java.lang.String\ toString()
 comment2.params=tipoMotor\ cilindrada\ potencia\ cilindros
-comment2.target=Motor(TipoMotor,\ int,\ int,\ int)
+comment2.target=Motor(Motor.TipoMotor,\ int,\ double,\ int)
 comment3.params=tipoMotor
-comment3.target=void\ setTipoMotor(TipoMotor)
+comment3.target=void\ setTipoMotor(Motor.TipoMotor)
 comment4.params=
 comment4.target=double\ getCilindrada()
 comment5.params=cilindrada

@@ -7,7 +7,7 @@ import java.util.List;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Vehiculo {
+public abstract class Vehiculo {
     private String color;
     private int plazas;
     private int taraVehiculo;
@@ -15,8 +15,14 @@ public class Vehiculo {
     private Motor motor;
     private Tapiceria tapiceria;
     private List<Rueda> ruedas;
+    private EstadoVehiculo estado;
 
-    public Vehiculo(String color, int plazas, int taraVehiculo, double pesoMax, Motor motor, Tapiceria tapiceria, List<Rueda> ruedas) {
+    public enum EstadoVehiculo
+{
+     CHASIS, MOTOR, TAPICERIA, RUEDAS
+}
+
+    public Vehiculo(String color, int plazas, int taraVehiculo, double pesoMax, Motor motor, Tapiceria tapiceria, List<Rueda> ruedas, EstadoVehiculo estado) {
         this.color = color;
         this.plazas = plazas;
         this.taraVehiculo = taraVehiculo;
@@ -24,8 +30,17 @@ public class Vehiculo {
         this.motor = motor;
         this.tapiceria = tapiceria;
         this.ruedas = ruedas;
+        this.estado=estado;
     }
 
+    public EstadoVehiculo getEstado(){
+        return estado;
+    }
+    
+    public void setEstado(EstadoVehiculo estado){
+        this.estado=estado;
+    }
+    
     public String getColor() {
         return color;
     }
@@ -34,12 +49,12 @@ public class Vehiculo {
         this.color = color;
     }
 
-    public int getnPlazas() {
+    public int getPlazas() {
         return plazas;
     }
 
-    public void setnPlazas(int nPlazas) {
-        this.plazas = nPlazas;
+    public void setPlazas(int plazas) {
+        this.plazas = plazas;
     }
 
     public int getTaraVehiculo() {

@@ -10,6 +10,11 @@ public class Tapiceria {
     private TipoTapiceria tipoTapiceria;
     private String color;
     private int metrosTela;
+    
+    public enum TipoTapiceria {
+    TELA,CUERO,ALCANTARA
+    }
+
 
     public TipoTapiceria getTipoTapiceria() {
         return tipoTapiceria;

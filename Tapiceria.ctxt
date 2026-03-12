@@ -2,11 +2,11 @@
 comment0.target=Tapiceria
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Tapiceria\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
-comment1.target=TipoTapiceria\ getTipoTapiceria()
+comment1.target=Tapiceria.TipoTapiceria\ getTipoTapiceria()
 comment2.params=tipoTapiceria\ color\ metrosTela
-comment2.target=Tapiceria(TipoTapiceria,\ java.lang.String,\ int)
+comment2.target=Tapiceria(Tapiceria.TipoTapiceria,\ java.lang.String,\ int)
 comment3.params=tipoTapiceria
-comment3.target=void\ setTipoTapiceria(TipoTapiceria)
+comment3.target=void\ setTipoTapiceria(Tapiceria.TipoTapiceria)
 comment4.params=
 comment4.target=java.lang.String\ getColor()
 comment5.params=color

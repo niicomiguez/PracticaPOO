@@ -11,12 +11,17 @@ public class Motor {
     private double cilindrada;
     private double potencia;
     private int cilindros;
+    
+    public enum TipoMotor {
+    ELECTRICO,GASOLINA,HIBRIDO
+    }
+
 
     public TipoMotor getTipoMotor() {
         return tipoMotor;
     }
 
-    public Motor(TipoMotor tipoMotor, int cilindrada, int potencia, int cilindros) {
+    public Motor(TipoMotor tipoMotor, int cilindrada, double potencia, int cilindros) {
         this.tipoMotor = tipoMotor;
         this.cilindrada = cilindrada;
         this.potencia = potencia;
