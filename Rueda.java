@@ -1,4 +1,4 @@
-
+import java.util.Objects;
 /**
  * Write a description of class Rueda here.
  * 
@@ -8,8 +8,8 @@
 public class Rueda {
 
     private TipoRueda tipoRueda;
-    private int ancho;
-    private int diametro;
+    private double ancho;
+    private double diametro;
     private int indiceCarga;
     private int codigoVelocidad;
 
@@ -17,23 +17,31 @@ public class Rueda {
         return tipoRueda;
     }
 
+    public Rueda(TipoRueda tipoRueda, int ancho, int diametro, int indiceCarga, int codigoVelocidad) {
+        this.tipoRueda = tipoRueda;
+        this.ancho = ancho;
+        this.diametro = diametro;
+        this.indiceCarga = indiceCarga;
+        this.codigoVelocidad = codigoVelocidad;
+    }
+
     public void setTipoRueda(TipoRueda tipoRueda) {
         this.tipoRueda = tipoRueda;
     }
 
-    public int getAncho() {
+    public double getAncho() {
         return ancho;
     }
 
-    public void setAncho(int ancho) {
+    public void setAncho(double ancho) {
         this.ancho = ancho;
     }
 
-    public int getDiametro() {
+    public double getDiametro() {
         return diametro;
     }
 
-    public void setDiametro(int diametro) {
+    public void setDiametro(double diametro) {
         this.diametro = diametro;
     }
 
@@ -52,5 +60,30 @@ public class Rueda {
     public void setCodigoVelocidad(int codigoVelocidad) {
         this.codigoVelocidad = codigoVelocidad;
     }
+
+    @Override
+    public String toString() {
+        return "Rueda{" +
+                "tipoRueda=" + tipoRueda +
+                ", ancho=" + ancho +
+                ", diametro=" + diametro +
+                ", indiceCarga=" + indiceCarga +
+                ", codigoVelocidad=" + codigoVelocidad +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rueda rueda = (Rueda) o;
+        return ancho == rueda.ancho && diametro == rueda.diametro && indiceCarga == rueda.indiceCarga && codigoVelocidad == rueda.codigoVelocidad && tipoRueda == rueda.tipoRueda;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(tipoRueda, ancho, diametro, indiceCarga, codigoVelocidad);
+    }
 }
+
 

@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=Furgoneta
+comment1.params=color\ plazas\ taraVehiculo\ pesoMax\ motor\ tapiceria\ ruedas\ volumenCarga
+comment1.target=Furgoneta(java.lang.String,\ int,\ int,\ double,\ Motor,\ Tapiceria,\ java.util.List,\ double)
+numComments=2

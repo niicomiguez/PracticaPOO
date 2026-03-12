@@ -8,22 +8,28 @@
 public class Tapiceria {
 
     private TipoTapiceria tipoTapiceria;
-    private int color;
+    private String color;
     private int metrosTela;
 
     public TipoTapiceria getTipoTapiceria() {
         return tipoTapiceria;
     }
 
+    public Tapiceria(TipoTapiceria tipoTapiceria, String color, int metrosTela) {
+        this.tipoTapiceria = tipoTapiceria;
+        this.color = color;
+        this.metrosTela = metrosTela;
+    }
+
     public void setTipoTapiceria(TipoTapiceria tipoTapiceria) {
         this.tipoTapiceria = tipoTapiceria;
     }
 
-    public int getColor() {
+    public String getColor() {
         return color;
     }
 
-    public void setColor(int color) {
+    public void setColor(String color) {
         this.color = color;
     }
 
@@ -33,5 +39,14 @@ public class Tapiceria {
 
     public void setMetrosTela(int metrosTela) {
         this.metrosTela = metrosTela;
+    }
+
+    @Override
+    public String toString() {
+        return "Tapiceria{" +
+                "tipoTapiceria=" + tipoTapiceria +
+                ", color=" + color +
+                ", metrosTela=" + metrosTela +
+                '}';
     }
 }

@@ -8,19 +8,29 @@ import java.util.List;
  * @version (a version number or a date)
  */
 public class Vehiculo {
-    private Color color;
+    private String color;
     private int plazas;
     private int taraVehiculo;
-    private int pesoMax;
+    private double pesoMax;
     private Motor motor;
     private Tapiceria tapiceria;
     private List<Rueda> ruedas;
 
-    public Color getColor() {
+    public Vehiculo(String color, int plazas, int taraVehiculo, double pesoMax, Motor motor, Tapiceria tapiceria, List<Rueda> ruedas) {
+        this.color = color;
+        this.plazas = plazas;
+        this.taraVehiculo = taraVehiculo;
+        this.pesoMax = pesoMax;
+        this.motor = motor;
+        this.tapiceria = tapiceria;
+        this.ruedas = ruedas;
+    }
+
+    public String getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(String color) {
         this.color = color;
     }
 
@@ -48,11 +58,11 @@ public class Vehiculo {
         this.motor = motor;
     }
 
-    public int getPesoMax() {
+    public double getPesoMax() {
         return pesoMax;
     }
 
-    public void setPesoMax(int pesoMax) {
+    public void setPesoMax(double pesoMax) {
         this.pesoMax = pesoMax;
     }
 
@@ -71,5 +81,19 @@ public class Vehiculo {
     public void setRuedas(List<Rueda> ruedas) {
         this.ruedas = ruedas;
     }
+
+    @Override
+    public String toString() {
+        return "Vehiculo{" +
+                "color=" + color +
+                ", plazas=" + plazas +
+                ", taraVehiculo=" + taraVehiculo +
+                ", pesoMax=" + pesoMax +
+                ", motor=" + motor +
+                ", tapiceria=" + tapiceria +
+                ", ruedas=" + ruedas +
+                '}';
+    }
+
 }
 
