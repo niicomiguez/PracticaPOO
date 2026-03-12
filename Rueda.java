@@ -10,8 +10,8 @@ public class Rueda {
     private TipoRueda tipoRueda;
     private int ancho;
     private int diametro;
-    private int iCarga;
-    private int cVelocidad;
+    private int indiceCarga;
+    private int codigoVelocidad;
 
     public TipoRueda getTipoRueda() {
         return tipoRueda;
@@ -37,19 +37,20 @@ public class Rueda {
         this.diametro = diametro;
     }
 
-    public int getiCarga() {
-        return iCarga;
+    public int getIndiceCarga() {
+        return indiceCarga;
     }
 
-    public void setiCarga(int iCarga) {
-        this.iCarga = iCarga;
+    public void setIndiceCarga(int indiceCarga) {
+        this.indiceCarga = indiceCarga;
     }
 
-    public int getcVelocidad() {
-        return cVelocidad;
+    public int getCodigoVelocidad() {
+        return codigoVelocidad;
     }
 
-    public void setcVelocidad(int cVelocidad) {
-        this.cVelocidad = cVelocidad;
+    public void setCodigoVelocidad(int codigoVelocidad) {
+        this.codigoVelocidad = codigoVelocidad;
     }
 }
+

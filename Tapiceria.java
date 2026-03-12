@@ -9,7 +9,7 @@ public class Tapiceria {
 
     private TipoTapiceria tipoTapiceria;
     private int color;
-    private int mTela;
+    private int metrosTela;
 
     public TipoTapiceria getTipoTapiceria() {
         return tipoTapiceria;
@@ -27,11 +27,11 @@ public class Tapiceria {
         this.color = color;
     }
 
-    public int getmTela() {
-        return mTela;
+    public int getMetrosTela() {
+        return metrosTela;
     }
 
-    public void setmTela(int mTela) {
-        this.mTela = mTela;
+    public void setMetrosTela(int metrosTela) {
+        this.metrosTela = metrosTela;
     }
 }

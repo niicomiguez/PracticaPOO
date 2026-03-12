@@ -10,7 +10,7 @@ public class Motor {
     private TipoMotor tipoMotor;
     private int cilindrada;
     private int potencia;
-    private int nCilindros;
+    private int cilindros;
 
     public TipoMotor getTipoMotor() {
         return tipoMotor;
@@ -36,11 +36,11 @@ public class Motor {
         this.potencia = potencia;
     }
 
-    public int getnCilindros() {
-        return nCilindros;
+    public int getCilindros() {
+        return cilindros;
     }
 
-    public void setnCilindros(int nCilindros) {
-        this.nCilindros = nCilindros;
+    public void setCilindros(int cilindros) {
+        this.cilindros = cilindros;
     }
 }
