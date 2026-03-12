@@ -1,19 +1,19 @@
 
 /**
- * Write a description of class GestionFabrica here.
+ * Write a description of class GestionFabricaDAO here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class GestionFabrica
+public class GestionFabricaDAO
 {
     // instance variables - replace the example below with your own
     private int x;
 
     /**
-     * Constructor for objects of class GestionFabrica
+     * Constructor for objects of class GestionFabricaDAO
      */
-    public GestionFabrica()
+    public GestionFabricaDAO()
     {
         // initialise instance variables
         x = 0;
