@@ -1,33 +1,55 @@
+import java.util.List;
+import java.util.ArrayList;
 
-/**
- * Write a description of class GestionFabricaDAO here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class GestionFabricaDAO
-{
-    // instance variables - replace the example below with your own
-    private int x;
+public class GestionFabricaDAO {
+    private List<Motor> motores;
+    private List<Rueda> ruedas;
+    private List<Tapiceria> tapiceria;
 
-    /**
-     * Constructor for objects of class GestionFabricaDAO
-     */
-    public GestionFabricaDAO()
-    {
-        // initialise instance variables
-        x = 0;
+    public GestionFabricaDAO() {
+        this.motores = new ArrayList<>();
+        this.ruedas = new ArrayList<>();
+        this.tapiceria = new ArrayList<>();
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    // region GESTIÓN DE MOTORES
+    public void añadirMotor(Motor nuevoMotor) {
+        if (nuevoMotor != null) {
+            this.motores.add(nuevoMotor);
+        }
     }
+
+    public String listarMotores() {
+        if (motores.isEmpty()) {
+            return "No hay motores disponibles";
+        }
+
+        StringBuilder listado = new StringBuilder("--- Listado de Motores ---\n");
+        for (Motor m : this.motores) {
+            listado.append(m.toString()).append("\n");
+        }
+        return listado.toString();
+    }
+
+    public Motor buscarMotorPorId(int idMotor) {
+        for (Motor m : this.motores) {
+            if (m.getId() == idMotor) {
+                return m;
+            }
+        }
+        return null;
+    }
+
+    public String borrarMotorPorId(int idMotor) {
+        Motor motorEncontrado = buscarMotorPorId(idMotor);
+
+        if (motorEncontrado != null) {
+            this.motores.remove(motorEncontrado);
+            return "Motor con id " + idMotor + " borrado correctamente";
+        }
+        return "No existe un motor con id " + idMotor + " en la fábrica";
+    }
+    // endregion
+
+
 }

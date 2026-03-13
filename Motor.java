@@ -7,6 +7,8 @@
  */
 public class Motor {
 
+    private static int contadorId = 1;
+    private int id;
     private TipoMotor tipoMotor;
     private double cilindrada;
     private double potencia;
@@ -16,12 +18,15 @@ public class Motor {
     ELECTRICO,GASOLINA,HIBRIDO
     }
 
-
+    public int getId() {
+        return id;
+    }
     public TipoMotor getTipoMotor() {
         return tipoMotor;
     }
 
-    public Motor(TipoMotor tipoMotor, int cilindrada, double potencia, int cilindros) {
+    public Motor(TipoMotor tipoMotor, double cilindrada, double potencia, int cilindros) {
+        this.id = contadorId++;
         this.tipoMotor = tipoMotor;
         this.cilindrada = cilindrada;
         this.potencia = potencia;
@@ -59,7 +64,8 @@ public class Motor {
     @Override
     public String toString() {
         return "Motor{" +
-                "tipoMotor=" + tipoMotor +
+                "ID ="+ id +
+                ", tipoMotor=" + tipoMotor +
                 ", cilindrada=" + cilindrada +
                 ", potencia=" + potencia +
                 ", cilindros=" + cilindros +
