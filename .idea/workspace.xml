@@ -6,13 +6,35 @@
   <component name="ChangeListManager">
     <list default="true" id="43a1013d-abe6-43a6-b036-f63fa10e2224" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Administrador.class" beforeDir="false" afterPath="$PROJECT_DIR$/Administrador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BiplazaDeportivo.class" beforeDir="false" afterPath="$PROJECT_DIR$/BiplazaDeportivo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FactoriaCoches.class" beforeDir="false" afterPath="$PROJECT_DIR$/FactoriaCoches.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FactoriaCoches.ctxt" beforeDir="false" afterPath="$PROJECT_DIR$/FactoriaCoches.ctxt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FactoriaCoches.java" beforeDir="false" afterPath="$PROJECT_DIR$/FactoriaCoches.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Furgoneta.class" beforeDir="false" afterPath="$PROJECT_DIR$/Furgoneta.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GestionFabricaDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/GestionFabricaDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GestionFabricaDAO.ctxt" beforeDir="false" afterPath="$PROJECT_DIR$/GestionFabricaDAO.ctxt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GestionFabricaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestionFabricaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Motor$TipoMotor.class" beforeDir="false" afterPath="$PROJECT_DIR$/Motor$TipoMotor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GestorPlanta.class" beforeDir="false" afterPath="$PROJECT_DIR$/GestorPlanta.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mecanico.class" beforeDir="false" afterPath="$PROJECT_DIR$/Mecanico.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Motor.class" beforeDir="false" afterPath="$PROJECT_DIR$/Motor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Motor.ctxt" beforeDir="false" afterPath="$PROJECT_DIR$/Motor.ctxt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Motor.java" beforeDir="false" afterPath="$PROJECT_DIR$/Motor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Operario.class" beforeDir="false" afterPath="$PROJECT_DIR$/Operario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rueda$TipoRueda.class" beforeDir="false" afterPath="$PROJECT_DIR$/Rueda$TipoRueda.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rueda.class" beforeDir="false" afterPath="$PROJECT_DIR$/Rueda.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rueda.java" beforeDir="false" afterPath="$PROJECT_DIR$/Rueda.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tapiceria$TipoTapiceria.class" beforeDir="false" afterPath="$PROJECT_DIR$/Tapiceria$TipoTapiceria.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tapiceria.class" beforeDir="false" afterPath="$PROJECT_DIR$/Tapiceria.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tapiceria.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tapiceria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Trabajador.class" beforeDir="false" afterPath="$PROJECT_DIR$/Trabajador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Trabajador.ctxt" beforeDir="false" afterPath="$PROJECT_DIR$/Trabajador.ctxt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Trabajador.java" beforeDir="false" afterPath="$PROJECT_DIR$/Trabajador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Turismo.class" beforeDir="false" afterPath="$PROJECT_DIR$/Turismo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vehiculo.class" beforeDir="false" afterPath="$PROJECT_DIR$/Vehiculo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vehiculo.ctxt" beforeDir="false" afterPath="$PROJECT_DIR$/Vehiculo.ctxt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vehiculo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Vehiculo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.bluej" beforeDir="false" afterPath="$PROJECT_DIR$/package.bluej" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +55,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/User/Desktop/UNED/2Cuatri/POO/PracticaPOO_Miguez_Ramos_Nicolas",
     "node.js.detected.package.eslint": "true",
@@ -62,7 +86,8 @@
       <updated>1773317724839</updated>
       <workItem from="1773317725889" duration="22000" />
       <workItem from="1773401682234" duration="10000" />
-      <workItem from="1773401938747" duration="1810000" />
+      <workItem from="1773401938747" duration="1901000" />
+      <workItem from="1773682156324" duration="39000" />
     </task>
     <servers />
   </component>

@@ -17,10 +17,7 @@ public abstract class Vehiculo {
     private List<Rueda> ruedas;
     private EstadoVehiculo estado;
 
-    public enum EstadoVehiculo
-{
-     CHASIS, MOTOR, TAPICERIA, RUEDAS
-}
+
 
     public Vehiculo(String color, int plazas, int taraVehiculo, double pesoMax, Motor motor, Tapiceria tapiceria, List<Rueda> ruedas, EstadoVehiculo estado) {
         this.color = color;

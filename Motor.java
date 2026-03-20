@@ -13,17 +13,6 @@ public class Motor {
     private double cilindrada;
     private double potencia;
     private int cilindros;
-    
-    public enum TipoMotor {
-    ELECTRICO,GASOLINA,HIBRIDO
-    }
-
-    public int getId() {
-        return id;
-    }
-    public TipoMotor getTipoMotor() {
-        return tipoMotor;
-    }
 
     public Motor(TipoMotor tipoMotor, double cilindrada, double potencia, int cilindros) {
         this.id = contadorId++;
@@ -33,6 +22,12 @@ public class Motor {
         this.cilindros = cilindros;
     }
 
+    public int getId() {
+        return id;
+    }
+    public TipoMotor getTipoMotor() {
+        return tipoMotor;
+    }
     public void setTipoMotor(TipoMotor tipoMotor) {
         this.tipoMotor = tipoMotor;
     }

@@ -2,11 +2,11 @@
 comment0.target=Trabajador
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Trabajador\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=nombre\ apellidos\ direccion\ DNI\ numSeguridadSocial\ puesto\ salario\ fechaIngreso
-comment1.target=Trabajador(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ int,\ Trabajador.Puesto,\ int,\ java.lang.String)
+comment1.target=Trabajador(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ int,\ Puesto,\ int,\ java.lang.String)
 comment10.params=
-comment10.target=Trabajador.Puesto\ getPuesto()
+comment10.target=Puesto\ getPuesto()
 comment11.params=puesto
-comment11.target=void\ setPuesto(Trabajador.Puesto)
+comment11.target=void\ setPuesto(Puesto)
 comment12.params=
 comment12.target=int\ getNumSeguridadSocial()
 comment13.params=numSeguridadSocial

@@ -15,9 +15,7 @@ public abstract class Trabajador {
     private int salario;
     private String fechaIngreso;
     
-    public enum Puesto {
-    OPERARIO,GESTOR,ADMINISTRADOR,MECANICO
-    }
+    
 
     public Trabajador(String nombre, String apellidos, String direccion, String DNI, int numSeguridadSocial, Puesto puesto, int salario, String fechaIngreso) {
         this.nombre = nombre;

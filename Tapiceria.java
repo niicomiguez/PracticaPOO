@@ -7,25 +7,26 @@
  */
 public class Tapiceria {
 
+    private static int contadorId = 1;
+    private int id;
     private TipoTapiceria tipoTapiceria;
     private String color;
     private int metrosTela;
     
-    public enum TipoTapiceria {
-    TELA,CUERO,ALCANTARA
-    }
-
-
-    public TipoTapiceria getTipoTapiceria() {
-        return tipoTapiceria;
-    }
 
     public Tapiceria(TipoTapiceria tipoTapiceria, String color, int metrosTela) {
+        this.id = contadorId++;
         this.tipoTapiceria = tipoTapiceria;
         this.color = color;
         this.metrosTela = metrosTela;
     }
 
+    public int getId() {
+        return id;
+    }
+    public TipoTapiceria getTipoTapiceria() {
+        return tipoTapiceria;
+    }
     public void setTipoTapiceria(TipoTapiceria tipoTapiceria) {
         this.tipoTapiceria = tipoTapiceria;
     }

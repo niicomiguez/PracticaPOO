@@ -7,5 +7,6 @@
  */
 public class Planificador
 {
-   public enum ModoSimulacion { SIMPLE, COMPLEJA, MUY_COMPLEJA }
+   
+    
 }

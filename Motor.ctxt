@@ -1,16 +1,16 @@
 #BlueJ class context
 comment0.target=Motor
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Motor\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=
-comment1.target=int\ getId()
+comment1.params=tipoMotor\ cilindrada\ potencia\ cilindros
+comment1.target=Motor(TipoMotor,\ double,\ double,\ int)
 comment10.params=cilindros
 comment10.target=void\ setCilindros(int)
 comment11.params=
 comment11.target=java.lang.String\ toString()
 comment2.params=
-comment2.target=TipoMotor\ getTipoMotor()
-comment3.params=tipoMotor\ cilindrada\ potencia\ cilindros
-comment3.target=Motor(TipoMotor,\ double,\ double,\ int)
+comment2.target=int\ getId()
+comment3.params=
+comment3.target=TipoMotor\ getTipoMotor()
 comment4.params=tipoMotor
 comment4.target=void\ setTipoMotor(TipoMotor)
 comment5.params=

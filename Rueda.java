@@ -7,14 +7,16 @@ import java.util.Objects;
  */
 public class Rueda {
 
+    private static int contadorId = 1;
     private TipoRueda tipoRueda;
     private double ancho;
     private double diametro;
     private int indiceCarga;
     private int codigoVelocidad;
-    
-    public enum TipoRueda {
-    NORMAL,DEPORTIVO,TODOTERRENO
+    private int id;
+
+    public int getId() {
+        return id;
     }
 
     public TipoRueda getTipoRueda() {
@@ -22,6 +24,7 @@ public class Rueda {
     }
 
     public Rueda(TipoRueda tipoRueda, int ancho, int diametro, int indiceCarga, int codigoVelocidad) {
+        this.id = contadorId++;
         this.tipoRueda = tipoRueda;
         this.ancho = ancho;
         this.diametro = diametro;

@@ -8,9 +8,7 @@ import java.util.List;
  */
 public class FactoriaCoches {
     
-    public enum TipoVehiculo {
-           TURISMO,BIPLAZA,FURGONETA
-    }
+    
 
     /**
      * Crea un vehículo según el tipo indicado.
@@ -20,7 +18,7 @@ public class FactoriaCoches {
                                      double pesoMax, Motor motor, Tapiceria tapiceria, 
                                      List<Rueda> ruedas) {  
         // Todos empiezan en estado CHASIS
-        Vehiculo.EstadoVehiculo estadoInicial = Vehiculo.EstadoVehiculo.CHASIS;
+        EstadoVehiculo estadoInicial = EstadoVehiculo.CHASIS;
 
         if (tipo == TipoVehiculo.TURISMO) {
         return new Turismo(color, plazas, tara, pesoMax, motor, tapiceria, ruedas, estadoInicial);
