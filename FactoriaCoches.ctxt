@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=FactoriaCoches
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ FactoriaCoches\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=tipo\ color\ plazas\ tara\ pesoMax\ motor\ tapiceria\ ruedas
-comment1.target=Vehiculo\ fabricarVehiculo(TipoVehiculo,\ java.lang.String,\ int,\ int,\ double,\ Motor,\ Tapiceria,\ java.util.List)
-comment1.text=\r\n\ Crea\ un\ veh\u00EDculo\ seg\u00FAn\ el\ tipo\ indicado.\r\n\ Seg\u00FAn\ el\ enunciado,\ cada\ tipo\ tiene\ su\ propia\ cadena\ de\ montaje.\r\n
+comment0.text=\r\n\ Factor\u00EDa\ encargada\ de\ instanciar\ los\ diferentes\ tipos\ de\ veh\u00EDculos.\r\n
+comment1.params=tipo\ bastidor\ color\ plazas\ tara\ pesoMax
+comment1.target=Vehiculo\ fabricarVehiculo(TipoVehiculo,\ java.lang.String,\ java.lang.String,\ int,\ int,\ double)
+comment1.text=\r\n\ Crea\ un\ veh\u00EDculo\ seg\u00FAn\ el\ tipo\ indicado.\r\n\ Se\ elimina\ el\ paso\ de\ componentes\ (motor,\ tapiceria,\ ruedas)\ porque\ \r\n\ el\ veh\u00EDculo\ comienza\ en\ fase\ CHASIS\ y\ est\u00E1\ vac\u00EDo.\r\n
 numComments=2

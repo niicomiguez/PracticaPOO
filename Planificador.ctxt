@@ -1,4 +1,24 @@
 #BlueJ class context
 comment0.target=Planificador
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Planificador\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-numComments=1
+comment0.text=\r\n\ Clase\ encargada\ de\ coordinar\ el\ tiempo\ y\ las\ acciones\ de\ la\ f\u00E1brica.\r\n\ Act\u00FAa\ como\ el\ motor\ de\ la\ simulaci\u00F3n.\r\n
+comment1.params=modo\ dao
+comment1.target=Planificador(TipoSimulacion,\ GestionFabricaDAO)
+comment1.text=\r\n\ Constructor\ del\ Planificador.\r\n\ @param\ modo\ El\ modo\ de\ simulaci\u00F3n\ (SIMPLE,\ COMPLEJO,\ etc.)\r\n\ @param\ dao\ El\ objeto\ de\ acceso\ a\ datos\ para\ registrar\ eventos\ y\ consultar\ plantilla.\r\n
+comment2.params=
+comment2.target=void\ tick()
+comment2.text=\r\n\ Avanza\ un\ segundo\ en\ la\ simulaci\u00F3n\ y\ ejecuta\ la\ l\u00F3gica\ de\ todas\ las\ cadenas.\r\n
+comment3.params=cadena
+comment3.target=void\ introducirNuevoVehiculo(CadenaMontaje)
+comment3.text=\r\n\ L\u00F3gica\ interna\ para\ crear\ un\ veh\u00EDculo\ y\ meterlo\ en\ la\ cadena.\r\n
+comment4.params=cadena
+comment4.target=void\ a\u00F1adirCadena(CadenaMontaje)
+comment4.text=\r\n\ A\u00F1ade\ una\ cadena\ de\ montaje\ al\ sistema\ de\ planificaci\u00F3n.\r\n
+comment5.params=
+comment5.target=int\ getSegundoActual()
+comment6.params=
+comment6.target=TipoSimulacion\ getModo()
+comment7.params=modo
+comment7.target=void\ setModo(TipoSimulacion)
+comment8.params=
+comment8.target=java.util.List\ getCadenas()
+numComments=9

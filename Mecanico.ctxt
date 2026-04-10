@@ -1,13 +1,11 @@
 #BlueJ class context
 comment0.target=Mecanico
 comment0.text=\r\n\ Clase\ que\ representa\ al\ Mec\u00E1nico\ de\ Cinta.\r\n\ Su\ velocidad\ de\ reparaci\u00F3n\ depende\ de\ la\ experiencia\ acumulada.\r\n
-comment1.params=nombre\ apellidos\ direccion\ DNI\ numSeguridadSocial\ puesto\ salario\ fechaIngreso
-comment1.target=Mecanico(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ int,\ Puesto,\ int,\ java.lang.String)
+comment1.params=nombre\ apellidos\ direccion\ DNI\ numSS\ salario\ fechaIngreso
+comment1.target=Mecanico(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ int,\ int,\ java.lang.String)
 comment2.params=
-comment2.target=boolean\ esEficiente()
-comment2.text=\r\n\ Un\ mec\u00E1nico\ es\ eficiente\ si\ ha\ realizado\ m\u00E1s\ de\ 20\ reparaciones.\r\n\ @return\ true\ si\ es\ eficiente,\ false\ si\ es\ est\u00E1ndar.\r\n
+comment2.target=int\ calcularTiempoReparacion()
+comment2.text=\r\n\ Calcula\ el\ tiempo\ de\ reparaci\u00F3n\ basado\ en\ la\ experiencia.\r\n\ >\ 20\ reparaciones\ \=\ 1\ segundo.\r\n\ <\=\ 20\ reparaciones\ \=\ aleatorio\ entre\ 2\ y\ 5\ segundos.\r\n
 comment3.params=
-comment3.target=int\ getNumReparaciones()
-comment4.params=
-comment4.target=void\ incrementarReparaciones()
-numComments=5
+comment3.target=void\ incrementarReparaciones()
+numComments=4

@@ -12,9 +12,9 @@
 public class Administrador extends Trabajador {
 
     public Administrador(String nombre, String apellidos, String direccion, String DNI, 
-                                int numSeguridadSocial, Puesto puesto, int salario, String fechaIngreso) {
+                                int numSeguridadSocial, int salario, String fechaIngreso) {
         
         // Enviamos los datos comunes a la clase padre Trabajador
-        super(nombre, apellidos, direccion, DNI, numSeguridadSocial, puesto, salario, fechaIngreso);
+        super(nombre, apellidos, direccion, DNI, numSeguridadSocial,"Administrador", salario, fechaIngreso);
     }
 }

@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Administrador
 comment0.text=\r\n\ Clase\ que\ representa\ al\ Administrador\ del\ Sistema.\r\n\ Encargado\ de\ restaurar\ el\ software\ y\ las\ cadenas\ tras\ errores\ o\ apagones.\r\n
-comment1.params=nombre\ apellidos\ direccion\ DNI\ numSeguridadSocial\ puesto\ salario\ fechaIngreso
-comment1.target=Administrador(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ int,\ Puesto,\ int,\ java.lang.String)
+comment1.params=nombre\ apellidos\ direccion\ DNI\ numSeguridadSocial\ salario\ fechaIngreso
+comment1.target=Administrador(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ int,\ int,\ java.lang.String)
 numComments=2

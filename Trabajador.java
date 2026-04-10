@@ -11,13 +11,11 @@ public abstract class Trabajador {
     private String DNI;
     private String direccion;
     private int numSeguridadSocial;
-    private Puesto puesto;
+    private String puesto;
     private int salario;
-    private String fechaIngreso;
-    
-    
+    private String fechaIngreso;    
 
-    public Trabajador(String nombre, String apellidos, String direccion, String DNI, int numSeguridadSocial, Puesto puesto, int salario, String fechaIngreso) {
+    public Trabajador(String nombre, String apellidos, String direccion, String DNI, int numSeguridadSocial,String puesto, int salario, String fechaIngreso) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.direccion = direccion;
@@ -27,7 +25,7 @@ public abstract class Trabajador {
         this.salario = salario;
         this.fechaIngreso = fechaIngreso;
     }
-
+    public String getPuesto() { return puesto; }
     public String getNombre() {
         return nombre;
     }
@@ -58,14 +56,6 @@ public abstract class Trabajador {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
-    }
-
-    public Puesto getPuesto() {
-        return puesto;
-    }
-
-    public void setPuesto(Puesto puesto) {
-        this.puesto = puesto;
     }
 
     public int getNumSeguridadSocial() {
@@ -100,7 +90,6 @@ public abstract class Trabajador {
                 ", DNI='" + DNI + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", numSeguridadSocial=" + numSeguridadSocial +
-                ", puesto=" + puesto +
                 ", salario=" + salario +
                 ", fechaIngreso='" + fechaIngreso + '\'' +
                 '}';

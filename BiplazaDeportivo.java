@@ -7,12 +7,12 @@
  */
 import java.util.List;
 
+// Las plazas siempre son 2
+
 public class BiplazaDeportivo extends Vehiculo {
 
-    public BiplazaDeportivo(String color, int plazas, int taraVehiculo, double pesoMax, 
-                            Motor motor, Tapiceria tapiceria, List<Rueda> ruedas, 
-                            EstadoVehiculo estado) {
+    public BiplazaDeportivo(String bastidor,String color, int taraVehiculo, double pesoMax) {
         
-        super(color, 2, taraVehiculo, pesoMax, motor, tapiceria, ruedas, estado);
+        super(bastidor,color,2, taraVehiculo, pesoMax);
     }
 }

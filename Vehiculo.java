@@ -8,6 +8,7 @@ import java.util.List;
  * @version (a version number or a date)
  */
 public abstract class Vehiculo {
+    private String bastidor;
     private String color;
     private int plazas;
     private int taraVehiculo;
@@ -17,19 +18,29 @@ public abstract class Vehiculo {
     private List<Rueda> ruedas;
     private EstadoVehiculo estado;
 
-
-
-    public Vehiculo(String color, int plazas, int taraVehiculo, double pesoMax, Motor motor, Tapiceria tapiceria, List<Rueda> ruedas, EstadoVehiculo estado) {
+    public Vehiculo(String bastidor,String color, int plazas, int taraVehiculo, double pesoMax) {
+        this.bastidor=bastidor;
         this.color = color;
         this.plazas = plazas;
         this.taraVehiculo = taraVehiculo;
-        this.pesoMax = pesoMax;
-        this.motor = motor;
-        this.tapiceria = tapiceria;
-        this.ruedas = ruedas;
-        this.estado=estado;
+        this.pesoMax = pesoMax;        
+        this.motor = null;
+        this.tapiceria = null;
+        this.ruedas = new java.util.ArrayList<>();
+        this.estado = EstadoVehiculo.CHASIS;
     }
-
+    public void siguienteEstado() {
+            EstadoVehiculo[] estados = EstadoVehiculo.values();
+            int actual = this.estado.ordinal();
+    
+            // Comprobamos que no estemos ya en el último estado
+            if (actual < estados.length - 1) {
+                this.estado = estados[actual + 1];
+            }
+        }
+    public String getBastidor() {
+        return bastidor;
+    }
     public EstadoVehiculo getEstado(){
         return estado;
     }

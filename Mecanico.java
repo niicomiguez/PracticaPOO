@@ -10,28 +10,29 @@
  * Su velocidad de reparación depende de la experiencia acumulada.
  */
 public class Mecanico extends Trabajador {
-    private int numReparaciones; 
+    private int reparacionesRealizadas;
 
     public Mecanico(String nombre, String apellidos, String direccion, String DNI, 
-                    int numSeguridadSocial, Puesto puesto, int salario, String fechaIngreso) {
-        
-        super(nombre, apellidos, direccion, DNI, numSeguridadSocial, puesto, salario, fechaIngreso);
-        this.numReparaciones = 0; 
+                    int numSS, int salario, String fechaIngreso) {
+        super(nombre, apellidos, direccion, DNI, numSS,"Mecanico",salario, fechaIngreso);
+        this.reparacionesRealizadas = 0;
     }
 
     /**
-     * Un mecánico es eficiente si ha realizado más de 20 reparaciones.
-     * @return true si es eficiente, false si es estándar.
+     * Calcula el tiempo de reparación basado en la experiencia.
+     * > 20 reparaciones = 1 segundo.
+     * <= 20 reparaciones = aleatorio entre 2 y 5 segundos.
      */
-    public boolean esEficiente() {
-        return numReparaciones > 20;
-    }
-
-    public int getNumReparaciones() {
-        return numReparaciones;
+    public int calcularTiempoReparacion() {
+        if (this.reparacionesRealizadas > 20) {
+            return 1; // Mecánico eficiente
+        } else {
+            // Genera un número aleatorio entre 2 y 5
+            return (int) (Math.random() * 4) + 2; 
+        }
     }
 
     public void incrementarReparaciones() {
-        this.numReparaciones++;
+        this.reparacionesRealizadas++;
     }
 }
