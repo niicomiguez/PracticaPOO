@@ -23,7 +23,7 @@ public class factory_main {
             System.out.println("1. Gestión de Almacén (Componentes)");
             System.out.println("2. Gestión de Trabajadores");
             System.out.println("3. Planificador (Simulación)");
-            System.out.println("4. Dashboard y Consultas");
+            System.out.println("4. Consultar Registros");
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
 
@@ -31,8 +31,8 @@ public class factory_main {
             switch (opcion) {
                 case 1: menuAlmacen(dao, sc); break;
                 case 2: menuTrabajadores(dao, sc); break;
-                /*case 3: ejecutarPlanificador(dao, sc); break;
-                case 4: menuConsultas(dao, sc); break;*/
+                /*case 3: ejecutarPlanificador(dao, sc); break; */
+                case 4: menuRegistros(dao, sc); break;
                 case 0: salir = true; break;
                 default: System.out.println("Opción no válida.");
             }
@@ -115,7 +115,7 @@ public class factory_main {
 
         dao.añadirMotor(nuevo, 0);
 
-        System.out.println("\n✅ Motor creado y registrado correctamente.");
+        System.out.println("\n Motor creado y registrado correctamente.");
     }
     public static void menuTapicerias(GestionFabricaDAO dao, Scanner sc) {
         boolean volver = false;
@@ -170,7 +170,7 @@ public class factory_main {
 
         dao.añadirTapiceria(nueva, 0);
 
-        System.out.println("\n✅ Tapicería creada y registrada correctamente.");
+        System.out.println("\n Tapicería creada y registrada correctamente.");
     }
 
     public static void menuRuedas(GestionFabricaDAO dao, Scanner sc) {
@@ -232,7 +232,7 @@ public class factory_main {
 
         dao.añadirRueda(nueva, 0);
 
-        System.out.println("\n✅ Rueda creada y registrada correctamente.");
+        System.out.println("\n Rueda creada y registrada correctamente.");
     }
 
     public static void menuTrabajadores(GestionFabricaDAO dao, Scanner sc) {
@@ -367,9 +367,50 @@ public class factory_main {
                 return;
         }
 
-        System.out.println("\n✅ Trabajador registrado correctamente en el sistema.");
+        System.out.println("\n Trabajador registrado correctamente en el sistema.");
     }
+    public static void menuRegistros(GestionFabricaDAO dao, Scanner sc) {
+        boolean volver = false;
+        while (!volver) {
+            System.out.println("\n--- CONSULTA DE REGISTROS (DASHBOARD) ---");
+            System.out.println("1. Ver Historial Completo");
+            System.out.println("2. Consultar por Tipo de Componente");
+            System.out.println("3. Consultar por Segundo (Fecha)");
+            System.out.println("0. Volver");
+            System.out.print("Seleccione una opción: ");
 
+            int opcion = sc.nextInt();
+            sc.nextLine();
+
+            switch (opcion) {
+                case 1:
+                    List<Evento> historial = dao.getHistorial();
+                    imprimirEventos(historial, "Historial Completo");
+                    break;
+
+                case 2:
+                    System.out.print("Introduce tipo (Motor, Rueda, Tapiceria): ");
+                    String tipo = sc.nextLine();
+                    List<Evento> porComponente = dao.consultarEventosPorComponente(tipo);
+                    imprimirEventos(porComponente, "Eventos de tipo: " + tipo);
+                    break;
+
+                case 3:
+                    System.out.print("Introduce el segundo exacto a consultar: ");
+                    int seg = sc.nextInt();
+                    List<Evento> porFecha = dao.consultarEventosPorFecha(seg);
+                    imprimirEventos(porFecha, "Eventos en el segundo: " + seg);
+                    break;
+
+                case 0:
+                    volver = true;
+                    break;
+
+                default:
+                    System.out.println("Opción no válida.");
+            }
+        }
+    }
     /**
      * Método auxiliar genérico para evitar repetir el bucle for en cada case.
      * Usa comodines (?) para aceptar cualquier lista de objetos que hereden de Trabajador.
@@ -381,6 +422,16 @@ public class factory_main {
         } else {
             for (Trabajador t : lista) {
                 System.out.println(t.toString());
+            }
+        }
+    }
+    private static void imprimirEventos(List<Evento> eventos, String titulo) {
+        System.out.println("\n=== " + titulo.toUpperCase() + " ===");
+        if (eventos.isEmpty()) {
+            System.out.println("No se han encontrado registros para esta consulta.");
+        } else {
+            for (Evento e : eventos) {
+                System.out.println(e.toString());
             }
         }
     }
