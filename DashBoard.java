@@ -25,20 +25,5 @@ public class DashBoard
         System.out.println("========================================\n");
     }
     
-        public void consultarHistorialPorSegundo(int segundoBuscado) {
-        System.out.println("--- Eventos ocurridos en el segundo " + segundoBuscado + " ---");
-        boolean encontrado = false;
-        
-        for (String registro : almacen.getHistorial()) {
-            // Buscamos si el String empieza por "Segundo X:"
-            if (registro.startsWith("Segundo " + segundoBuscado + ":")) {
-                System.out.println(registro);
-                encontrado = true;
-            }
-        }
-        
-        if (!encontrado) {
-            System.out.println("No hubo actividad en este segundo.");
-        }
-    }
+    
 }

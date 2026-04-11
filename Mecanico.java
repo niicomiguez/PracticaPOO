@@ -13,7 +13,7 @@ public class Mecanico extends Trabajador {
     private int reparacionesRealizadas;
 
     public Mecanico(String nombre, String apellidos, String direccion, String DNI, 
-                    int numSS, int salario, String fechaIngreso) {
+                    int numSS, double salario, String fechaIngreso) {
         super(nombre, apellidos, direccion, DNI, numSS,"Mecanico",salario, fechaIngreso);
         this.reparacionesRealizadas = 0;
     }

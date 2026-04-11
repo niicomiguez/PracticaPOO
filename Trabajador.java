@@ -12,10 +12,10 @@ public abstract class Trabajador {
     private String direccion;
     private int numSeguridadSocial;
     private String puesto;
-    private int salario;
+    private double salario;
     private String fechaIngreso;    
 
-    public Trabajador(String nombre, String apellidos, String direccion, String DNI, int numSeguridadSocial,String puesto, int salario, String fechaIngreso) {
+    public Trabajador(String nombre, String apellidos, String direccion, String DNI, int numSeguridadSocial,String puesto, double salario, String fechaIngreso) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.direccion = direccion;
@@ -66,11 +66,11 @@ public abstract class Trabajador {
         this.numSeguridadSocial = numSeguridadSocial;
     }
 
-    public int getSalario() {
+    public double getSalario() {
         return salario;
     }
 
-    public void setSalario(int salario) {
+    public void setSalario(double salario) {
         this.salario = salario;
     }
 
@@ -85,7 +85,8 @@ public abstract class Trabajador {
     @Override
     public String toString() {
         return "Trabajador{" +
-                "nombre='" + nombre + '\'' +
+                "DNI='" + DNI + '\'' +
+                ", nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +
                 ", DNI='" + DNI + '\'' +
                 ", direccion='" + direccion + '\'' +

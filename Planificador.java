@@ -1,34 +1,40 @@
+/*
 import java.util.List;
 import java.util.ArrayList;
 
+*/
 /**
  * Clase encargada de coordinar el tiempo y las acciones de la fábrica.
  * Actúa como el motor de la simulación.
- */
+ *//*
+
 public class Planificador {
     private int segundoActual;
     private TipoSimulacion modo;
     private List<CadenaMontaje> cadenas;
     private GestionFabricaDAO dao;
-    private FactoriaCoches factoria; 
     private int contadorBastidor = 1;
 
-    /**
+    */
+/**
      * Constructor del Planificador.
      * @param modo El modo de simulación (SIMPLE, COMPLEJO, etc.)
      * @param dao El objeto de acceso a datos para registrar eventos y consultar plantilla.
-     */
+     *//*
+
     public Planificador(TipoSimulacion modo, GestionFabricaDAO dao) {
         this.segundoActual = 0;
         this.modo = modo;
         this.dao = dao;
         this.cadenas = new ArrayList<>();
-        this.factoria = new FactoriaCoches();
+        
     }
 
-    /**
+    */
+/**
      * Avanza un segundo en la simulación y ejecuta la lógica de todas las cadenas.
-     */
+     *//*
+
     public void tick() {
         this.segundoActual++;
         
@@ -47,9 +53,11 @@ public class Planificador {
         }
     }
 
-    /**
+    */
+/**
      * Lógica interna para crear un vehículo y meterlo en la cadena.
-     */
+     *//*
+
     private void introducirNuevoVehiculo(CadenaMontaje cadena) {
         // Obtenemos la primera estación (Fase 0: CHASIS)
         EstacionMontaje primeraEstacion = cadena.getEstaciones().get(0);
@@ -59,28 +67,15 @@ public class Planificador {
             String bastidor = "VIN-" + String.format("%04d", contadorBastidor++);
             
             // Fabricamos el vehículo (por defecto Turismo, o según lógica de negocio)
-            Vehiculo nuevo = factoria.fabricarVehiculo(
-                TipoVehiculo.TURISMO, 
-                bastidor, 
-                "Blanco", 
-                5, 
-                1200, 
-                1800.0
-            );
-            
-            if (nuevo != null) {
-                // La estación valida que el estado sea el correcto (CHASIS)
-                if (primeraEstacion.recibirVehiculo(nuevo)) {
-                    dao.registrarEvento(segundoActual, "FACTORÍA: Creado vehículo " + bastidor + 
-                                       " e introducido en cadena " + cadena.getId());
-                }
-            }
+
         }
     }
 
-    /**
+    */
+/**
      * Añade una cadena de montaje al sistema de planificación.
-     */
+     *//*
+
     public void añadirCadena(CadenaMontaje cadena) {
         if (cadena != null) {
             this.cadenas.add(cadena);
@@ -104,4 +99,4 @@ public class Planificador {
     public List<CadenaMontaje> getCadenas() {
         return cadenas;
     }
-}
+}*/

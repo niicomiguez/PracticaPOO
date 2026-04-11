@@ -9,7 +9,7 @@ public class Operario extends Trabajador {
     private int numMontajes; 
 
     public Operario(String nombre, String apellidos, String direccion, String DNI, 
-                    int numSeguridadSocial, int salario, String fechaIngreso) {
+                    int numSeguridadSocial, double salario, String fechaIngreso) {
         super(nombre, apellidos, direccion, DNI, numSeguridadSocial,"Operario", salario, fechaIngreso);
         this.numMontajes = 0; 
     }

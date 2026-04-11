@@ -58,8 +58,8 @@ public class Motor {
 
     @Override
     public String toString() {
-        return "Motor{" +
-                "ID ="+ id +
+        return "Motor {" +
+                "ID="+ id +
                 ", tipoMotor=" + tipoMotor +
                 ", cilindrada=" + cilindrada +
                 ", potencia=" + potencia +

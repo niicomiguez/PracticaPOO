@@ -12,7 +12,7 @@
 public class Administrador extends Trabajador {
 
     public Administrador(String nombre, String apellidos, String direccion, String DNI, 
-                                int numSeguridadSocial, int salario, String fechaIngreso) {
+                                int numSeguridadSocial, double salario, String fechaIngreso) {
         
         // Enviamos los datos comunes a la clase padre Trabajador
         super(nombre, apellidos, direccion, DNI, numSeguridadSocial,"Administrador", salario, fechaIngreso);

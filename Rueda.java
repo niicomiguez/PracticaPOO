@@ -70,8 +70,9 @@ public class Rueda {
 
     @Override
     public String toString() {
-        return "Rueda{" +
-                "tipoRueda=" + tipoRueda +
+        return "Rueda {" +
+                "ID=" + id +
+                ", tipoRueda=" + tipoRueda +
                 ", ancho=" + ancho +
                 ", diametro=" + diametro +
                 ", indiceCarga=" + indiceCarga +

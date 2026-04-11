@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=GestorPlanta
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ GestorPlanta\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=nombre\ apellidos\ direccion\ DNI\ numSeguridadSocial\ salario\ fechaIngreso
+comment1.target=GestorPlanta(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ int,\ int,\ java.lang.String)
+numComments=2

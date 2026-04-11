@@ -49,9 +49,10 @@ public class Tapiceria {
 
     @Override
     public String toString() {
-        return "Tapiceria{" +
-                "tipoTapiceria=" + tipoTapiceria +
-                ", color=" + color +
+        return "Tapiceria {" +
+                "ID=" + id +
+                ", tipoTapiceria=" + tipoTapiceria +
+                ", color='" + color + '\'' +
                 ", metrosTela=" + metrosTela +
                 '}';
     }
