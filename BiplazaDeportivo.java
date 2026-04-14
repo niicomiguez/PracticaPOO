@@ -11,8 +11,8 @@ import java.util.List;
 
 public class BiplazaDeportivo extends Vehiculo {
 
-    public BiplazaDeportivo(String bastidor,String color, int taraVehiculo, double pesoMax) {
+    public BiplazaDeportivo(String color, int taraVehiculo, double pesoMax) {
         
-        super(bastidor,color,2, taraVehiculo, pesoMax);
+        super(color,2, taraVehiculo, pesoMax);
     }
 }

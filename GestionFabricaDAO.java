@@ -7,7 +7,7 @@ public class GestionFabricaDAO {
     private List<Tapiceria> tapiceria;
     private List<Trabajador> trabajadores;
     private List<Evento> historialMontaje = new ArrayList<>();
-    private List<Vehiculo> vehiculosPrueba;
+    private List<Vehiculo> vehiculos;
 
     /**
      * Registra un evento de forma estructurada en el historial.
@@ -58,7 +58,7 @@ public class GestionFabricaDAO {
         this.ruedas = new ArrayList<>();
         this.tapiceria = new ArrayList<>();
         this.trabajadores = new ArrayList<>();
-        this.vehiculosPrueba = new ArrayList<>();
+        this.vehiculos = new ArrayList<>();
     }
 
     // region GESTIÓN DE MOTORES
@@ -264,8 +264,114 @@ public class GestionFabricaDAO {
         }
         return lista;
     }
+    public List<Turismo> obtenerSoloTurismos() {
+        List<Turismo> lista = new ArrayList<>();
+        for (Vehiculo v : vehiculos) {
+            if (v instanceof Turismo) {
+                lista.add((Turismo) v);
+            }
+        }
+        return lista;
+    }
 
+    public List<BiplazaDeportivo> obtenerSoloBiplazas() {
+        List<BiplazaDeportivo> lista = new ArrayList<>();
+        for (Vehiculo v : vehiculos) {
+            if (v instanceof BiplazaDeportivo) {
+                lista.add((BiplazaDeportivo) v);
+            }
+        }
+        return lista;
+    }
+
+    public List<Furgoneta> obtenerSoloFurgonetas() {
+        List<Furgoneta> lista = new ArrayList<>();
+        for (Vehiculo v : vehiculos) {
+            if (v instanceof Furgoneta) {
+                lista.add((Furgoneta) v);
+            }
+        }
+        return lista;
+    }
+    public void consumirMotor(int idVehiculo, int segundoActual) {
+        if (!motores.isEmpty()) {
+            Motor m = motores.removeFirst();
+            this.historialMontaje.add(new Evento(segundoActual, m, idVehiculo, "Motor"+(m.getId())+ "instalado"));
+        }
+    }
+
+    public void consumirTapiceria(int idVehiculo, int segundoActual) {
+        if (!tapiceria.isEmpty()) {
+            Tapiceria t = tapiceria.removeFirst();
+            this.historialMontaje.add(new Evento(segundoActual, t, idVehiculo, "Tapicería"+(t.getId())+"instalada"));
+        }
+    }
+
+    public void consumirRuedas(int idVehiculo, int segundoActual) {
+        for (int i = 0; i < 4; i++) {
+            if (!ruedas.isEmpty()) {
+                Rueda r = ruedas.removeFirst();
+                this.historialMontaje.add(new Evento(segundoActual, r, idVehiculo, "Rueda " + (r.getId()) + " instalada"));
+            }
+        }
+    }
+    public boolean hayMotor() {
+        return !motores.isEmpty();
+    }
+
+    public boolean hayTapiceria() {
+        return !tapiceria.isEmpty();
+    }
+
+    public boolean hayRuedas() {
+        return ruedas.size() >= 4;
+    }
+
+    public boolean hayStockParaVehiculo() {
+        return hayMotor() && hayTapiceria() && hayRuedas();
+    }
+
+    // region GESTIÓN DE VEHÍCULOS
+    public void añadirVehiculo(Vehiculo nuevoVehiculo) {
+        if (nuevoVehiculo != null) {
+            this.vehiculos.add(nuevoVehiculo);
+        }
+    }
+
+    public List<Vehiculo> getVehiculos() {
+        return vehiculos;
+    }
+
+    public String listarVehiculos() {
+        if (vehiculos.isEmpty()) return "No hay vehículos en el almacén";
+        StringBuilder listado = new StringBuilder("--- Almacén de Vehículos (Chasis) ---\n");
+        for (Vehiculo v : this.vehiculos) {
+            listado.append("ID: ").append(v.getId())
+                    .append(" | Tipo: ").append(v.getClass().getSimpleName())
+                    .append(" | Color: ").append(v.getColor())
+                    .append(" | Estado: ").append(v.getEstado()).append("\n");
+        }
+        return listado.toString();
+    }
+
+    public Vehiculo buscarVehiculoPorId(int idVehiculo) {
+        for (Vehiculo v : this.vehiculos) {
+            if (v.getId() == idVehiculo) return v;
+        }
+        return null;
+    }
+
+    public String borrarVehiculoPorId(int idVehiculo, int segundoActual) {
+        Vehiculo v = buscarVehiculoPorId(idVehiculo);
+        if (v != null) {
+            this.vehiculos.remove(v);
+            this.historialMontaje.add(new Evento(segundoActual, v, idVehiculo, "Vehículo eliminado del almacén"));
+            return "Vehículo con id " + idVehiculo + " borrado correctamente";
+        }
+        return "No existe un vehículo con id " + idVehiculo;
+    }
 // endregion
+
     // endregion
 
     public void cargarDatosPrueba() {
@@ -303,8 +409,20 @@ public class GestionFabricaDAO {
         this.añadirTrabajador(new GestorPlanta("Pedro", "Ruiz", "Calle E", "55555555E", 105, 1300, "2026-02-01"));
         this.añadirTrabajador(new Mecanico("Andrés", "Molina", "Calle P", "16161616O", 115, 1350, "2026-01-20"));
         // Vehículos
-        this.vehiculosPrueba.add(new Turismo("VIN-TUR-01", "Rojo", 5, 1200, 1700.0));
-        this.vehiculosPrueba.add(new Furgoneta("VIN-FUR-02", "Blanco", 3, 1800, 3500.0));
-        this.vehiculosPrueba.add(new BiplazaDeportivo("VIN-BIP-03", "Amarillo", 1100, 1400.0));
+        // Turismos
+        this.vehiculos.add(new Turismo("Azul Marino", 5, 1250, 1800.0));
+        this.vehiculos.add(new Turismo("Blanco Perlado", 5, 1200, 1750.0));
+        this.vehiculos.add(new Turismo("Gris Metalizado", 5, 1300, 1900.0));
+        this.vehiculos.add(new Turismo("Negro Mate", 4, 1150, 1650.0));
+
+        // Deportivos
+        this.vehiculos.add(new BiplazaDeportivo("Rojo Ferrari", 1050, 1350.0));
+        this.vehiculos.add(new BiplazaDeportivo("Naranja Sunset", 1100, 1400.0));
+        this.vehiculos.add(new BiplazaDeportivo("Verde British", 1080, 1380.0));
+
+        // Furgonetas
+        this.vehiculos.add(new Furgoneta("Blanco Empresa", 3, 1900, 3500.0));
+        this.vehiculos.add(new Furgoneta("Amarillo Correos", 2, 1850, 3300.0));
+        this.vehiculos.add(new Furgoneta("Azul Eléctrico", 9, 2100, 3800.0));
     }
 }

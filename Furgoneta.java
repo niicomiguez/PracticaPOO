@@ -9,8 +9,8 @@ import java.util.List;
 
 public class Furgoneta extends Vehiculo {
 
-    public Furgoneta(String bastidor,String color, int plazas, int taraVehiculo, double pesoMax) {
-        super(bastidor,color, plazas, taraVehiculo,  pesoMax);
+    public Furgoneta(String color, int plazas, int taraVehiculo, double pesoMax) {
+        super(color, plazas, taraVehiculo,  pesoMax);
     }
 
 

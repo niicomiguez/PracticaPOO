@@ -20,10 +20,11 @@ public class factory_main {
 
         while (!salir) {
             System.out.println("\n--- FACTORÍA DE COCHES 2026 ---");
-            System.out.println("1. Gestión de Almacén (Componentes)");
+            System.out.println("1. Gestión de Almacén");
             System.out.println("2. Gestión de Trabajadores");
-            System.out.println("3. Planificador (Simulación)");
-            System.out.println("4. Consultar Registros");
+            System.out.println("3. Gestión de Vehículos");
+            System.out.println("4. Planificador (Simulación)");
+            System.out.println("5. Consultar Registros");
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
 
@@ -31,8 +32,9 @@ public class factory_main {
             switch (opcion) {
                 case 1: menuAlmacen(dao, sc); break;
                 case 2: menuTrabajadores(dao, sc); break;
-                case 3: ejecutarPlanificador(dao, sc); break;
-                case 4: menuRegistros(dao, sc); break;
+                case 3: menuVehiculos(dao, sc); break;
+                case 4: ejecutarPlanificador(dao, sc); break;
+                case 5: menuRegistros(dao, sc); break;
                 case 0: salir = true; break;
                 default: System.out.println("Opción no válida.");
             }
@@ -49,190 +51,86 @@ public class factory_main {
             System.out.print("Seleccione una opción: ");
 
             int opcion = sc.nextInt();
-
-            switch (opcion) {
-                case 1: menuMotores(dao, sc); break;
-                case 2: menuTapicerias(dao,sc); break;
-                case 3: menuRuedas(dao,sc); break;
-                case 0: salir = true; break;
-                default: System.out.println("Opción no válida.");
+            if (opcion == 0) salir = true;
+            else if (opcion >= 1 && opcion <= 3) {
+                menuGestionAlmacen(dao, sc, opcion);
+            } else {
+                System.out.println("Opción no válida.");
             }
         }
     }
+    public static void menuGestionAlmacen(GestionFabricaDAO dao, Scanner sc, int tipoComponente) {
+        // 1: Motor, 2: Tapicería, 3: Rueda
+        String[] nombres = {"", "MOTORES", "TAPICERÍAS", "RUEDAS"};
+        String nombre = nombres[tipoComponente];
 
-    public static void menuMotores(GestionFabricaDAO dao, Scanner sc) {
         boolean volver = false;
         while (!volver) {
-            System.out.println("\n--- GESTIÓN DE MOTORES ---");
-            System.out.println("1. Listar motores en stock");
-            System.out.println("2. Añadir nuevo motor");
-            System.out.println("3. Borrar motor por ID");
+            System.out.println("\n--- GESTIÓN DE " + nombre + " ---");
+            System.out.println("1. Listar " + nombre.toLowerCase());
+            System.out.println("2. Añadir nuevo/a " + nombre.toLowerCase());
+            System.out.println("3. Borrar por ID");
             System.out.println("0. Volver");
             System.out.print("Opción: ");
 
             int opcion = sc.nextInt();
+            sc.nextLine();
+
             switch (opcion) {
-                case 1:
-                    System.out.println(dao.listarMotores());
-                    break;
-                case 2:
-                    crearNuevoMotor(dao, sc);
-                    break;
-                case 3:
-                    System.out.print("Introduce el ID del motor a borrar: ");
-                    int idBorrar = sc.nextInt();
-                    System.out.println(dao.borrarMotorPorId(idBorrar, 0));
-                    break;
-                case 0:
-                    volver = true;
-                    break;
-                default:
-                    System.out.println("Opción no válida.");
+                case 1 -> {
+                    if (tipoComponente == 1) System.out.println(dao.listarMotores());
+                    else if (tipoComponente == 2) System.out.println(dao.listarTapicerias());
+                    else System.out.println(dao.listarRuedas());
+                }
+                case 2 -> crearComponente(dao, sc, tipoComponente);
+                case 3 -> {
+                    System.out.print("Introduce ID a borrar: ");
+                    int id = sc.nextInt();
+                    String resultado = switch (tipoComponente) {
+                        case 1 -> dao.borrarMotorPorId(id, segundoActual);
+                        case 2 -> dao.borrarTapiceriaPorId(id, segundoActual);
+                        default -> dao.borrarRuedaPorId(id, segundoActual);
+                    };
+                    System.out.println(resultado);
+                }
+                case 0 -> volver = true;
+                default -> System.out.println("Opción no válida.");
             }
         }
     }
-    private static void crearNuevoMotor(GestionFabricaDAO dao, Scanner sc) {
-        System.out.println("\n-- Seleccione Tipo de Motor --");
-        System.out.println("1. GASOLINA | 2. ELECTRICO | 3. HIBRIDO");
-        int tipoInt = sc.nextInt();
+    private static void crearComponente(GestionFabricaDAO dao, Scanner sc, int tipo) {
+        System.out.println("\n-- Creando nuevo componente --");
 
-        TipoMotor tipo = TipoMotor.GASOLINA; // Valor por defecto
-        switch(tipoInt) {
-            case 2: tipo = TipoMotor.ELECTRICO; break;
-            case 3: tipo = TipoMotor.HIBRIDO; break;
-        }
-
-        System.out.print("Cilindrada (ej: 1600,0): ");
-        double cilindrada = sc.nextDouble();
-
-        System.out.print("Potencia (CV): ");
-        double potencia = sc.nextDouble();
-
-        System.out.print("Número de cilindros: ");
-        int cilindros = sc.nextInt();
-
-        Motor nuevo = new Motor(tipo, cilindrada, potencia, cilindros);
-
-        dao.añadirMotor(nuevo, 0);
-
-        System.out.println("\n Motor creado y registrado correctamente.");
-    }
-    public static void menuTapicerias(GestionFabricaDAO dao, Scanner sc) {
-        boolean volver = false;
-        while (!volver) {
-            System.out.println("\n--- GESTIÓN DE TAPICERÍAS ---");
-            System.out.println("1. Listar tapicerías en stock");
-            System.out.println("2. Añadir nueva tapicería");
-            System.out.println("3. Borrar tapicería por ID");
-            System.out.println("0. Volver");
-            System.out.print("Opción: ");
-
-            int opcion = sc.nextInt();
-            switch (opcion) {
-                case 1:
-                    System.out.println(dao.listarTapicerias());
-                    break;
-                case 2:
-                    crearNuevaTapiceria(dao, sc);
-                    break;
-                case 3:
-                    System.out.print("Introduce el ID de la tapicería a borrar: ");
-                    int idBorrar = sc.nextInt();
-                    System.out.println(dao.borrarTapiceriaPorId(idBorrar, 0));
-                    break;
-                case 0:
-                    volver = true;
-                    break;
-                default:
-                    System.out.println("Opción no válida.");
+        switch (tipo) {
+            case 1 -> { // MOTORES
+                System.out.println("1. GASOLINA | 2. ELECTRICO | 3. HIBRIDO");
+                int tInt = sc.nextInt();
+                TipoMotor tm = (tInt == 2) ? TipoMotor.ELECTRICO : (tInt == 3) ? TipoMotor.HIBRIDO : TipoMotor.GASOLINA;
+                System.out.print("Cilindrada: "); double cil = sc.nextDouble();
+                System.out.print("Potencia: "); double pot = sc.nextDouble();
+                System.out.print("Cilindros: "); int cils = sc.nextInt();
+                dao.añadirMotor(new Motor(tm, cil, pot, cils), segundoActual);
+            }
+            case 2 -> { // TAPICERÍA
+                System.out.println("1. TELA | 2. CUERO | 3. ALCANTARA");
+                int tInt = sc.nextInt();
+                TipoTapiceria tt = (tInt == 2) ? TipoTapiceria.CUERO : (tInt == 3) ? TipoTapiceria.ALCANTARA : TipoTapiceria.TELA;
+                System.out.print("Color: "); String col = sc.next();
+                System.out.print("Plazas: "); int plz = sc.nextInt();
+                dao.añadirTapiceria(new Tapiceria(tt, col, plz), segundoActual);
+            }
+            case 3 -> { // RUEDAS
+                System.out.println("1. NORMAL | 2. DEPORTIVO | 3. TODOTERRENO");
+                int tInt = sc.nextInt();
+                TipoRueda tr = (tInt == 2) ? TipoRueda.DEPORTIVO : (tInt == 3) ? TipoRueda.TODOTERRENO : TipoRueda.NORMAL;
+                System.out.print("Anchura: "); int anc = sc.nextInt();
+                System.out.print("Diámetro: "); int diam = sc.nextInt();
+                System.out.print("Carga: "); int carg = sc.nextInt();
+                System.out.print("Vel. Máx: "); int vel = sc.nextInt();
+                dao.añadirRueda(new Rueda(tr, anc, diam, carg, vel), segundoActual);
             }
         }
-    }
-
-    private static void crearNuevaTapiceria(GestionFabricaDAO dao, Scanner sc) {
-        System.out.println("\n-- Seleccione Tipo de Tapicería --");
-        System.out.println("1. TELA | 2. CUERO | 3. ALCANTARA");
-        int tipoInt = sc.nextInt();
-
-        TipoTapiceria tipo = TipoTapiceria.TELA;
-        switch(tipoInt) {
-            case 2: tipo = TipoTapiceria.CUERO; break;
-            case 3: tipo = TipoTapiceria.ALCANTARA; break;
-        }
-
-        System.out.print("Color de la tapicería: ");
-        String color = sc.next();
-
-        System.out.print("Número de plazas/asientos: ");
-        int plazas = sc.nextInt();
-
-        Tapiceria nueva = new Tapiceria(tipo, color, plazas);
-
-        dao.añadirTapiceria(nueva, 0);
-
-        System.out.println("\n Tapicería creada y registrada correctamente.");
-    }
-
-    public static void menuRuedas(GestionFabricaDAO dao, Scanner sc) {
-        boolean volver = false;
-        while (!volver) {
-            System.out.println("\n--- GESTIÓN DE RUEDAS ---");
-            System.out.println("1. Listar ruedas en stock");
-            System.out.println("2. Añadir nueva rueda");
-            System.out.println("3. Borrar rueda por ID");
-            System.out.println("0. Volver");
-            System.out.print("Opción: ");
-
-            int opcion = sc.nextInt();
-            switch (opcion) {
-                case 1:
-                    System.out.println(dao.listarRuedas());
-                    break;
-                case 2:
-                    crearNuevaRueda(dao, sc);
-                    break;
-                case 3:
-                    System.out.print("Introduce el ID de la rueda a borrar: ");
-                    int idBorrar = sc.nextInt();
-                    System.out.println(dao.borrarRuedaPorId(idBorrar, 0));
-                    break;
-                case 0:
-                    volver = true;
-                    break;
-                default:
-                    System.out.println("Opción no válida.");
-            }
-        }
-    }
-
-    private static void crearNuevaRueda(GestionFabricaDAO dao, Scanner sc) {
-        System.out.println("\n-- Seleccione Tipo de Rueda --");
-        System.out.println("1. NORMAL | 2. DEPORTIVO | 3. TODOTERRENO ");
-        int tipoInt = sc.nextInt();
-
-        TipoRueda tipo = TipoRueda.NORMAL;
-        switch(tipoInt) {
-            case 2: tipo = TipoRueda.DEPORTIVO; break;
-            case 3: tipo = TipoRueda.TODOTERRENO; break;
-        }
-
-        System.out.print("Anchura (mm): ");
-        int anchura = sc.nextInt();
-
-        System.out.print("Diámetro (pulgadas): ");
-        int diametro = sc.nextInt();
-
-        System.out.print("Índice de carga: ");
-        int indiceCarga = sc.nextInt();
-
-        System.out.print("Código de velocidad (máx km/h): ");
-        int velMax = sc.nextInt();
-
-        Rueda nueva = new Rueda(tipo, anchura, diametro, indiceCarga, velMax);
-
-        dao.añadirRueda(nueva, 0);
-
-        System.out.println("\n Rueda creada y registrada correctamente.");
+        System.out.println("Componente registrado con éxito.");
     }
 
     public static void menuTrabajadores(GestionFabricaDAO dao, Scanner sc) {
@@ -451,7 +349,7 @@ public class factory_main {
             // Determinar el nombre del modo seleccionado
             String modo = "";
             switch (opcion) {
-                case 1: modo = "SIMPLE"; break;
+                case 1: modo = "SIMPLE";  break;
                 case 2: modo = "COMPLEJA"; break;
                 case 3: modo = "MUY COMPLEJA"; break;
             }
@@ -462,17 +360,19 @@ public class factory_main {
 
             if (confirmacion.equals("S")) {
                 System.out.println("Iniciando simulación " + modo + "...");
+                Planificador planificador;
 
                 // Aquí irá la lógica de cada simulación
                 switch (opcion) {
                     case 1:
-                        // Ejemplo: simularMontajeSimple(dao);
+                        planificador=new Planificador(TipoSimulacion.SIMPLE,dao);
+                        planificador.comenzarSimulacion();
                         break;
                     case 2:
-                        // Ejemplo: simularMontajeComplejo(dao);
+                        planificador=new Planificador(TipoSimulacion.COMPLEJA,dao);
                         break;
                     case 3:
-                        // Ejemplo: simularMontajeMuyComplejo(dao);
+                        planificador=new Planificador(TipoSimulacion.MUY_COMPLEJA,dao);
                         break;
                 }
 
@@ -484,10 +384,102 @@ public class factory_main {
             }
         }
     }
-    /**
-     * Método auxiliar genérico para evitar repetir el bucle for en cada case.
-     * Usa comodines (?) para aceptar cualquier lista de objetos que hereden de Trabajador.
-     */
+    public static void menuVehiculos(GestionFabricaDAO dao, Scanner sc) {
+        boolean salir = false;
+        while (!salir) {
+            System.out.println("\n--- GESTIÓN DE VEHÍCULOS ---");
+            System.out.println("1. Listar todos");
+            System.out.println("2. Turismos");
+            System.out.println("3. Biplazas Deportivos");
+            System.out.println("4. Furgonetas");
+            System.out.println("0. Volver");
+
+            int opcion = sc.nextInt();
+            switch (opcion) {
+                case 1 -> System.out.println(dao.listarVehiculos());
+                case 2 -> menuGestionVehiculos(dao, sc, 1);
+                case 3 -> menuGestionVehiculos(dao, sc, 2);
+                case 4 -> menuGestionVehiculos(dao, sc, 3);
+                case 0 -> salir = true;
+            }
+        }
+    }
+    public static void menuGestionVehiculos(GestionFabricaDAO dao, Scanner sc, int tipoVehiculo) {
+        // tipoVehiculo: 1=Turismo, 2=Deportivo, 3=Furgoneta
+        String[] nombres = {"", "TURISMOS", "BIPLAZAS", "FURGONETAS"};
+        String nombre = nombres[tipoVehiculo];
+
+        boolean volver = false;
+        while (!volver) {
+            System.out.println("\n--- GESTIÓN DE " + nombre + " ---");
+            System.out.println("1. Listar " + nombre.toLowerCase() + " en stock");
+            System.out.println("2. Añadir nuevo " + nombre.toLowerCase());
+            System.out.println("3. Borrar por ID");
+            System.out.println("0. Volver");
+            System.out.print("Opción: ");
+
+            int opcion = sc.nextInt();
+            sc.nextLine();
+
+            switch (opcion) {
+                case 1 -> {
+                    Object listaFiltrada = switch (tipoVehiculo) {
+                        case 1 -> dao.obtenerSoloTurismos();
+                        case 2 -> dao.obtenerSoloBiplazas();
+                        case 3 -> dao.obtenerSoloFurgonetas();
+                        default -> null;
+                    };
+
+                    System.out.println("\n--- LISTADO  DE " + nombre + " ---");
+                    if (listaFiltrada != null && !((List<?>)listaFiltrada).isEmpty()) {
+                        ((List<?>)listaFiltrada).forEach(System.out::println);
+                    } else {
+                        System.out.println("No hay existencias de este tipo.");
+                    }
+                }
+                case 2 -> crearVehiculo(dao, sc, tipoVehiculo);
+                case 3 -> {
+                    System.out.print("ID a borrar: ");
+                    int id = sc.nextInt();
+                    System.out.println(dao.borrarVehiculoPorId(id, segundoActual));
+                }
+                case 0 -> volver = true;
+                default -> System.out.println("Opción no válida.");
+            }
+        }
+    }
+    private static void crearVehiculo(GestionFabricaDAO dao, Scanner sc, int tipo) {
+        System.out.println("\n-- Datos del nuevo chasis --");
+
+        System.out.print("Color: ");
+        String color = sc.nextLine();
+
+        int plazas = 2; // Valor por defecto para Biplazas
+        if (tipo != 2) {
+            System.out.print("Número de plazas: ");
+            plazas = sc.nextInt();
+        }
+
+        System.out.print("Tara (kg): ");
+        int tara = sc.nextInt();
+
+        System.out.print("Peso Máximo (kg): ");
+        double pesoMax = sc.nextDouble();
+
+        Vehiculo nuevo = null;
+        switch (tipo) {
+            case 1 -> nuevo = new Turismo(color, plazas, tara, pesoMax);
+            case 2 -> nuevo = new BiplazaDeportivo(color, tara, pesoMax);
+            case 3 -> nuevo = new Furgoneta(color, plazas, tara, pesoMax);
+        }
+
+        if (nuevo != null) {
+            dao.añadirVehiculo(nuevo);
+            System.out.println("\n Registrado con ID: " + nuevo.getId());
+        }
+    }
+    
+    
     private static void imprimirLista(List<? extends Trabajador> lista, String titulo) {
         System.out.println("\n--- " + titulo.toUpperCase() + " ---");
         if (lista.isEmpty()) {

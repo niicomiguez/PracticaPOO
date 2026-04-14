@@ -9,8 +9,8 @@ import java.util.List;
 
 public class Turismo extends Vehiculo {
 
-    public Turismo(String bastidor,String color, int plazas, int taraVehiculo, double pesoMax) {
-        super(bastidor,color, plazas, taraVehiculo,  pesoMax);
+    public Turismo(String color, int plazas, int taraVehiculo, double pesoMax) {
+        super(color, plazas, taraVehiculo,  pesoMax);
 
     }
 

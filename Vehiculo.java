@@ -8,7 +8,8 @@ import java.util.List;
  * @version (a version number or a date)
  */
 public abstract class Vehiculo {
-    private String bastidor;
+    private static int contadorId = 1;
+    private final int idVehiculo;
     private String color;
     private int plazas;
     private int taraVehiculo;
@@ -18,8 +19,8 @@ public abstract class Vehiculo {
     private List<Rueda> ruedas;
     private EstadoVehiculo estado;
 
-    public Vehiculo(String bastidor,String color, int plazas, int taraVehiculo, double pesoMax) {
-        this.bastidor=bastidor;
+    public Vehiculo(String color, int plazas, int taraVehiculo, double pesoMax) {
+        this.idVehiculo=contadorId++;
         this.color = color;
         this.plazas = plazas;
         this.taraVehiculo = taraVehiculo;
@@ -37,9 +38,9 @@ public abstract class Vehiculo {
             if (actual < estados.length - 1) {
                 this.estado = estados[actual + 1];
             }
-        }
-    public String getBastidor() {
-        return bastidor;
+    }
+    public int getId() {
+        return idVehiculo;
     }
     public EstadoVehiculo getEstado(){
         return estado;
