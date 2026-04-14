@@ -31,7 +31,7 @@ public class factory_main {
             switch (opcion) {
                 case 1: menuAlmacen(dao, sc); break;
                 case 2: menuTrabajadores(dao, sc); break;
-                /*case 3: ejecutarPlanificador(dao, sc); break; */
+                case 3: ejecutarPlanificador(dao, sc); break;
                 case 4: menuRegistros(dao, sc); break;
                 case 0: salir = true; break;
                 default: System.out.println("Opción no válida.");
@@ -408,6 +408,79 @@ public class factory_main {
 
                 default:
                     System.out.println("Opción no válida.");
+            }
+        }
+    }
+    public static void ejecutarPlanificador(GestionFabricaDAO dao, Scanner sc) {
+        int ops = dao.obtenerSoloOperarios().size();
+        int mecs = dao.obtenerSoloMecanicos().size();
+        int ads = dao.obtenerSoloAdministradores().size();
+
+        // Necesitamos 12 operarios (4 por cada una de las 3 cadenas), 1 mecánico y 1 administrador
+        if (ops < 12 || mecs < 1 || ads < 1) {
+            System.out.println("\n ERROR: PLANTILLA INCOMPLETA PARA SIMULACIÓN");
+            System.out.println("--------------------------------------------------");
+            System.out.println("Estado actual: " + ops + " Operarios, " + mecs + " Mecánicos, " + ads + " Administradores.");
+            System.out.println("Requisito mín: 12 Operarios, 1 Mecánico, 1 Administrador.");
+            System.out.println("--------------------------------------------------");
+            System.out.println("Vuelva al menú de trabajadores para completar la plantilla.");
+            return;
+        }
+        boolean volver = false;
+        while (!volver) {
+            System.out.println("\n--- TIPO DE SIMULACIÓN ---");
+            System.out.println("1. Simple");
+            System.out.println("2. Compleja");
+            System.out.println("3. Muy Compleja");
+            System.out.println("0. Volver");
+            System.out.print("Seleccione una opción: ");
+
+            int opcion = sc.nextInt();
+            sc.nextLine(); // Limpiar buffer
+
+            if (opcion == 0) {
+                volver = true;
+                continue;
+            }
+
+            if (opcion < 1 || opcion > 3) {
+                System.out.println("Opción no válida.");
+                continue;
+            }
+
+            // Determinar el nombre del modo seleccionado
+            String modo = "";
+            switch (opcion) {
+                case 1: modo = "SIMPLE"; break;
+                case 2: modo = "COMPLEJA"; break;
+                case 3: modo = "MUY COMPLEJA"; break;
+            }
+
+            // Solicitar confirmación
+            System.out.print("¿Desea empezar la simulación en modo " + modo + "? (S/N): ");
+            String confirmacion = sc.nextLine().trim().toUpperCase();
+
+            if (confirmacion.equals("S")) {
+                System.out.println("Iniciando simulación " + modo + "...");
+
+                // Aquí irá la lógica de cada simulación
+                switch (opcion) {
+                    case 1:
+                        // Ejemplo: simularMontajeSimple(dao);
+                        break;
+                    case 2:
+                        // Ejemplo: simularMontajeComplejo(dao);
+                        break;
+                    case 3:
+                        // Ejemplo: simularMontajeMuyComplejo(dao);
+                        break;
+                }
+
+                System.out.println("Simulación finalizada con éxito.");
+            } else if (confirmacion.equals("N")) {
+                System.out.println("Simulación cancelada. Volviendo al menú...");
+            } else {
+                System.out.println(" Opción no válida (debe introducir S o N).");
             }
         }
     }

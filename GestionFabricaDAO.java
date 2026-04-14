@@ -288,9 +288,20 @@ public class GestionFabricaDAO {
         // Trabajadores
         this.añadirTrabajador(new Operario("Juan", "García", "Calle A", "11111111A", 101, 1200, "2026-01-01"));
         this.añadirTrabajador(new Operario("Ana", "Sánchez", "Calle B", "22222222B", 102, 1250, "2026-01-10"));
+        this.añadirTrabajador(new Operario("Carlos", "Gómez", "Calle F", "44444444D", 104, 1200, "2026-02-10"));
+        this.añadirTrabajador(new Operario("Marta", "López", "Calle G", "66666666F", 106, 1200, "2026-02-15"));
+        this.añadirTrabajador(new Operario("Elena", "Marín", "Calle H", "77777777G", 107, 1250, "2026-03-01"));
+        this.añadirTrabajador(new Operario("Diego", "Pérez", "Calle I", "88888888H", 108, 1200, "2026-03-05"));
+        this.añadirTrabajador(new Operario("Julia", "Castro", "Calle J", "99999999I", 109, 1200, "2026-03-10"));
+        this.añadirTrabajador(new Operario("Roberto", "Sanz", "Calle K", "10101010J", 110, 1250, "2026-03-12"));
+        this.añadirTrabajador(new Operario("Lucía", "Fernández", "Calle L", "12121212K", 111, 1200, "2026-03-15"));
+        this.añadirTrabajador(new Operario("Marcos", "Jiménez", "Calle M", "13131313L", 112, 1200, "2026-03-18"));
+        this.añadirTrabajador(new Operario("Sofía", "Vargas", "Calle N", "14141414M", 113, 1250, "2026-03-20"));
+        this.añadirTrabajador(new Operario("Iván", "Cano", "Calle O", "15151515N", 114, 1200, "2026-03-22"));
+
         this.añadirTrabajador(new Administrador("Luis", "Martín", "Calle C", "33333333C", 103, 1400, "2026-01-05"));
         this.añadirTrabajador(new GestorPlanta("Pedro", "Ruiz", "Calle E", "55555555E", 105, 1300, "2026-02-01"));
-
+        this.añadirTrabajador(new Mecanico("Andrés", "Molina", "Calle P", "16161616O", 115, 1350, "2026-01-20"));
         // Vehículos
         this.vehiculosPrueba.add(new Turismo("VIN-TUR-01", "Rojo", 5, 1200, 1700.0));
         this.vehiculosPrueba.add(new Furgoneta("VIN-FUR-02", "Blanco", 3, 1800, 3500.0));
