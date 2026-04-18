@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ public abstract class Vehiculo {
         this.motor = null;
         this.tapiceria = null;
         this.ruedas = new java.util.ArrayList<>();
-        this.estado = EstadoVehiculo.CHASIS;
+        this.estado = EstadoVehiculo.ND;
     }
     public void siguienteEstado() {
             EstadoVehiculo[] estados = EstadoVehiculo.values();

@@ -1,6 +1,12 @@
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Clase principal encargada de coordinar la producción de la fábrica.
+ * Gestiona el paso del tiempo, el movimiento de los vehículos por las estaciones,
+ * la asignación de personal y la resolución de conflictos de stock.
+ * * @author Nicolás Míguez Ramos
+ */
 public class Planificador {
     private int segundoActual;
     private TipoSimulacion tipoSimulacion;
@@ -17,12 +23,25 @@ public class Planificador {
         cadenas[2] = new CadenaMontaje(TipoVehiculo.FURGONETA);
     }
 
+    /*
+    * Comprueba si la simulación ha acabado
+    */
+    public boolean finalizado(){
+        return cadenas[0].getNumeroVehiculos() == 0 &&
+                cadenas[1].getNumeroVehiculos() == 0 &&
+                cadenas[2].getNumeroVehiculos() == 0 &&
+                dao.getVehiculos().isEmpty();
+    }
+
+    /*
+    * Comienza la simulación
+    */
     public void comenzarSimulacion(){
         System.out.println(">>> COMENZANDO SIMULACIÓN EN MODO " + tipoSimulacion.toString() + " <<<");
         asignarPersonal();
         asignarVehiculos();
 
-        while (!dao.getVehiculos().isEmpty()) {
+        while (!dao.getVehiculos().isEmpty() || !finalizado()) {
             switch (tipoSimulacion){
                     case SIMPLE:
                         modoSimple();
@@ -34,8 +53,11 @@ public class Planificador {
 //                        modoMuyCompleja();
                         break;
             }
-            asignarVehiculos();
+            if (!dao.getVehiculos().isEmpty()) {
+                asignarVehiculos();
+            }
 
+            // Para la ejecución 200 ms para poder ver la consola
             try { Thread.sleep(200); } catch (InterruptedException e) {}
 
             if (segundoActual > 5000) break;
@@ -43,6 +65,9 @@ public class Planificador {
         System.out.println(">>> SIMULACIÓN FINALIZADA EN EL SEGUNDO " + segundoActual + " <<<");
     }
 
+    /*
+    * Ejecución simple
+    */
     public void modoSimple() {
         segundoActual++;
         System.out.println("\n--- SEGUNDO " + segundoActual + " ---");
@@ -50,75 +75,151 @@ public class Planificador {
         for (CadenaMontaje cadena : cadenas) {
             for (int i = 0; i < cadena.getEstaciones().length; i++) {
                 EstacionMontaje estacion = cadena.getEstaciones()[i];
-
-                // 1. Obtenemos el vehículo directamente de la estación
                 Vehiculo v = estacion.getVehiculoEnEstacion();
 
-                // 2. Comprobamos si hay alguien trabajando y hay coche
-                if (v != null && estacion.getOperarioAsignado() != null) {
+                // Si la estacion tiene vehiculo, operario y su trabajo no esta terminado
+                if (v != null && estacion.getOperarioAsignado() != null && !estacion.isTrabajoTerminado()) {
+
                     Operario op = estacion.getOperarioAsignado();
                     estacion.incrementarTiempoTrabajado();
 
-                    if (!estacion.isTrabajoTerminado() && estacion.getTiempoTrabajado() >= op.getTiempoTarea()) {
+                    // Entra en el if cuando el operario ha trabajado el tiempo correspondiente
+                    if (estacion.getTiempoTrabajado() >= op.getTiempoTarea()) {
 
                         if (intentarMontarPieza(v.getId(), i)) {
-                            // ¡Ya no necesitas buscar en el DAO! 'v' es el coche
                             v.siguienteEstado();
-
                             System.out.println("Cadena " + cadena.getTipoVehiculo() +
                                     ": Estación " + (i+1) + " - Operario " + op.getNombre() +
-                                    " terminó montaje. Estado: " + v.getEstado());
-
+                                    " terminó montaje en Vehículo ID: " + v.getId() + // <--- AÑADE ESTO
+                                    ". Nuevo Estado: " + v.getEstado());
                             estacion.setTrabajoTerminado(true);
                             op.incrementarMontajes();
                         }
                     }
                 }
             }
+            // Los vehiculos avanzan en la cadena
             avanzarVehiculos(cadena);
         }
     }
+
+    /**
+     * @param idV Id del vehículo al que se le monta la pieza
+     * @param numEstacion Estación donde se monta la pieza
+     */
     private boolean intentarMontarPieza(int idV, int numEstacion) {
-        // numEstacion 0: Motor, 1: Ruedas, 2: Tapiceria, 3: Pruebas
+        java.util.Scanner sc = new java.util.Scanner(System.in);
+
+        // Identificamos el proceso según la estación de la cadena
         switch (numEstacion) {
-            case 0 -> {
-                // Verificamos si hay motores y extraemos el primero
-                if (dao.getMotores().isEmpty()) return false;
-
-                Motor m = dao.getMotores().removeFirst(); // SACAMOS el motor del almacén
-                dao.registrarEvento(new Evento(segundoActual, null, idV, "Motor " + m.getTipoMotor() + " montado"));
+            case 0 -> { // Estación de Chasis
+                dao.registrarEvento(new Evento(segundoActual, null, idV, "Robot: Chasis ensamblado"));
                 return true;
             }
-            case 1 -> {
-                // Usamos tu método de extraer ruedas (asegúrate de que el DAO las borre de su lista)
-                if (dao.getRuedas().size() < 4) return false;
+            case 1 -> { // Estación de Motores
+                while (dao.getMotores().isEmpty()) {
+                    // Gestión de parada por falta de stock
+                    System.out.println("\n[!] DETENCIÓN DE LÍNEA: Sin MOTORES para Vehículo " + idV);
+                    System.out.println("1. Introducir nuevo motor manualmente\n2. Esperar\n3. Abortar");
+                    System.out.print("Seleccione una opción: ");
 
-                for (int i = 0; i < 4; i++) {
-                    dao.getRuedas().removeFirst();
+                    String opcion = sc.nextLine();
+                    switch (opcion) {
+                        case "1" -> {
+                            try {
+                                // Creación manual de componente por consola
+                                System.out.print("Tipo (GASOLINA, ELECTRICO, HIBRIDO): ");
+                                TipoMotor tipo = TipoMotor.valueOf(sc.nextLine().toUpperCase());
+                                System.out.print("Cilindrada: ");
+                                double cil = Double.parseDouble(sc.nextLine());
+                                System.out.print("Caballos: ");
+                                double cv = Double.parseDouble(sc.nextLine());
+                                System.out.print("Cilindros: ");
+                                int cilindros = Integer.parseInt(sc.nextLine());
+
+                                dao.getMotores().add(new Motor(tipo, cil, cv, cilindros));
+                            } catch (Exception e) { System.out.println("Error en datos."); }
+                        }
+                        case "2" -> { return false; } // Pausa el montaje este segundo
+                        case "3" -> { System.exit(0); } // Cierre de emergencia
+                    }
                 }
-                dao.registrarEvento(new Evento(segundoActual, null, idV, "4 Ruedas montadas"));
+                // Consumo de material y registro
+                Motor m = dao.getMotores().removeFirst();
+                dao.registrarEvento(new Evento(segundoActual, null, idV, "Motor " + m.getTipoMotor() + " instalado"));
                 return true;
             }
-            case 2 -> {
-                // Verificamos y extraemos tapicería
-                if (dao.getTapicerias().isEmpty()) return false;
+            case 2 -> { // Estación de Tapicería
+                while (dao.getTapicerias().isEmpty()) {
+                    System.out.println("\n[!] DETENCIÓN DE LÍNEA: Sin TAPICERÍA para Vehículo " + idV);
+                    System.out.println("1. Introducir nueva tapicería\n2. Esperar\n3. Abortar");
+                    System.out.print("Opción: ");
 
-                Tapiceria t = dao.getTapicerias().removeFirst(); // SACAMOS la tapicería
+                    String opcion = sc.nextLine();
+                    switch (opcion) {
+                        case "1" -> {
+                            try {
+                                System.out.print("Tipo (TELA, CUERO, ALCANTARA): ");
+                                TipoTapiceria tipo = TipoTapiceria.valueOf(sc.nextLine().toUpperCase());
+                                System.out.print("Color: ");
+                                String color = sc.nextLine();
+                                System.out.print("Metros: ");
+                                int metros = Integer.parseInt(sc.nextLine());
+
+                                dao.getTapicerias().add(new Tapiceria(tipo, color, metros));
+                            } catch (Exception e) { System.out.println("Error en datos."); }
+                        }
+                        case "2" -> { return false; }
+                        case "3" -> { System.exit(0); }
+                    }
+                }
+                Tapiceria t = dao.getTapicerias().removeFirst();
                 dao.registrarEvento(new Evento(segundoActual, null, idV, "Tapicería " + t.getColor() + " montada"));
                 return true;
             }
-            case 3 -> {
-                // Control de calidad: No consume piezas, solo registra el éxito
-                dao.registrarEvento(new Evento(segundoActual, null, idV, "Pruebas finalizadas. Vehículo listo para entrega."));
+            case 3 -> { // Estación de Ruedas
+                while (dao.getRuedas().size() < 4) {
+                    System.out.println("\n[!] DETENCIÓN DE LÍNEA: Ruedas insuficientes (" + dao.getRuedas().size() + ")");
+                    System.out.println("1. Introducir lote de 4 ruedas\n2. Esperar\n3. Abortar");
+                    System.out.print("Opción: ");
+
+                    String opcion = sc.nextLine();
+                    switch (opcion) {
+                        case "1" -> {
+                            try {
+                                System.out.print("Tipo (NORMAL, DEPORTIVO, TODOTERRENO): ");
+                                TipoRueda tipo = TipoRueda.valueOf(sc.nextLine().toUpperCase());
+                                System.out.print("Anchura: ");
+                                int anchura = Integer.parseInt(sc.nextLine());
+                                System.out.print("Diámetro: ");
+                                int diametro = Integer.parseInt(sc.nextLine());
+
+                                // Añadimos el set completo necesario para el vehículo
+                                for(int i=0; i<4; i++) {
+                                    dao.getRuedas().add(new Rueda(tipo, anchura, diametro, 91, 210));
+                                }
+                            } catch (Exception e) { System.out.println("Error en datos."); }
+                        }
+                        case "2" -> { return false; }
+                        case "3" -> { System.exit(0); }
+                    }
+                }
+                // Descontamos 4 ruedas del inventario
+                for (int i = 0; i < 4; i++) dao.getRuedas().removeFirst();
+                dao.registrarEvento(new Evento(segundoActual, null, idV, "4 Ruedas montadas"));
                 return true;
             }
         }
         return false;
     }
+
+    /**
+    * @param cadena Objeto Cadena de montaje
+    * */
     private void avanzarVehiculos(CadenaMontaje cadena) {
         EstacionMontaje[] estaciones = cadena.getEstaciones();
 
-        // 1. Mover entre estaciones (de 3 a 4, de 2 a 3, de 1 a 2)
+        // Mover entre estaciones (de 3 a 4, de 2 a 3, de 1 a 2)
         for (int i = estaciones.length - 1; i > 0; i--) {
             EstacionMontaje actual = estaciones[i];
             EstacionMontaje anterior = estaciones[i - 1];
@@ -133,18 +234,24 @@ public class Planificador {
             }
         }
 
-        // 2. Salida de la fábrica (Estación 4)
+        // Salida de la fábrica (Estación 4)
         EstacionMontaje ultima = estaciones[estaciones.length - 1];
         if (ultima.isTrabajoTerminado()) {
             Vehiculo vTerminado = ultima.getVehiculoEnEstacion();
 
-            // Es vital registrar el evento ANTES de vaciar
+            System.out.println("\n[!] SALIDA DE FÁBRICA: El Vehículo ID " + vTerminado.getId() +
+                    " (" + cadena.getTipoVehiculo() + ") ha sido COMPLETADO.");
+
             dao.registrarEvento(new Evento(segundoActual, vTerminado, vTerminado.getId(),
                     "Vehículo COMPLETADO y sale de la cadena"));
 
             ultima.vaciarEstacion();
         }
     }
+
+    /**
+     * Asignar de forma aleatoria el personal disponible a las estaciones
+     * */
     public void asignarPersonal(){
         List<Operario> operarios = dao.obtenerSoloOperarios();
 
@@ -153,6 +260,7 @@ public class Planificador {
             for (int j = 0; j < cadena.getEstaciones().length; j++) {
                 if (!operarios.isEmpty()) {
                     cadena.getEstaciones()[j].setOperarioAsignado(operarios.getFirst());
+                    System.out.println("Operario "+ operarios.getFirst().getNombre() + " asignado a estación " + (j+1) + " de cadena " + cadena.getTipoVehiculo());
                     operarios.removeFirst();
                 } else {
                     System.out.println("Alerta: No hay suficientes operarios para todas las estaciones.");
@@ -160,10 +268,18 @@ public class Planificador {
             }
         }
     }
+
+    /**
+     * Asignar de forma aleatoria los vehículos disponibles a las estaciones
+     * */
     public void asignarVehiculos() {
         List<Turismo> turismos = dao.obtenerSoloTurismos();
         List<BiplazaDeportivo> biplazas = dao.obtenerSoloBiplazas();
         List<Furgoneta> furgonetas = dao.obtenerSoloFurgonetas();
+
+        Collections.shuffle(turismos);
+        Collections.shuffle(biplazas);
+        Collections.shuffle(furgonetas);
 
         // Cadena 0: TURISMOS
         // Comprobamos si hay turismos en el almacén y si la primera estación de su cadena está vacía

@@ -7,5 +7,5 @@
  */
     public enum EstadoVehiculo
 {
-     CHASIS, MOTOR, TAPICERIA, RUEDAS
+     ND,CHASIS, MOTOR, TAPICERIA, RUEDAS
 }

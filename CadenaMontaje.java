@@ -12,6 +12,15 @@ public class CadenaMontaje{
             estaciones[i] = new EstacionMontaje();
         }
     }
+    public int getNumeroVehiculos(){
+        int contador=0;
+        for (EstacionMontaje estacion : estaciones) {
+            if (estacion.getVehiculoEnEstacion() != null){
+                contador++;
+            }
+        }
+        return contador;
+    }
 
     public TipoVehiculo getTipoVehiculo() {
         return tipoVehiculo;

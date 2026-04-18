@@ -376,20 +376,29 @@ public class GestionFabricaDAO {
 
     public void cargarDatosPrueba() {
         // Componentes
-        Motor m1 = new Motor(TipoMotor.GASOLINA, 1600.0, 115.0, 4);
-        Motor m2 = new Motor(TipoMotor.ELECTRICO, 0.0, 200.0, 0);
-        Motor m3 = new Motor(TipoMotor.HIBRIDO, 1800.0, 140.0, 4);
-        this.motores.add(m1); this.motores.add(m2); this.motores.add(m3);
+        // 9 Motores
+        for (int i = 0; i < 3; i++) {
+            this.motores.add(new Motor(TipoMotor.GASOLINA, 1600.0, 115.0, 4));
+            this.motores.add(new Motor(TipoMotor.ELECTRICO, 0.0, 200.0, 0));
+            this.motores.add(new Motor(TipoMotor.HIBRIDO, 1800.0, 140.0, 4));
+        }
 
-        Rueda r1 = new Rueda(TipoRueda.NORMAL, 205, 16, 91, 210);
-        Rueda r2 = new Rueda(TipoRueda.DEPORTIVO, 245, 19, 98, 300);
-        Rueda r3 = new Rueda(TipoRueda.TODOTERRENO, 265, 17, 112, 190);
-        this.ruedas.add(r1); this.ruedas.add(r2); this.ruedas.add(r3);
+        // 47 Ruedas
+        for (int i = 0; i < 15; i++) {
+            this.ruedas.add(new Rueda(TipoRueda.NORMAL, 205, 16, 91, 210));
+            this.ruedas.add(new Rueda(TipoRueda.DEPORTIVO, 245, 19, 98, 300));
+            this.ruedas.add(new Rueda(TipoRueda.TODOTERRENO, 265, 17, 112, 190));
+        }
+        // Añadimos 2 más para llegar a las 47 exactas (15*3 = 45 + 2 = 47)
+        this.ruedas.add(new Rueda(TipoRueda.NORMAL, 205, 16, 91, 210));
+        this.ruedas.add(new Rueda(TipoRueda.DEPORTIVO, 245, 19, 98, 300));
 
-        Tapiceria t1 = new Tapiceria(TipoTapiceria.TELA, "Gris", 4);
-        Tapiceria t2 = new Tapiceria(TipoTapiceria.CUERO, "Beige", 6);
-        Tapiceria t3 = new Tapiceria(TipoTapiceria.ALCANTARA, "Negro", 5);
-        this.tapiceria.add(t1); this.tapiceria.add(t2); this.tapiceria.add(t3);
+        // 12 Tapicerías
+        for (int i = 0; i < 4; i++) {
+            this.tapiceria.add(new Tapiceria(TipoTapiceria.TELA, "Gris", 4));
+            this.tapiceria.add(new Tapiceria(TipoTapiceria.CUERO, "Beige", 6));
+            this.tapiceria.add(new Tapiceria(TipoTapiceria.ALCANTARA, "Negro", 5));
+        }
 
         // Trabajadores
         this.añadirTrabajador(new Operario("Juan", "García", "Calle A", "11111111A", 101, 1200, "2026-01-01"));
