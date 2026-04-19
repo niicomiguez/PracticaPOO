@@ -109,16 +109,12 @@ public abstract class Vehiculo {
 
     @Override
     public String toString() {
-        return "Vehiculo{" +
-                "color=" + color +
-                ", plazas=" + plazas +
-                ", taraVehiculo=" + taraVehiculo +
-                ", pesoMax=" + pesoMax +
-                ", motor=" + motor +
-                ", tapiceria=" + tapiceria +
-                ", ruedas=" + ruedas +
-                '}';
+        return String.format("[%s] Color: %-15s | Motor: %-10s | Tapicería: %-10s | Ruedas: %d",
+                this.getClass().getSimpleName(),
+                color,
+                (motor != null ? motor.getTipoMotor() : "Ninguno"),
+                (tapiceria != null ? tapiceria.getTipoTapiceria() : "Ninguna"),
+                ruedas.size());
     }
-
 }
 

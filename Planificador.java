@@ -86,7 +86,7 @@ public class Planificador {
                     // Entra en el if cuando el operario ha trabajado el tiempo correspondiente
                     if (estacion.getTiempoTrabajado() >= op.getTiempoTarea()) {
 
-                        if (intentarMontarPieza(v.getId(), i)) {
+                        if (intentarMontarPieza(v.getId(), i,cadena)) {
                             v.siguienteEstado();
                             System.out.println("Cadena " + cadena.getTipoVehiculo() +
                                     ": Estación " + (i+1) + " - Operario " + op.getNombre() +
@@ -107,18 +107,18 @@ public class Planificador {
      * @param idV Id del vehículo al que se le monta la pieza
      * @param numEstacion Estación donde se monta la pieza
      */
-    private boolean intentarMontarPieza(int idV, int numEstacion) {
+    private boolean intentarMontarPieza(int idV, int numEstacion, CadenaMontaje cadena) {
         java.util.Scanner sc = new java.util.Scanner(System.in);
+        // Obtenemos el vehículo que está físicamente en la estación actual
+        Vehiculo v = cadena.getEstaciones()[numEstacion].getVehiculoEnEstacion();
 
-        // Identificamos el proceso según la estación de la cadena
         switch (numEstacion) {
             case 0 -> { // Estación de Chasis
-                dao.registrarEvento(new Evento(segundoActual, null, idV, "Robot: Chasis ensamblado"));
+                dao.registrarEvento(new Evento(segundoActual, v, idV, "Robot: Chasis ensamblado"));
                 return true;
             }
             case 1 -> { // Estación de Motores
                 while (dao.getMotores().isEmpty()) {
-                    // Gestión de parada por falta de stock
                     System.out.println("\n[!] DETENCIÓN DE LÍNEA: Sin MOTORES para Vehículo " + idV);
                     System.out.println("1. Introducir nuevo motor manualmente\n2. Esperar\n3. Abortar");
                     System.out.print("Seleccione una opción: ");
@@ -127,26 +127,26 @@ public class Planificador {
                     switch (opcion) {
                         case "1" -> {
                             try {
-                                // Creación manual de componente por consola
                                 System.out.print("Tipo (GASOLINA, ELECTRICO, HIBRIDO): ");
                                 TipoMotor tipo = TipoMotor.valueOf(sc.nextLine().toUpperCase());
-                                System.out.print("Cilindrada: ");
+                                System.out.print("Cilindrada (ej: 120.3): ");
                                 double cil = Double.parseDouble(sc.nextLine());
-                                System.out.print("Caballos: ");
+                                System.out.print("Caballos (ej: 150.0): ");
                                 double cv = Double.parseDouble(sc.nextLine());
-                                System.out.print("Cilindros: ");
+                                System.out.print("Cilindros (ej: 4): ");
                                 int cilindros = Integer.parseInt(sc.nextLine());
 
                                 dao.getMotores().add(new Motor(tipo, cil, cv, cilindros));
                             } catch (Exception e) { System.out.println("Error en datos."); }
                         }
-                        case "2" -> { return false; } // Pausa el montaje este segundo
-                        case "3" -> { System.exit(0); } // Cierre de emergencia
+                        case "2" -> { return false; }
+                        case "3" -> { System.exit(0); }
                     }
                 }
-                // Consumo de material y registro
                 Motor m = dao.getMotores().removeFirst();
-                dao.registrarEvento(new Evento(segundoActual, null, idV, "Motor " + m.getTipoMotor() + " instalado"));
+                // --- SETTER MOTOR ---
+                v.setMotor(m);
+                dao.registrarEvento(new Evento(segundoActual, v, idV, "Motor " + m.getTipoMotor() + " instalado"));
                 return true;
             }
             case 2 -> { // Estación de Tapicería
@@ -161,9 +161,9 @@ public class Planificador {
                             try {
                                 System.out.print("Tipo (TELA, CUERO, ALCANTARA): ");
                                 TipoTapiceria tipo = TipoTapiceria.valueOf(sc.nextLine().toUpperCase());
-                                System.out.print("Color: ");
+                                System.out.print("Color (ej: Negro): ");
                                 String color = sc.nextLine();
-                                System.out.print("Metros: ");
+                                System.out.print("Metros (ej: 5): ");
                                 int metros = Integer.parseInt(sc.nextLine());
 
                                 dao.getTapicerias().add(new Tapiceria(tipo, color, metros));
@@ -174,7 +174,9 @@ public class Planificador {
                     }
                 }
                 Tapiceria t = dao.getTapicerias().removeFirst();
-                dao.registrarEvento(new Evento(segundoActual, null, idV, "Tapicería " + t.getColor() + " montada"));
+                // --- SETTER TAPICERÍA ---
+                v.setTapiceria(t);
+                dao.registrarEvento(new Evento(segundoActual, v, idV, "Tapicería " + t.getColor() + " montada"));
                 return true;
             }
             case 3 -> { // Estación de Ruedas
@@ -189,12 +191,11 @@ public class Planificador {
                             try {
                                 System.out.print("Tipo (NORMAL, DEPORTIVO, TODOTERRENO): ");
                                 TipoRueda tipo = TipoRueda.valueOf(sc.nextLine().toUpperCase());
-                                System.out.print("Anchura: ");
+                                System.out.print("Anchura (ej: 205): ");
                                 int anchura = Integer.parseInt(sc.nextLine());
-                                System.out.print("Diámetro: ");
+                                System.out.print("Diámetro (ej: 16): ");
                                 int diametro = Integer.parseInt(sc.nextLine());
 
-                                // Añadimos el set completo necesario para el vehículo
                                 for(int i=0; i<4; i++) {
                                     dao.getRuedas().add(new Rueda(tipo, anchura, diametro, 91, 210));
                                 }
@@ -204,9 +205,16 @@ public class Planificador {
                         case "3" -> { System.exit(0); }
                     }
                 }
-                // Descontamos 4 ruedas del inventario
-                for (int i = 0; i < 4; i++) dao.getRuedas().removeFirst();
-                dao.registrarEvento(new Evento(segundoActual, null, idV, "4 Ruedas montadas"));
+
+                // Creamos una lista temporal para las 4 ruedas del vehículo
+                List<Rueda> ruedasParaVehiculo = new java.util.ArrayList<>();
+                for (int i = 0; i < 4; i++) {
+                    ruedasParaVehiculo.add(dao.getRuedas().removeFirst());
+                }
+
+                // --- SETTER RUEDAS ---
+                v.setRuedas(ruedasParaVehiculo);
+                dao.registrarEvento(new Evento(segundoActual, v, idV, "4 Ruedas montadas"));
                 return true;
             }
         }
@@ -242,8 +250,7 @@ public class Planificador {
             System.out.println("\n[!] SALIDA DE FÁBRICA: El Vehículo ID " + vTerminado.getId() +
                     " (" + cadena.getTipoVehiculo() + ") ha sido COMPLETADO.");
 
-            dao.registrarEvento(new Evento(segundoActual, vTerminado, vTerminado.getId(),
-                    "Vehículo COMPLETADO y sale de la cadena"));
+            dao.añadirVehiculoEnsamblado(vTerminado, segundoActual);
 
             ultima.vaciarEstacion();
         }

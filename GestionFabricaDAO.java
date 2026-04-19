@@ -8,6 +8,164 @@ public class GestionFabricaDAO {
     private List<Trabajador> trabajadores;
     private List<Evento> historialMontaje = new ArrayList<>();
     private List<Vehiculo> vehiculos;
+    private List<Vehiculo> vehiculosEnsamblados;
+    private java.util.Map<Integer, List<Vehiculo>> produccionPorFecha = new java.util.HashMap<>();
+
+    public GestionFabricaDAO() {
+        this.motores = new ArrayList<>();
+        this.ruedas = new ArrayList<>();
+        this.tapiceria = new ArrayList<>();
+        this.trabajadores = new ArrayList<>();
+        this.vehiculos = new ArrayList<>();
+        this.vehiculosEnsamblados=new ArrayList<>();
+    }
+
+    /**
+     * Genera un listado de las configuraciones más fabricadas.
+     * Cumple con el requisito: "Listado de configuraciones con mayor tasa de ensamblaje".
+     */
+    public String listarConfiguracionesMasEnsambladas() {
+        if (vehiculosEnsamblados.isEmpty()) return "No hay datos de producción para generar estadísticas.";
+
+        // Mapa para contar: Llave = Configuración, Valor = Cantidad
+        java.util.Map<String, Integer> conteo = new java.util.HashMap<>();
+
+        for (Vehiculo v : vehiculosEnsamblados) {
+            // Creamos una cadena que represente la configuración única
+            String config = v.getClass().getSimpleName() + " [" +
+                    (v.getMotor() != null ? v.getMotor().getTipoMotor() : "Sin Motor") + " / " +
+                    (v.getTapiceria() != null ? v.getTapiceria().getTipoTapiceria() : "Sin Tapicería") + "]";
+
+            // Si ya existe, suma 1; si no, empieza en 1
+            conteo.put(config, conteo.getOrDefault(config, 0) + 1);
+        }
+
+        // Pasamos el mapa a una lista para poder ordenarla por el valor (tasa de ensamblaje)
+        List<java.util.Map.Entry<String, Integer>> ranking = new ArrayList<>(conteo.entrySet());
+        ranking.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue())); // Orden descendente
+
+        StringBuilder sb = new StringBuilder("--- TASA DE ENSAMBLAJE POR CONFIGURACIÓN ---\n");
+        for (java.util.Map.Entry<String, Integer> entrada : ranking) {
+            sb.append(String.format("%-45s | Unidades: %d\n", entrada.getKey(), entrada.getValue()));
+        }
+
+        return sb.toString();
+    }
+    /**
+     * Genera el listado de vehículos ensamblados ordenados alfabéticamente por tipo.
+     */
+    public String listarVehiculosEnsambladosAlfabético() {
+        if (vehiculosEnsamblados.isEmpty()) return "No hay vehículos ensamblados.";
+
+        List<Vehiculo> lista = new ArrayList<>(vehiculosEnsamblados);
+        // Ordenamos por el nombre de la clase (Biplaza, Furgoneta, Turismo...)
+        lista.sort((v1, v2) -> v1.getClass().getSimpleName().compareToIgnoreCase(v2.getClass().getSimpleName()));
+
+        StringBuilder sb = new StringBuilder("--- LISTADO ALFABÉTICO POR TIPO DE VEHÍCULO ---\n");
+        for (Vehiculo v : lista) {
+            sb.append(v.toString()).append("\n"); // Ahora el toString empieza por el Tipo
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Genera el listado de vehículos ensamblados siguiendo el formato estándar del DAO.
+     */
+    public String listarVehiculosEnsamblados() {
+        if (vehiculosEnsamblados.isEmpty()) return "No hay vehículos ensamblados disponibles";
+
+        StringBuilder listado = new StringBuilder("--- Listado de Vehículos Ensamblados ---\n");
+        for (Vehiculo v : this.vehiculosEnsamblados) {
+            listado.append(v.toString()).append("\n");
+        }
+        return listado.toString();
+    }
+
+    /**
+     * Lista los vehículos producidos en una fecha (segundo) específica.
+     * Muestra el vehículo y todos sus componentes asociados.
+     */
+    public String listarProduccionPorFecha(int fechaBuscada) {
+        List<Vehiculo> producidos = produccionPorFecha.get(fechaBuscada);
+
+        if (producidos == null || producidos.isEmpty()) {
+            return "No hubo producción en el segundo " + fechaBuscada;
+        }
+
+        StringBuilder sb = new StringBuilder("--- PRODUCCIÓN EN FECHA: " + fechaBuscada + " ---\n");
+        for (Vehiculo v : producidos) {
+            sb.append(v.toString()).append("\n");
+        }
+        return sb.toString();
+    }
+    /**
+     * Añadir vehículo ensamblado a la lista
+     * */
+    public void añadirVehiculoEnsamblado(Vehiculo nuevoVehiculo, int segundoActual) {
+        if (nuevoVehiculo != null) {
+            this.vehiculosEnsamblados.add(nuevoVehiculo);
+
+            this.produccionPorFecha.putIfAbsent(segundoActual, new java.util.ArrayList<>());
+            this.produccionPorFecha.get(segundoActual).add(nuevoVehiculo);
+
+            registrarEvento(new Evento(segundoActual, nuevoVehiculo, nuevoVehiculo.getId(), "Vehículo "+nuevoVehiculo.getId()+" ensamblado"));
+        }
+    }
+
+    public String listarVehiculosPorTipoMotor(TipoMotor tipoBuscado) {
+        if (vehiculosEnsamblados.isEmpty()) return "No hay vehículos ensamblados disponibles";
+
+        StringBuilder listado = new StringBuilder("--- Vehículos con Motor: " + tipoBuscado + " ---\n");
+        boolean encontrado = false;
+
+        for (Vehiculo v : this.vehiculosEnsamblados) {
+            // Accedemos al motor del vehículo y comparamos su tipo
+            if (v.getMotor() != null && v.getMotor().getTipoMotor() == tipoBuscado) {
+                listado.append(v.toString()).append("\n");
+                encontrado = true;
+            }
+        }
+
+        return encontrado ? listado.toString() : "No hay vehículos con motor " + tipoBuscado;
+    }
+
+    public String listarVehiculosPorTipoTapiceria(TipoTapiceria tipoBuscado) {
+        if (vehiculosEnsamblados.isEmpty()) return "No hay vehículos ensamblados disponibles";
+
+        StringBuilder listado = new StringBuilder("--- Vehículos con Tapicería: " + tipoBuscado + " ---\n");
+        boolean encontrado = false;
+
+        for (Vehiculo v : this.vehiculosEnsamblados) {
+            if (v.getTapiceria() != null && v.getTapiceria().getTipoTapiceria() == tipoBuscado) {
+                listado.append(v.toString()).append("\n");
+                encontrado = true;
+            }
+        }
+
+        return encontrado ? listado.toString() : "No hay vehículos con tapicería " + tipoBuscado;
+    }
+
+    /**
+     * Genera un listado de vehículos ensamblados que usan un tipo de rueda específico.
+     */
+    public String listarVehiculosPorTipoRueda(TipoRueda tipoBuscado) {
+        if (vehiculosEnsamblados.isEmpty()) return "No hay vehículos ensamblados disponibles";
+
+        StringBuilder listado = new StringBuilder("--- Vehículos con Ruedas: " + tipoBuscado + " ---\n");
+        boolean encontrado = false;
+
+        for (Vehiculo v : this.vehiculosEnsamblados) {
+            // Comprobamos si el vehículo tiene ruedas y si la primera coincide (todas suelen ser iguales)
+            if (v.getRuedas() != null && !v.getRuedas().isEmpty()) {
+                if (v.getRuedas().get(0).getTipoRueda() == tipoBuscado) {
+                    listado.append(v.toString()).append("\n");
+                    encontrado = true;
+                }
+            }
+        }
+
+        return encontrado ? listado.toString() : "No hay vehículos con ruedas de tipo " + tipoBuscado;
+    }
 
     /**
      * Registra un evento de forma estructurada en el historial.
@@ -53,13 +211,7 @@ public class GestionFabricaDAO {
         return filtrados;
     }
 
-    public GestionFabricaDAO() {
-        this.motores = new ArrayList<>();
-        this.ruedas = new ArrayList<>();
-        this.tapiceria = new ArrayList<>();
-        this.trabajadores = new ArrayList<>();
-        this.vehiculos = new ArrayList<>();
-    }
+
 
     // region GESTIÓN DE MOTORES
     public void añadirMotor(Motor nuevoMotor,int segundoActual) {
@@ -227,6 +379,45 @@ public class GestionFabricaDAO {
     }
 
     /**
+     * Filtar Operarios por productividad
+     * */
+    public String obtenerOperariosProductividad() {
+        List<Operario> lista = obtenerSoloOperarios();
+        if (lista.isEmpty()) return "No hay operarios disponibles.";
+
+        // Ordenamos de mayor a menor montajes
+        lista.sort((o1, o2) -> Integer.compare(o2.getNumMontajes(), o1.getNumMontajes()));
+
+        StringBuilder sb = new StringBuilder("--- RANKING DE PRODUCTIVIDAD (OPERARIOS) ---\n");
+        for (Operario o : lista) {
+            // Ponemos los montajes al principio para que se vea claro
+            sb.append(String.format("[%d montajes] - %s %s (DNI: %s)\n",
+                    o.getNumMontajes(), o.getNombre(), o.getApellidos(), o.getDNI()));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Filtar Operarios por orden alfabético
+     * */
+    public String obtenerOperariosOrdenAlfabetico() {
+        List<Operario> lista = obtenerSoloOperarios();
+        if (lista.isEmpty()) return "No hay operarios disponibles.";
+
+        // Ordenamos por apellidos ignorando mayúsculas/minúsculas
+        lista.sort((o1, o2) -> o1.getApellidos().compareToIgnoreCase(o2.getApellidos()));
+
+        StringBuilder sb = new StringBuilder("--- OPERARIOS POR ORDEN ALFABÉTICO ---\n");
+        for (Operario o : lista) {
+            // Formato limpio: Apellidos primero para verificar el orden fácilmente
+            sb.append(String.format("%-20s %-15s | DNI: %-10s | Montajes: %d\n",
+                    o.getApellidos(), o.getNombre(), o.getDNI(), o.getNumMontajes()));
+        }
+        return sb.toString();
+    }
+
+
+    /**
      * Filtra y devuelve solo los trabajadores de tipo Administrador.
      */
     public List<Administrador> obtenerSoloAdministradores() {
@@ -239,6 +430,18 @@ public class GestionFabricaDAO {
         return lista;
     }
 
+    /**
+     * Busca trabajadores cuyo nombre contenga el texto buscado.
+     */
+    public List<Trabajador> buscarTrabajadorPorNombre(String nombreBuscado) {
+        List<Trabajador> encontrados = new ArrayList<>();
+        for (Trabajador t : trabajadores) {
+            if (t.getNombre().toLowerCase().contains(nombreBuscado.toLowerCase())) {
+                encontrados.add(t);
+            }
+        }
+        return encontrados;
+    }
     /**
      * Filtra y devuelve solo los trabajadores de tipo Gestor de Planta.
      */

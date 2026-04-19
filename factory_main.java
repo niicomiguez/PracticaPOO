@@ -180,10 +180,10 @@ public class factory_main {
         while (!volver) {
             System.out.println("\n--- CONSULTA DE PLANTILLA ---");
             System.out.println("1. Plantilla completa");
-            System.out.println("2. Solo Operarios");
-            System.out.println("3. Solo Administradores");
-            System.out.println("4. Solo Gestores de Planta");
-            System.out.println("5. Solo Mecánicos");
+            System.out.println("2. Operarios");
+            System.out.println("3. Administradores");
+            System.out.println("4. Gestores de Planta");
+            System.out.println("5. Mecánicos");
             System.out.println("0. Volver");
             System.out.print("Seleccione una opción: ");
 
@@ -193,8 +193,7 @@ public class factory_main {
                     System.out.println(dao.listarTrabajadores());
                     break;
                 case 2:
-                    List<Operario> ops = dao.obtenerSoloOperarios();
-                    imprimirLista(ops, "Operarios");
+                    menuOperariosAvanzado(dao, sc);
                     break;
                 case 3:
                     List<Administrador> admins = dao.obtenerSoloAdministradores();
@@ -207,6 +206,36 @@ public class factory_main {
                 case 5:
                     List<Mecanico> mecanicos = dao.obtenerSoloMecanicos();
                     imprimirLista(mecanicos, "Mecánicos");
+                    break;
+                case 0:
+                    volver = true;
+                    break;
+                default:
+                    System.out.println("Opción no válida.");
+            }
+        }
+    }
+
+    private static void menuOperariosAvanzado(GestionFabricaDAO dao, Scanner sc) {
+        boolean volver = false;
+        while (!volver) {
+            System.out.println("\n--- GESTIÓN DE OPERARIOS ---");
+            System.out.println("1. Listar todos");
+            System.out.println("2. Ordenar alfabéticamente (por Apellido)");
+            System.out.println("3. Ordenar por productividad (Ranking montajes)");
+            System.out.println("0. Volver");
+            System.out.print("Seleccione una opción: ");
+
+            int opcion = sc.nextInt();
+            switch (opcion) {
+                case 1:
+                    imprimirLista(dao.obtenerSoloOperarios(), "Operarios - Orden General");
+                    break;
+                case 2:
+                    System.out.println(dao.obtenerOperariosOrdenAlfabetico());
+                    break;
+                case 3:
+                    System.out.println(dao.obtenerOperariosProductividad());
                     break;
                 case 0:
                     volver = true;
@@ -392,6 +421,7 @@ public class factory_main {
             System.out.println("2. Turismos");
             System.out.println("3. Biplazas Deportivos");
             System.out.println("4. Furgonetas");
+            System.out.println("5. Vehículos Ensamblados");
             System.out.println("0. Volver");
 
             int opcion = sc.nextInt();
@@ -400,8 +430,70 @@ public class factory_main {
                 case 2 -> menuGestionVehiculos(dao, sc, 1);
                 case 3 -> menuGestionVehiculos(dao, sc, 2);
                 case 4 -> menuGestionVehiculos(dao, sc, 3);
+                case 5 -> menuGestionVehiculosEnsamblados(dao, sc);
                 case 0 -> salir = true;
             }
+        }
+    }
+    public static void menuGestionVehiculosEnsamblados(GestionFabricaDAO dao, Scanner sc) {
+        boolean volver = false;
+        while (!volver) {
+            System.out.println("\n--- VEHÍCULOS ENSAMBLADOS (HISTORIAL) ---");
+            System.out.println("1. Listar todos (Orden cronológico)");
+            System.out.println("2. Ordenar alfabéticamente por tipo");
+            System.out.println("3. Filtrar por componentes");
+            System.out.println("4. Tasas de montaje (Configuraciones más exitosas)");
+            System.out.println("5. Filtrar por fecha (segundo de simulación)");
+            System.out.println("0. Volver");
+            System.out.print("Opción: ");
+
+            int opcion = sc.nextInt();
+            switch (opcion) {
+                case 1 -> System.out.println(dao.listarVehiculosEnsamblados());
+                case 2 -> System.out.println(dao.listarVehiculosEnsambladosAlfabético());
+                case 3 -> menuFiltradoComponentes(dao, sc);
+                case 4 -> System.out.println(dao.listarConfiguracionesMasEnsambladas());
+                case 5 -> {
+                    System.out.print("Introduzca el segundo exacto de la simulación: ");
+                    int fecha = sc.nextInt();
+                    System.out.println(dao.listarProduccionPorFecha(fecha));
+                }
+                case 0 -> volver = true;
+                default -> System.out.println("Opción no válida.");
+            }
+        }
+    }
+
+    private static void menuFiltradoComponentes(GestionFabricaDAO dao, Scanner sc) {
+        System.out.println("\n--- FILTRAR POR COMPONENTE ---");
+        System.out.println("1. Por Motor");
+        System.out.println("2. Por Tapicería");
+        System.out.println("3. Por Ruedas");
+        System.out.println("0. Cancelar");
+        System.out.print("Seleccione componente: ");
+
+        int comp = sc.nextInt();
+        switch (comp) {
+            case 1 -> {
+                System.out.println("Seleccione tipo de Motor: 1. ELÉCTRICO | 2. GASOLINA | 3. HÍBRIDO");
+                int tipo = sc.nextInt();
+                TipoMotor tm = (tipo == 1) ? TipoMotor.ELECTRICO : (tipo == 3) ? TipoMotor.HIBRIDO : TipoMotor.GASOLINA;
+                System.out.println(dao.listarVehiculosPorTipoMotor(tm));
+            }
+            case 2 -> {
+                System.out.println("Seleccione tipo de Tapicería: 1. TELA | 2. CUERO | 3. ALCANTARA");
+                int tipo = sc.nextInt();
+                TipoTapiceria tt = (tipo == 2) ? TipoTapiceria.CUERO : (tipo == 3) ? TipoTapiceria.ALCANTARA : TipoTapiceria.TELA;
+                System.out.println(dao.listarVehiculosPorTipoTapiceria(tt));
+            }
+            case 3 -> {
+                System.out.println("Seleccione tipo de Rueda: 1. NORMAL | 2. DEPORTIVO | 3. TODOTERRENO");
+                int tipo = sc.nextInt();
+                TipoRueda tr = (tipo == 2) ? TipoRueda.DEPORTIVO : (tipo == 3) ? TipoRueda.TODOTERRENO : TipoRueda.NORMAL;
+                System.out.println(dao.listarVehiculosPorTipoRueda(tr));
+            }
+            case 0 -> {}
+            default -> System.out.println("Opción no válida.");
         }
     }
     public static void menuGestionVehiculos(GestionFabricaDAO dao, Scanner sc, int tipoVehiculo) {
