@@ -47,7 +47,7 @@ public class Planificador {
                         modoSimple();
                         break;
                     case COMPLEJA:
-//                        modoCompleja();
+                        modoComplejo();
                         break;
                     case MUY_COMPLEJA:
 //                        modoMuyCompleja();
@@ -103,6 +103,89 @@ public class Planificador {
         }
     }
 
+    /*
+     * Ejecución compleja
+     * */
+    public void modoComplejo() {
+        segundoActual++;
+        System.out.println("\n--- SIMULACIÓN COMPLEJA - SEGUNDO " + segundoActual + " ---");
+
+        for (CadenaMontaje cadena : cadenas) {
+            // GESTIÓN DE AVERÍAS
+            if (cadena.isAveria()) {
+                gestionarReparacion(cadena);
+                continue;
+            }
+
+            // PROBABILIDAD DE AVERÍA (Solo si no está ya averiada)
+            // 15% de probabilidad de que se rompa este segundo
+            if (Math.random() < 0.15) {
+                cadena.setAveria(true);
+                System.out.println("[!!!] AVERÍA CRÍTICA en Cadena: " + cadena.getTipoVehiculo());
+                gestionarReparacion(cadena);
+                continue;
+            }
+
+            // 3. EJECUCIÓN NORMAL (Solo si no hubo avería)
+            for (int i = 0; i < cadena.getEstaciones().length; i++) {
+                EstacionMontaje estacion = cadena.getEstaciones()[i];
+                Vehiculo v = estacion.getVehiculoEnEstacion();
+
+                if (v != null && estacion.getOperarioAsignado() != null && !estacion.isTrabajoTerminado()) {
+                    Operario op = estacion.getOperarioAsignado();
+                    estacion.incrementarTiempoTrabajado();
+
+                    if (estacion.getTiempoTrabajado() >= op.getTiempoTarea()) {
+                        if (intentarMontarPieza(v.getId(), i, cadena)) {
+                            v.siguienteEstado();
+                            System.out.println("Cadena " + cadena.getTipoVehiculo() + ": Estación " + (i+1) + " terminó montaje.");
+                            estacion.setTrabajoTerminado(true);
+                            op.incrementarMontajes();
+                        }
+                    }
+                }
+            }
+            avanzarVehiculos(cadena);
+        }
+    }
+    private void gestionarReparacion(CadenaMontaje cadena) {
+        // Si no hay mecánico, llamamos a uno del DAO
+        if (cadena.getMecanicoAsignado() == null) {
+            List<Mecanico> mecanicos = dao.obtenerSoloMecanicos();
+            Mecanico m = mecanicos.get((int)(Math.random() * mecanicos.size()));
+
+            cadena.setMecanicoAsignado(m);
+            cadena.setTiempoReparacionRestante(m.calcularTiempoReparacion());
+            dao.registrarEvento(new Evento(
+                    segundoActual,
+                    null,
+                    -1,
+                    "AVERÍA en " + cadena.getTipoVehiculo() + ". Acude: " + m.getNombre()
+            ));
+            System.out.println("-> Mecánico " + m.getNombre() + " (" +
+                    (m.getReparacionesRealizadas() > 20 ? "Efectivo" : "Estándar") +
+                    ") acude a la reparación. Tiempo estimado: " + cadena.getTiempoReparacionRestante() + "s");
+        }
+
+        // El mecánico trabaja este segundo
+        cadena.setTiempoReparacionRestante(cadena.getTiempoReparacionRestante() - 1);
+
+        if (cadena.getTiempoReparacionRestante() <= 0) {
+            Mecanico m = cadena.getMecanicoAsignado();
+            m.incrementarReparaciones();
+            dao.registrarEvento(new Evento(
+                    segundoActual,
+                    null,
+                    -1,
+                    "REPARACIÓN COMPLETADA en " + cadena.getTipoVehiculo() + " por " + m.getNombre()
+            ));
+            cadena.setAveria(false);
+            cadena.setMecanicoAsignado(null);
+            System.out.println("[OK] Cadena " + cadena.getTipoVehiculo() + " reparada por " + m.getNombre());
+        } else {
+            System.out.println("... Cadena " + cadena.getTipoVehiculo() + " en reparación (quedan " + cadena.getTiempoReparacionRestante() + "s)");
+        }
+    }
     /**
      * @param idV Id del vehículo al que se le monta la pieza
      * @param numEstacion Estación donde se monta la pieza

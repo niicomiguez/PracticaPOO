@@ -344,11 +344,11 @@ public class factory_main {
         int ads = dao.obtenerSoloAdministradores().size();
 
         // Necesitamos 12 operarios (4 por cada una de las 3 cadenas), 1 mecánico y 1 administrador
-        if (ops < 12 || mecs < 1 || ads < 1) {
+        if (ops < 12 || mecs < 4 || ads < 1) {
             System.out.println("\n ERROR: PLANTILLA INCOMPLETA PARA SIMULACIÓN");
             System.out.println("--------------------------------------------------");
             System.out.println("Estado actual: " + ops + " Operarios, " + mecs + " Mecánicos, " + ads + " Administradores.");
-            System.out.println("Requisito mín: 12 Operarios, 1 Mecánico, 1 Administrador.");
+            System.out.println("Requisito mín: 12 Operarios, 4 Mecánicos, 1 Administrador.");
             System.out.println("--------------------------------------------------");
             System.out.println("Vuelva al menú de trabajadores para completar la plantilla.");
             return;
@@ -399,6 +399,7 @@ public class factory_main {
                         break;
                     case 2:
                         planificador=new Planificador(TipoSimulacion.COMPLEJA,dao);
+                        planificador.comenzarSimulacion();
                         break;
                     case 3:
                         planificador=new Planificador(TipoSimulacion.MUY_COMPLEJA,dao);

@@ -1,13 +1,16 @@
 public class CadenaMontaje{
     private TipoVehiculo tipoVehiculo;
-    EstacionMontaje[] estaciones;
-    boolean averia;
+    private EstacionMontaje[] estaciones;
+    private boolean averia;
+    private Mecanico mecanicoAsignado;
+    private int tiempoReparacionRestante;
 
     public CadenaMontaje(TipoVehiculo tipo) {
         this.tipoVehiculo = tipo;
         this.estaciones = new EstacionMontaje[4];
         this.averia = false;
-
+        this.mecanicoAsignado=null;
+        this.tiempoReparacionRestante=0;
         for (int i = 0; i < estaciones.length; i++) {
             estaciones[i] = new EstacionMontaje();
         }
@@ -44,5 +47,21 @@ public class CadenaMontaje{
 
     public void setAveria(boolean averia) {
         this.averia = averia;
+    }
+
+    public Mecanico getMecanicoAsignado() {
+        return mecanicoAsignado;
+    }
+
+    public void setMecanicoAsignado(Mecanico mecanicoAsignado) {
+        this.mecanicoAsignado = mecanicoAsignado;
+    }
+
+    public int getTiempoReparacionRestante() {
+        return tiempoReparacionRestante;
+    }
+
+    public void setTiempoReparacionRestante(int tiempoReparacionRestante) {
+        this.tiempoReparacionRestante = tiempoReparacionRestante;
     }
 }

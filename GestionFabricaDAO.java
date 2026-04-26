@@ -619,7 +619,19 @@ public class GestionFabricaDAO {
 
         this.añadirTrabajador(new Administrador("Luis", "Martín", "Calle C", "33333333C", 103, 1400, "2026-01-05"));
         this.añadirTrabajador(new GestorPlanta("Pedro", "Ruiz", "Calle E", "55555555E", 105, 1300, "2026-02-01"));
-        this.añadirTrabajador(new Mecanico("Andrés", "Molina", "Calle P", "16161616O", 115, 1350, "2026-01-20"));
+        Mecanico m1 = new Mecanico("Andrés", "Gómez", "Avenida Galicia 12", "45678912A", 120, 1450, "2025-11-15");
+        Mecanico m2 = new Mecanico("Andrea", "Vázquez", "Calle Mayor 45", "78912345B", 121, 1380, "2026-02-05");
+
+        Mecanico m3 = new Mecanico("Marcos", "López", "Rúa da Rosa 8", "32165498C", 122, 1500, "2024-05-20");
+        m3.setReparacionesRealizadas(25);
+
+        Mecanico m4 = new Mecanico("Daniel", "Sanz", "Paseo del Prado 2", "15975346D", 123, 1420, "2026-03-10");
+        m4.setReparacionesRealizadas(25);
+
+        this.añadirTrabajador(m1);
+        this.añadirTrabajador(m2);
+        this.añadirTrabajador(m3);
+        this.añadirTrabajador(m4);
         // Vehículos
         // Turismos
         this.vehiculos.add(new Turismo("Azul Marino", 5, 1250, 1800.0));

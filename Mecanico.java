@@ -35,4 +35,12 @@ public class Mecanico extends Trabajador {
     public void incrementarReparaciones() {
         this.reparacionesRealizadas++;
     }
+
+    public int getReparacionesRealizadas() {
+        return reparacionesRealizadas;
+    }
+
+    public void setReparacionesRealizadas(int reparacionesRealizadas) {
+        this.reparacionesRealizadas = reparacionesRealizadas;
+    }
 }
