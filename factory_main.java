@@ -403,6 +403,7 @@ public class factory_main {
                         break;
                     case 3:
                         planificador=new Planificador(TipoSimulacion.MUY_COMPLEJA,dao);
+                        planificador.comenzarSimulacion();
                         break;
                 }
 

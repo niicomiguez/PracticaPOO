@@ -7,10 +7,11 @@
     <list default="true" id="43a1013d-abe6-43a6-b036-f63fa10e2224" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CadenaMontaje.java" beforeDir="false" afterPath="$PROJECT_DIR$/CadenaMontaje.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestionFabricaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestionFabricaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mecanico.java" beforeDir="false" afterPath="$PROJECT_DIR$/Mecanico.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Planificador.java" beforeDir="false" afterPath="$PROJECT_DIR$/Planificador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/factory_main.java" beforeDir="false" afterPath="$PROJECT_DIR$/factory_main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PracticaPOO_Miguez_Ramos_Nicolas/CadenaMontaje.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PracticaPOO_Miguez_Ramos_Nicolas/CadenaMontaje.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PracticaPOO_Miguez_Ramos_Nicolas/Planificador.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PracticaPOO_Miguez_Ramos_Nicolas/Planificador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PracticaPOO_Miguez_Ramos_Nicolas/factory_main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PracticaPOO_Miguez_Ramos_Nicolas/factory_main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

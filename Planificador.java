@@ -12,6 +12,8 @@ public class Planificador {
     private TipoSimulacion tipoSimulacion;
     private CadenaMontaje[] cadenas;
     private GestionFabricaDAO dao;
+    private boolean apagónGeneral = false;
+    private int tiempoRestauracionRestante = 0;
 
     public Planificador(TipoSimulacion tipoSimulacion, GestionFabricaDAO dao){
         this.segundoActual = 0;
@@ -50,7 +52,7 @@ public class Planificador {
                         modoComplejo();
                         break;
                     case MUY_COMPLEJA:
-//                        modoMuyCompleja();
+                        modoMuyComplejo();
                         break;
             }
             if (!dao.getVehiculos().isEmpty()) {
@@ -138,7 +140,10 @@ public class Planificador {
                     if (estacion.getTiempoTrabajado() >= op.getTiempoTarea()) {
                         if (intentarMontarPieza(v.getId(), i, cadena)) {
                             v.siguienteEstado();
-                            System.out.println("Cadena " + cadena.getTipoVehiculo() + ": Estación " + (i+1) + " terminó montaje.");
+                            System.out.println("Cadena " + cadena.getTipoVehiculo() +
+                                    ": Estación " + (i + 1) + " - Operario " + op.getNombre() +
+                                    " terminó montaje en Vehículo ID: " + v.getId() +
+                                    ". Nuevo Estado: " + v.getEstado());
                             estacion.setTrabajoTerminado(true);
                             op.incrementarMontajes();
                         }
@@ -146,6 +151,96 @@ public class Planificador {
                 }
             }
             avanzarVehiculos(cadena);
+        }
+    }
+
+    /*
+     * Ejecución muy compleja
+     * */
+    public void modoMuyComplejo() {
+        segundoActual++;
+        System.out.println("\n--- SIMULACIÓN MUY COMPLEJA - SEGUNDO " + segundoActual + " ---");
+
+        // 1. BLOQUEO GLOBAL (ADMINISTRADOR)
+        if (apagónGeneral) {
+            gestionarCaidaLuz();
+            return; // Si no hay luz, nadie en toda la fábrica trabaja este segundo
+        }
+
+        // 2. PROBABILIDAD DE ERROR (40%)
+        if (Math.random() < 0.20) {
+            if (Math.random() < 0.50) {
+                // Caso A: Apagón General (Afecta a todos)
+                this.apagónGeneral = true;
+                this.tiempoRestauracionRestante = 5; // 2s software + 3s cadenas
+                System.out.println("[XXXX] ¡APAGÓN GENERAL! Fábrica detenida.");
+                gestionarCaidaLuz();
+                return;
+            } else {
+                // Caso B: Avería Mecánica (Afecta a una cadena al azar)
+                CadenaMontaje cAzar = cadenas[(int)(Math.random() * cadenas.length)];
+                if (!cAzar.isAveria()) {
+                    cAzar.setAveria(true);
+                    System.out.println("[!!!] AVERÍA MECÁNICA en: " + cAzar.getTipoVehiculo());
+                }
+            }
+        }
+
+        // 3. EJECUCIÓN NORMAL DE CADENAS
+        for (CadenaMontaje cadena : cadenas) {
+            if (cadena.isAveria()) {
+                gestionarReparacion(cadena);
+                continue;
+            }
+
+            for (int i = 0; i < cadena.getEstaciones().length; i++) {
+                EstacionMontaje estacion = cadena.getEstaciones()[i];
+                Vehiculo v = estacion.getVehiculoEnEstacion();
+
+                if (v != null && estacion.getOperarioAsignado() != null && !estacion.isTrabajoTerminado()) {
+                    Operario op = estacion.getOperarioAsignado();
+                    estacion.incrementarTiempoTrabajado();
+
+                    if (estacion.getTiempoTrabajado() >= op.getTiempoTarea()) {
+                        if (intentarMontarPieza(v.getId(), i, cadena)) {
+                            v.siguienteEstado();
+
+                            // --- AQUÍ ESTÁ EL MENSAJE QUE FALTABA ---
+                            System.out.println("Cadena " + cadena.getTipoVehiculo() +
+                                    ": Estación " + (i + 1) + " - Operario " + op.getNombre() +
+                                    " terminó montaje en Vehículo ID: " + v.getId() +
+                                    ". Nuevo Estado: " + v.getEstado());
+
+                            estacion.setTrabajoTerminado(true);
+                            op.incrementarMontajes();
+                        }
+                    }
+                }
+            }
+            avanzarVehiculos(cadena);
+        }
+    }
+    private void gestionarCaidaLuz() {
+        // Obtenemos al administrador del DAO
+        Administrador admin = dao.obtenerSoloAdministradores().get(0);
+
+        // Mostramos mensaje según la fase en la que esté
+        if (tiempoRestauracionRestante > 3) {
+            // Segundos 5 y 4 (Los 2s para el sistema de gestión)
+            System.out.println("... [ADMIN] " + admin.getNombre() + " restaurando Sistema de Gestión...");
+        } else {
+            // Segundos 3, 2 y 1 (Los 3s para las cadenas)
+            System.out.println("... [ADMIN] " + admin.getNombre() + " reanudando Cadenas de Montaje...");
+        }
+
+        tiempoRestauracionRestante--;
+
+        // Al llegar a cero, liberamos la fábrica
+        if (tiempoRestauracionRestante <= 0) {
+            System.out.println("[OK] Sistema restaurado. Fábrica operativa.");
+            this.apagónGeneral = false;
+            // Opcional: registrar el evento en el DAO
+            dao.registrarEvento(new Evento(segundoActual, null, -2, "Apagón arreglado por " + admin.getNombre()));
         }
     }
     private void gestionarReparacion(CadenaMontaje cadena) {

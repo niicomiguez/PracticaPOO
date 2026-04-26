@@ -4,6 +4,9 @@ public class CadenaMontaje{
     private boolean averia;
     private Mecanico mecanicoAsignado;
     private int tiempoReparacionRestante;
+    private boolean caidaLuz;
+    private int tiempoArregloLuz;
+    private Administrador adminAsignado;
 
     public CadenaMontaje(TipoVehiculo tipo) {
         this.tipoVehiculo = tipo;
@@ -11,6 +14,10 @@ public class CadenaMontaje{
         this.averia = false;
         this.mecanicoAsignado=null;
         this.tiempoReparacionRestante=0;
+        this.caidaLuz=false;
+        this.tiempoArregloLuz=0;
+        this.adminAsignado=null;
+
         for (int i = 0; i < estaciones.length; i++) {
             estaciones[i] = new EstacionMontaje();
         }
@@ -23,6 +30,30 @@ public class CadenaMontaje{
             }
         }
         return contador;
+    }
+
+    public boolean isCaidaLuz() {
+        return caidaLuz;
+    }
+
+    public void setCaidaLuz(boolean caidaLuz) {
+        this.caidaLuz = caidaLuz;
+    }
+
+    public int getTiempoArregloLuz() {
+        return tiempoArregloLuz;
+    }
+
+    public void setTiempoArregloLuz(int tiempoArregloLuz) {
+        this.tiempoArregloLuz = tiempoArregloLuz;
+    }
+
+    public Administrador getAdminAsignado() {
+        return adminAsignado;
+    }
+
+    public void setAdminAsignado(Administrador adminAsignado) {
+        this.adminAsignado = adminAsignado;
     }
 
     public TipoVehiculo getTipoVehiculo() {
