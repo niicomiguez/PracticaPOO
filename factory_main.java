@@ -1,15 +1,22 @@
-
 /**
- * Write a description of class factory_main here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * Clase principal de la aplicación que actúa como interfaz de usuario por consola.
+ * Centraliza la gestión de los menús de almacén, trabajadores, vehículos y
+ * el control de ejecución del planificador de simulación.
+ * * @author Nicolás Míguez Ramos
+ * @version 1.0
  */
 import java.util.List;
 import java.util.Scanner;
 
 public class factory_main {
+    /** Contador global del tiempo transcurrido en la simulación. */
     private static int segundoActual = 0;
+
+    /**
+     * Punto de entrada principal de la aplicación.
+     * Inicializa el DAO, carga datos de prueba y gestiona el bucle principal del menú.
+     * @param args Argumentos de la línea de comandos (no utilizados).
+     */
     public static void main(String[] args) {
         GestionFabricaDAO dao = new GestionFabricaDAO();
         // Cargar datos iniciales para no empezar de cero
@@ -40,7 +47,13 @@ public class factory_main {
             }
         }
     }
-    public static void menuAlmacen(GestionFabricaDAO dao,Scanner sc){
+
+    /**
+     * Gestiona el submenú de selección del tipo de componente en el almacén.
+     * @param dao Objeto de acceso a datos.
+     * @param sc Scanner para la entrada de datos.
+     */
+    public static void menuAlmacen(GestionFabricaDAO dao, Scanner sc) {
         boolean salir = false;
         while (!salir) {
             System.out.println("\n--- GESTIÓN DE ALMACÉN ---");
@@ -59,6 +72,13 @@ public class factory_main {
             }
         }
     }
+
+    /**
+     * Proporciona las operaciones CRUD básicas para los componentes del almacén.
+     * @param dao Objeto de acceso a datos.
+     * @param sc Scanner para la entrada de datos.
+     * @param tipoComponente Identificador del tipo (1:Motor, 2:Tapicería, 3:Rueda).
+     */
     public static void menuGestionAlmacen(GestionFabricaDAO dao, Scanner sc, int tipoComponente) {
         // 1: Motor, 2: Tapicería, 3: Rueda
         String[] nombres = {"", "MOTORES", "TAPICERÍAS", "RUEDAS"};
@@ -98,6 +118,13 @@ public class factory_main {
             }
         }
     }
+
+    /**
+     * Recoge los datos por consola para instanciar y añadir un nuevo componente al almacén.
+     * @param dao Objeto de acceso a datos.
+     * @param sc Scanner para la entrada de datos.
+     * @param tipo Tipo de componente a crear.
+     */
     private static void crearComponente(GestionFabricaDAO dao, Scanner sc, int tipo) {
         System.out.println("\n-- Creando nuevo componente --");
 
@@ -109,7 +136,7 @@ public class factory_main {
                 System.out.print("Cilindrada: "); double cil = sc.nextDouble();
                 System.out.print("Potencia: "); double pot = sc.nextDouble();
                 System.out.print("Cilindros: "); int cils = sc.nextInt();
-                dao.añadirMotor(new Motor(tm, cil, pot, cils), segundoActual);
+                dao.anadirMotor(new Motor(tm, cil, pot, cils), segundoActual);
             }
             case 2 -> { // TAPICERÍA
                 System.out.println("1. TELA | 2. CUERO | 3. ALCANTARA");
@@ -117,7 +144,7 @@ public class factory_main {
                 TipoTapiceria tt = (tInt == 2) ? TipoTapiceria.CUERO : (tInt == 3) ? TipoTapiceria.ALCANTARA : TipoTapiceria.TELA;
                 System.out.print("Color: "); String col = sc.next();
                 System.out.print("Plazas: "); int plz = sc.nextInt();
-                dao.añadirTapiceria(new Tapiceria(tt, col, plz), segundoActual);
+                dao.anadirTapiceria(new Tapiceria(tt, col, plz), segundoActual);
             }
             case 3 -> { // RUEDAS
                 System.out.println("1. NORMAL | 2. DEPORTIVO | 3. TODOTERRENO");
@@ -127,12 +154,17 @@ public class factory_main {
                 System.out.print("Diámetro: "); int diam = sc.nextInt();
                 System.out.print("Carga: "); int carg = sc.nextInt();
                 System.out.print("Vel. Máx: "); int vel = sc.nextInt();
-                dao.añadirRueda(new Rueda(tr, anc, diam, carg, vel), segundoActual);
+                dao.anadirRueda(new Rueda(tr, anc, diam, carg, vel), segundoActual);
             }
         }
         System.out.println("Componente registrado con éxito.");
     }
 
+    /**
+     * Gestiona el menú de administración de recursos humanos (trabajadores).
+     * @param dao Objeto de acceso a datos.
+     * @param sc Scanner para la entrada de datos.
+     */
     public static void menuTrabajadores(GestionFabricaDAO dao, Scanner sc) {
         boolean volver = false;
         String dniAux;
@@ -175,6 +207,12 @@ public class factory_main {
             }
         }
     }
+
+    /**
+     * Muestra diferentes vistas de la plantilla filtradas por rol profesional.
+     * @param dao Objeto de acceso a datos.
+     * @param sc Scanner para la entrada de datos.
+     */
     public static void menuPlantilla(GestionFabricaDAO dao, Scanner sc) {
         boolean volver = false;
         while (!volver) {
@@ -216,6 +254,11 @@ public class factory_main {
         }
     }
 
+    /**
+     * Menú específico para la visualización avanzada y ordenación de operarios.
+     * @param dao Objeto de acceso a datos.
+     * @param sc Scanner para la entrada de datos.
+     */
     private static void menuOperariosAvanzado(GestionFabricaDAO dao, Scanner sc) {
         boolean volver = false;
         while (!volver) {
@@ -245,6 +288,12 @@ public class factory_main {
             }
         }
     }
+
+    /**
+     * Formulario de alta para registrar un nuevo trabajador según su perfil específico.
+     * @param dao Objeto de acceso a datos.
+     * @param sc Scanner para la entrada de datos.
+     */
     public static void menuAltaTrabajador(GestionFabricaDAO dao, Scanner sc) {
         System.out.println("\n--- ALTA DE NUEVO TRABAJADOR ---");
         System.out.println("Seleccione el tipo de perfil:");
@@ -278,16 +327,16 @@ public class factory_main {
 
         switch (tipo) {
             case 1:
-                dao.añadirTrabajador(new Operario(nombre, apellidos, direccion, dni, 0, sueldo, fecha));
+                dao.anadirTrabajador(new Operario(nombre, apellidos, direccion, dni, 0, sueldo, fecha));
                 break;
             case 2:
-                dao.añadirTrabajador(new Administrador(nombre, apellidos, direccion, dni, 0, sueldo, fecha));
+                dao.anadirTrabajador(new Administrador(nombre, apellidos, direccion, dni, 0, sueldo, fecha));
                 break;
             case 3:
-                dao.añadirTrabajador(new GestorPlanta(nombre, apellidos, direccion, dni, 0, sueldo, fecha));
+                dao.anadirTrabajador(new GestorPlanta(nombre, apellidos, direccion, dni, 0, sueldo, fecha));
                 break;
             case 4:
-                dao.añadirTrabajador(new Mecanico(nombre, apellidos, direccion, dni, 0, sueldo, fecha));
+                dao.anadirTrabajador(new Mecanico(nombre, apellidos, direccion, dni, 0, sueldo, fecha));
                 break;
             default:
                 System.out.println("Opción no válida.");
@@ -296,6 +345,12 @@ public class factory_main {
 
         System.out.println("\n Trabajador registrado correctamente en el sistema.");
     }
+
+    /**
+     * Dashboard de consulta de eventos y trazabilidad de la factoría.
+     * @param dao Objeto de acceso a datos.
+     * @param sc Scanner para la entrada de datos.
+     */
     public static void menuRegistros(GestionFabricaDAO dao, Scanner sc) {
         boolean volver = false;
         while (!volver) {
@@ -338,6 +393,12 @@ public class factory_main {
             }
         }
     }
+
+    /**
+     * Valida los requisitos de plantilla e inicia el motor de simulación.
+     * @param dao Objeto de acceso a datos.
+     * @param sc Scanner para la entrada de datos.
+     */
     public static void ejecutarPlanificador(GestionFabricaDAO dao, Scanner sc) {
         int ops = dao.obtenerSoloOperarios().size();
         int mecs = dao.obtenerSoloMecanicos().size();
@@ -391,18 +452,17 @@ public class factory_main {
                 System.out.println("Iniciando simulación " + modo + "...");
                 Planificador planificador;
 
-                // Aquí irá la lógica de cada simulación
                 switch (opcion) {
                     case 1:
-                        planificador=new Planificador(TipoSimulacion.SIMPLE,dao);
+                        planificador = new Planificador(TipoSimulacion.SIMPLE, dao);
                         planificador.comenzarSimulacion();
                         break;
                     case 2:
-                        planificador=new Planificador(TipoSimulacion.COMPLEJA,dao);
+                        planificador = new Planificador(TipoSimulacion.COMPLEJA, dao);
                         planificador.comenzarSimulacion();
                         break;
                     case 3:
-                        planificador=new Planificador(TipoSimulacion.MUY_COMPLEJA,dao);
+                        planificador = new Planificador(TipoSimulacion.MUY_COMPLEJA, dao);
                         planificador.comenzarSimulacion();
                         break;
                 }
@@ -415,6 +475,12 @@ public class factory_main {
             }
         }
     }
+
+    /**
+     * Menú principal de gestión de los vehículos (chasis y ensamblados).
+     * @param dao Objeto de acceso a datos.
+     * @param sc Scanner para la entrada de datos.
+     */
     public static void menuVehiculos(GestionFabricaDAO dao, Scanner sc) {
         boolean salir = false;
         while (!salir) {
@@ -437,6 +503,12 @@ public class factory_main {
             }
         }
     }
+
+    /**
+     * Gestiona el historial y filtrado de vehículos que ya han sido completados.
+     * @param dao Objeto de acceso a datos.
+     * @param sc Scanner para la entrada de datos.
+     */
     public static void menuGestionVehiculosEnsamblados(GestionFabricaDAO dao, Scanner sc) {
         boolean volver = false;
         while (!volver) {
@@ -452,7 +524,7 @@ public class factory_main {
             int opcion = sc.nextInt();
             switch (opcion) {
                 case 1 -> System.out.println(dao.listarVehiculosEnsamblados());
-                case 2 -> System.out.println(dao.listarVehiculosEnsambladosAlfabético());
+                case 2 -> System.out.println(dao.listarVehiculosEnsambladosAlfabetico());
                 case 3 -> menuFiltradoComponentes(dao, sc);
                 case 4 -> System.out.println(dao.listarConfiguracionesMasEnsambladas());
                 case 5 -> {
@@ -466,6 +538,11 @@ public class factory_main {
         }
     }
 
+    /**
+     * Submenú para filtrar la producción según el tipo de componentes instalados.
+     * @param dao Objeto de acceso a datos.
+     * @param sc Scanner para la entrada de datos.
+     */
     private static void menuFiltradoComponentes(GestionFabricaDAO dao, Scanner sc) {
         System.out.println("\n--- FILTRAR POR COMPONENTE ---");
         System.out.println("1. Por Motor");
@@ -498,8 +575,14 @@ public class factory_main {
             default -> System.out.println("Opción no válida.");
         }
     }
+
+    /**
+     * Menú CRUD para los diferentes tipos de vehículos en stock (chasis).
+     * @param dao Objeto de acceso a datos.
+     * @param sc Scanner para la entrada de datos.
+     * @param tipoVehiculo Categoría del vehículo (1:Turismo, 2:Biplaza, 3:Furgoneta).
+     */
     public static void menuGestionVehiculos(GestionFabricaDAO dao, Scanner sc, int tipoVehiculo) {
-        // tipoVehiculo: 1=Turismo, 2=Deportivo, 3=Furgoneta
         String[] nombres = {"", "TURISMOS", "BIPLAZAS", "FURGONETAS"};
         String nombre = nombres[tipoVehiculo];
 
@@ -542,6 +625,13 @@ public class factory_main {
             }
         }
     }
+
+    /**
+     * Recoge los parámetros físicos e instancia un nuevo vehículo en el sistema.
+     * @param dao Objeto de acceso a datos.
+     * @param sc Scanner para la entrada de datos.
+     * @param tipo Tipo de vehículo a crear.
+     */
     private static void crearVehiculo(GestionFabricaDAO dao, Scanner sc, int tipo) {
         System.out.println("\n-- Datos del nuevo chasis --");
 
@@ -568,12 +658,16 @@ public class factory_main {
         }
 
         if (nuevo != null) {
-            dao.añadirVehiculo(nuevo);
+            dao.anadirVehiculo(nuevo);
             System.out.println("\n Registrado con ID: " + nuevo.getId());
         }
     }
-    
-    
+
+    /**
+     * Utilidad para imprimir listas de trabajadores por consola.
+     * @param lista Lista de trabajadores a mostrar.
+     * @param titulo Encabezado para la sección.
+     */
     private static void imprimirLista(List<? extends Trabajador> lista, String titulo) {
         System.out.println("\n--- " + titulo.toUpperCase() + " ---");
         if (lista.isEmpty()) {
@@ -584,6 +678,12 @@ public class factory_main {
             }
         }
     }
+
+    /**
+     * Utilidad para imprimir el historial de eventos por consola.
+     * @param eventos Lista de eventos a mostrar.
+     * @param titulo Encabezado para la sección.
+     */
     private static void imprimirEventos(List<Evento> eventos, String titulo) {
         System.out.println("\n=== " + titulo.toUpperCase() + " ===");
         if (eventos.isEmpty()) {

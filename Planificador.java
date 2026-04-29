@@ -2,19 +2,43 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Clase principal encargada de coordinar la producción de la fábrica.
- * Gestiona el paso del tiempo, el movimiento de los vehículos por las estaciones,
- * la asignación de personal y la resolución de conflictos de stock.
+ * Motor principal de la simulación de la fábrica.
+ * Esta clase orquestra el flujo de trabajo, gestionando tres niveles de dificultad
+ * (SIMPLE, COMPLEJO, MUY_COMPLEJO) y coordinando la interacción entre las
+ * estaciones de montaje, los operarios, los mecánicos y el administrador.
+ * * Se encarga de:
+ * 1. Controlar el cronómetro (segundoActual).
+ * 2. Mover los vehículos a través de las estaciones.
+ * 3. Gestionar imprevistos como averías mecánicas y fallos eléctricos.
+ * 4. Resolver la falta de stock mediante interacción con el usuario.
  * * @author Nicolás Míguez Ramos
+ * @version 1.0
  */
 public class Planificador {
+    /** Instante de tiempo actual de la simulación. */
     private int segundoActual;
-    private TipoSimulacion tipoSimulacion;
-    private CadenaMontaje[] cadenas;
-    private GestionFabricaDAO dao;
-    private boolean apagónGeneral = false;
+
+    /** Nivel de dificultad seleccionado para la ejecución. */
+    private final TipoSimulacion tipoSimulacion;
+
+    /** Cadenas de montaje activas en la fábrica (Turismos, Biplazas y Furgonetas). */
+    private final CadenaMontaje[] cadenas;
+
+    /** Acceso a los datos centrales de la fábrica. */
+    private final GestionFabricaDAO dao;
+
+    /** Estado global de suministro eléctrico (Modo Muy Complejo). */
+    private boolean apagonGeneral = false;
+
+    /** Segundos que restan para que el administrador restablezca la energía. */
     private int tiempoRestauracionRestante = 0;
 
+    /**
+     * Constructor del Planificador.
+     * Inicializa las tres cadenas de montaje obligatorias según el tipo de vehículo.
+     * @param tipoSimulacion Nivel de dificultad.
+     * @param dao Instancia del objeto de acceso a datos.
+     */
     public Planificador(TipoSimulacion tipoSimulacion, GestionFabricaDAO dao){
         this.segundoActual = 0;
         this.tipoSimulacion = tipoSimulacion;
@@ -25,9 +49,12 @@ public class Planificador {
         cadenas[2] = new CadenaMontaje(TipoVehiculo.FURGONETA);
     }
 
-    /*
-    * Comprueba si la simulación ha acabado
-    */
+    /**
+     * Verifica si la simulación debe detenerse.
+     * Se considera finalizada cuando no quedan chasis en el almacén ni vehículos
+     * en ninguna de las estaciones de las cadenas.
+     * @return true si todo el trabajo ha sido completado.
+     */
     public boolean finalizado(){
         return cadenas[0].getNumeroVehiculos() == 0 &&
                 cadenas[1].getNumeroVehiculos() == 0 &&
@@ -35,9 +62,11 @@ public class Planificador {
                 dao.getVehiculos().isEmpty();
     }
 
-    /*
-    * Comienza la simulación
-    */
+    /**
+     * Inicia el bucle principal de ejecución.
+     * Asigna el personal inicial, introduce los primeros vehículos y
+     * itera segundo a segundo hasta completar la producción o alcanzar el límite.
+     */
     public void comenzarSimulacion(){
         System.out.println(">>> COMENZANDO SIMULACIÓN EN MODO " + tipoSimulacion.toString() + " <<<");
         asignarPersonal();
@@ -60,7 +89,7 @@ public class Planificador {
             }
 
             // Para la ejecución 200 ms para poder ver la consola
-            try { Thread.sleep(200); } catch (InterruptedException e) {}
+            try { Thread.sleep(200); } catch (InterruptedException e) {e.printStackTrace();}
 
             if (segundoActual > 5000) break;
         }
@@ -162,7 +191,7 @@ public class Planificador {
         System.out.println("\n--- SIMULACIÓN MUY COMPLEJA - SEGUNDO " + segundoActual + " ---");
 
         // 1. BLOQUEO GLOBAL (ADMINISTRADOR)
-        if (apagónGeneral) {
+        if (apagonGeneral) {
             gestionarCaidaLuz();
             return; // Si no hay luz, nadie en toda la fábrica trabaja este segundo
         }
@@ -171,7 +200,7 @@ public class Planificador {
         if (Math.random() < 0.20) {
             if (Math.random() < 0.50) {
                 // Caso A: Apagón General (Afecta a todos)
-                this.apagónGeneral = true;
+                this.apagonGeneral = true;
                 this.tiempoRestauracionRestante = 5; // 2s software + 3s cadenas
                 System.out.println("[XXXX] ¡APAGÓN GENERAL! Fábrica detenida.");
                 gestionarCaidaLuz();
@@ -238,7 +267,7 @@ public class Planificador {
         // Al llegar a cero, liberamos la fábrica
         if (tiempoRestauracionRestante <= 0) {
             System.out.println("[OK] Sistema restaurado. Fábrica operativa.");
-            this.apagónGeneral = false;
+            this.apagonGeneral = false;
             // Opcional: registrar el evento en el DAO
             dao.registrarEvento(new Evento(segundoActual, null, -2, "Apagón arreglado por " + admin.getNombre()));
         }
@@ -321,7 +350,7 @@ public class Planificador {
                         case "3" -> { System.exit(0); }
                     }
                 }
-                Motor m = dao.getMotores().removeFirst();
+                Motor m = dao.getMotores().remove(0);
                 // --- SETTER MOTOR ---
                 v.setMotor(m);
                 dao.registrarEvento(new Evento(segundoActual, v, idV, "Motor " + m.getTipoMotor() + " instalado"));
@@ -351,7 +380,7 @@ public class Planificador {
                         case "3" -> { System.exit(0); }
                     }
                 }
-                Tapiceria t = dao.getTapicerias().removeFirst();
+                Tapiceria t = dao.getTapicerias().remove(0);
                 // --- SETTER TAPICERÍA ---
                 v.setTapiceria(t);
                 dao.registrarEvento(new Evento(segundoActual, v, idV, "Tapicería " + t.getColor() + " montada"));
@@ -387,7 +416,7 @@ public class Planificador {
                 // Creamos una lista temporal para las 4 ruedas del vehículo
                 List<Rueda> ruedasParaVehiculo = new java.util.ArrayList<>();
                 for (int i = 0; i < 4; i++) {
-                    ruedasParaVehiculo.add(dao.getRuedas().removeFirst());
+                    ruedasParaVehiculo.add(dao.getRuedas().remove(0));
                 }
 
                 // --- SETTER RUEDAS ---
@@ -428,7 +457,7 @@ public class Planificador {
             System.out.println("\n[!] SALIDA DE FÁBRICA: El Vehículo ID " + vTerminado.getId() +
                     " (" + cadena.getTipoVehiculo() + ") ha sido COMPLETADO.");
 
-            dao.añadirVehiculoEnsamblado(vTerminado, segundoActual);
+            dao.anadirVehiculoEnsamblado(vTerminado, segundoActual);
 
             ultima.vaciarEstacion();
         }
@@ -444,9 +473,9 @@ public class Planificador {
         for (CadenaMontaje cadena : cadenas) {
             for (int j = 0; j < cadena.getEstaciones().length; j++) {
                 if (!operarios.isEmpty()) {
-                    cadena.getEstaciones()[j].setOperarioAsignado(operarios.getFirst());
-                    System.out.println("Operario "+ operarios.getFirst().getNombre() + " asignado a estación " + (j+1) + " de cadena " + cadena.getTipoVehiculo());
-                    operarios.removeFirst();
+                    cadena.getEstaciones()[j].setOperarioAsignado(operarios.get(0));
+                    System.out.println("Operario "+ operarios.get(0).getNombre() + " asignado a estación " + (j+1) + " de cadena " + cadena.getTipoVehiculo());
+                    operarios.remove(0);
                 } else {
                     System.out.println("Alerta: No hay suficientes operarios para todas las estaciones.");
                 }
@@ -469,7 +498,7 @@ public class Planificador {
         // Cadena 0: TURISMOS
         // Comprobamos si hay turismos en el almacén y si la primera estación de su cadena está vacía
         if (!turismos.isEmpty() && cadenas[0].getEstaciones()[0].estaLibre()) {
-            Turismo t = turismos.getFirst();
+            Turismo t = turismos.get(0);
 
             // Colocamos el objeto vehículo directamente en la estación
             cadenas[0].getEstaciones()[0].setVehiculoEnEstacion(t);
@@ -482,7 +511,7 @@ public class Planificador {
 
         // Cadena 1: BIPLAZAS
         if (!biplazas.isEmpty() && cadenas[1].getEstaciones()[0].estaLibre()) {
-            BiplazaDeportivo b = biplazas.getFirst();
+            BiplazaDeportivo b = biplazas.get(0);
 
             cadenas[1].getEstaciones()[0].setVehiculoEnEstacion(b);
 
@@ -493,7 +522,7 @@ public class Planificador {
 
         // Cadena 2: FURGONETAS
         if (!furgonetas.isEmpty() && cadenas[2].getEstaciones()[0].estaLibre()) {
-            Furgoneta f = furgonetas.getFirst();
+            Furgoneta f = furgonetas.get(0);
 
             cadenas[2].getEstaciones()[0].setVehiculoEnEstacion(f);
 
