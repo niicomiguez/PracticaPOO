@@ -1,4 +1,4 @@
 #BlueJ class context
 comment0.target=TipoMotor
-comment0.text=\r\n\ Enumeration\ class\ TipoMotor\ -\ write\ a\ description\ of\ the\ enum\ class\ here\r\n\ \r\n\ @author\ (your\ name\ here)\r\n\ @version\ (version\ number\ or\ date\ here)\r\n
+comment0.text=\r\n\ Define\ las\ categor\u00EDas\ de\ motorizaci\u00F3n\ disponibles\ en\ la\ f\u00E1brica.\r\n\ Esta\ enumeraci\u00F3n\ se\ utiliza\ para\ clasificar\ los\ motores\ en\ el\ inventario\r\n\ y\ para\ filtrar\ la\ producci\u00F3n\ finalizada\ en\ las\ estad\u00EDsticas\ del\ DAO.\r\n\ *\ @author\ Nicol\u00E1s\ M\u00EDguez\ Ramos\r\n\ @version\ 1.0\r\n
 numComments=1

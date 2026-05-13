@@ -1,8 +1,9 @@
 #BlueJ class context
 comment0.target=Planificador
-comment0.text=\r\n\ Clase\ principal\ encargada\ de\ coordinar\ la\ producci\u00F3n\ de\ la\ f\u00E1brica.\r\n\ Gestiona\ el\ paso\ del\ tiempo,\ el\ movimiento\ de\ los\ veh\u00EDculos\ por\ las\ estaciones,\r\n\ la\ asignaci\u00F3n\ de\ personal\ y\ la\ resoluci\u00F3n\ de\ conflictos\ de\ stock.\r\n\ *\ @author\ Nicol\u00E1s\ M\u00EDguez\ Ramos\r\n
+comment0.text=\r\n\ Motor\ principal\ de\ la\ simulaci\u00F3n\ de\ la\ f\u00E1brica.\r\n\ Esta\ clase\ orquestra\ el\ flujo\ de\ trabajo,\ gestionando\ tres\ niveles\ de\ dificultad\r\n\ (SIMPLE,\ COMPLEJO,\ MUY_COMPLEJO)\ y\ coordinando\ la\ interacci\u00F3n\ entre\ las\r\n\ estaciones\ de\ montaje,\ los\ operarios,\ los\ mec\u00E1nicos\ y\ el\ administrador.\r\n\ *\ Se\ encarga\ de\:\r\n\ 1.\ Controlar\ el\ cron\u00F3metro\ (segundoActual).\r\n\ 2.\ Mover\ los\ veh\u00EDculos\ a\ trav\u00E9s\ de\ las\ estaciones.\r\n\ 3.\ Gestionar\ imprevistos\ como\ aver\u00EDas\ mec\u00E1nicas\ y\ fallos\ el\u00E9ctricos.\r\n\ 4.\ Resolver\ la\ falta\ de\ stock\ mediante\ interacci\u00F3n\ con\ el\ usuario.\r\n\ *\ @author\ Nicol\u00E1s\ M\u00EDguez\ Ramos\r\n\ @version\ 1.0\r\n
 comment1.params=tipoSimulacion\ dao
 comment1.target=Planificador(TipoSimulacion,\ GestionFabricaDAO)
+comment1.text=\r\n\ Constructor\ del\ Planificador.\r\n\ Inicializa\ las\ tres\ cadenas\ de\ montaje\ obligatorias\ seg\u00FAn\ el\ tipo\ de\ veh\u00EDculo.\r\n\ @param\ tipoSimulacion\ Nivel\ de\ dificultad.\r\n\ @param\ dao\ Instancia\ del\ objeto\ de\ acceso\ a\ datos.\r\n
 comment10.params=cadena
 comment10.target=void\ avanzarVehiculos(CadenaMontaje)
 comment10.text=\r\n\ @param\ cadena\ Objeto\ Cadena\ de\ montaje\r\n
@@ -14,10 +15,10 @@ comment12.target=void\ asignarVehiculos()
 comment12.text=\r\n\ Asignar\ de\ forma\ aleatoria\ los\ veh\u00EDculos\ disponibles\ a\ las\ estaciones\r\n
 comment2.params=
 comment2.target=boolean\ finalizado()
-comment2.text=\r\n\ Comprueba\ si\ la\ simulaci\u00F3n\ ha\ acabado\r\n
+comment2.text=\r\n\ Verifica\ si\ la\ simulaci\u00F3n\ debe\ detenerse.\r\n\ Se\ considera\ finalizada\ cuando\ no\ quedan\ chasis\ en\ el\ almac\u00E9n\ ni\ veh\u00EDculos\r\n\ en\ ninguna\ de\ las\ estaciones\ de\ las\ cadenas.\r\n\ @return\ true\ si\ todo\ el\ trabajo\ ha\ sido\ completado.\r\n
 comment3.params=
 comment3.target=void\ comenzarSimulacion()
-comment3.text=\r\n\ Comienza\ la\ simulaci\u00F3n\r\n
+comment3.text=\r\n\ Inicia\ el\ bucle\ principal\ de\ ejecuci\u00F3n.\r\n\ Asigna\ el\ personal\ inicial,\ introduce\ los\ primeros\ veh\u00EDculos\ y\r\n\ itera\ segundo\ a\ segundo\ hasta\ completar\ la\ producci\u00F3n\ o\ alcanzar\ el\ l\u00EDmite.\r\n
 comment4.params=
 comment4.target=void\ modoSimple()
 comment4.text=\r\n\ Ejecuci\u00F3n\ simple\r\n

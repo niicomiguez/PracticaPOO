@@ -1,4 +1,4 @@
 #BlueJ class context
 comment0.target=TipoRueda
-comment0.text=\r\n\ Enumeration\ class\ TipoRueda\ -\ write\ a\ description\ of\ the\ enum\ class\ here\r\n\ \r\n\ @author\ (your\ name\ here)\r\n\ @version\ (version\ number\ or\ date\ here)\r\n
+comment0.text=\r\n\ Define\ las\ categor\u00EDas\ de\ neum\u00E1ticos\ disponibles\ en\ el\ inventario.\r\n\ Cada\ tipo\ determina\ la\ compatibilidad\ con\ el\ modelo\ de\ veh\u00EDculo\ y\r\n\ afecta\ a\ las\ especificaciones\ t\u00E9cnicas\ de\ seguridad\ y\ rendimiento.\r\n\ *\ @author\ Nicol\u00E1s\ M\u00EDguez\ Ramos\r\n\ @version\ 1.0\r\n
 numComments=1

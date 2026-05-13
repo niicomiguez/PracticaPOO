@@ -1,3 +1,4 @@
 #BlueJ class context
 comment0.target=TipoVehiculo
+comment0.text=\r\n\ Define\ las\ categor\u00EDas\ de\ veh\u00EDculos\ que\ la\ f\u00E1brica\ es\ capaz\ de\ producir.\r\n\ Este\ enumerado\ es\ fundamental\ para\ la\ segmentaci\u00F3n\ de\ las\ cadenas\ de\ montaje\r\n\ y\ la\ correcta\ asignaci\u00F3n\ de\ chasis\ y\ componentes\ seg\u00FAn\ el\ modelo.\r\n\ *\ @author\ Nicol\u00E1s\ M\u00EDguez\ Ramos\r\n\ @version\ 1.0\r\n
 numComments=1

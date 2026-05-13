@@ -1,10 +1,12 @@
 #BlueJ class context
 comment0.target=Tapiceria
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Tapiceria\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Clase\ que\ representa\ el\ kit\ de\ Tapicer\u00EDa\ para\ el\ interior\ de\ los\ veh\u00EDculos.\r\n\ Gestiona\ la\ informaci\u00F3n\ sobre\ el\ material,\ el\ color\ y\ la\ cantidad\ de\ tela\r\n\ necesaria\ para\ completar\ el\ acabado\ interno\ de\ cada\ unidad\ producida.\r\n\ *\ Al\ igual\ que\ el\ resto\ de\ componentes,\ implementa\ un\ sistema\ de\ ID\ \r\n\ autoincremental\ para\ asegurar\ la\ trazabilidad\ en\ el\ almac\u00E9n\ de\ la\ f\u00E1brica.\r\n\ *\ @author\ Nicol\u00E1s\ M\u00EDguez\ Ramos\r\n\ @version\ 1.0\r\n
 comment1.params=tipoTapiceria\ color\ metrosTela
 comment1.target=Tapiceria(TipoTapiceria,\ java.lang.String,\ int)
+comment1.text=\r\n\ Constructor\ para\ la\ clase\ Tapiceria.\r\n\ Incrementa\ autom\u00E1ticamente\ el\ contador\ global\ para\ asignar\ el\ ID\ \u00FAnico.\r\n\ *\ @param\ tipoTapiceria\ Categor\u00EDa\ del\ material.\r\n\ @param\ color\ \ \ \ \ \ \ \ \ Nombre\ del\ color\ del\ acabado.\r\n\ @param\ metrosTela\ \ \ \ Metros\ de\ material\ que\ componen\ el\ kit.\r\n
 comment2.params=
 comment2.target=int\ getId()
+comment2.text=@return\ El\ ID\ \u00FAnico\ del\ componente.
 comment3.params=
 comment3.target=TipoTapiceria\ getTipoTapiceria()
 comment4.params=tipoTapiceria
@@ -19,4 +21,5 @@ comment8.params=metrosTela
 comment8.target=void\ setMetrosTela(int)
 comment9.params=
 comment9.target=java.lang.String\ toString()
+comment9.text=\r\n\ Devuelve\ una\ descripci\u00F3n\ detallada\ del\ kit\ de\ tapicer\u00EDa.\r\n\ @return\ Cadena\ formateada\ con\ el\ ID,\ material,\ color\ y\ metros.\r\n
 numComments=10

@@ -14,7 +14,7 @@ import java.util.List;
  * * @author Nicolás Míguez Ramos
  * @version 1.0
  */
-public class Planificador {
+public class Planificador implements IPlanificador{
     /** Instante de tiempo actual de la simulación. */
     private int segundoActual;
 

@@ -1,14 +1,17 @@
 #BlueJ class context
 comment0.target=Motor
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Motor\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Clase\ que\ representa\ un\ Motor\ en\ el\ sistema\ de\ fabricaci\u00F3n.\r\n\ Cada\ motor\ cuenta\ con\ un\ identificador\ \u00FAnico\ generado\ autom\u00E1ticamente\r\n\ y\ especificaciones\ t\u00E9cnicas\ que\ definen\ su\ rendimiento\ y\ compatibilidad\r\n\ con\ los\ diferentes\ tipos\ de\ veh\u00EDculos.\r\n\ *\ @author\ Nicol\u00E1s\ M\u00EDguez\ Ramos\r\n\ @version\ 1.0\r\n
 comment1.params=tipoMotor\ cilindrada\ potencia\ cilindros
 comment1.target=Motor(TipoMotor,\ double,\ double,\ int)
+comment1.text=\r\n\ Constructor\ para\ la\ clase\ Motor.\r\n\ Incrementa\ autom\u00E1ticamente\ el\ contador\ global\ para\ asignar\ el\ ID.\r\n\ *\ @param\ tipoMotor\ \ Tipo\ de\ combustible\ o\ energ\u00EDa\ que\ utiliza.\r\n\ @param\ cilindrada\ Volumen\ de\ desplazamiento\ del\ motor.\r\n\ @param\ potencia\ \ \ Fuerza\ del\ motor.\r\n\ @param\ cilindros\ \ Cantidad\ de\ cilindros\ instalados.\r\n
 comment10.params=cilindros
 comment10.target=void\ setCilindros(int)
 comment11.params=
 comment11.target=java.lang.String\ toString()
+comment11.text=\r\n\ Devuelve\ una\ representaci\u00F3n\ textual\ de\ las\ especificaciones\ del\ motor.\r\n\ @return\ Cadena\ con\ los\ datos\ t\u00E9cnicos\ y\ el\ ID.\r\n
 comment2.params=
 comment2.target=int\ getId()
+comment2.text=@return\ El\ ID\ \u00FAnico\ del\ componente.
 comment3.params=
 comment3.target=TipoMotor\ getTipoMotor()
 comment4.params=tipoMotor

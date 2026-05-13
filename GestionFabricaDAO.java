@@ -8,7 +8,7 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class GestionFabricaDAO {
+public class GestionFabricaDAO implements IGestionDatos {
     private final List<Motor> motores;
     private final List<Rueda> ruedas;
     private final List<Tapiceria> tapiceria;

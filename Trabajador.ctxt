@@ -1,8 +1,9 @@
 #BlueJ class context
 comment0.target=Trabajador
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Trabajador\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Clase\ abstracta\ que\ define\ la\ estructura\ base\ de\ cualquier\ empleado\ de\ la\ f\u00E1brica.\r\n\ Centraliza\ la\ informaci\u00F3n\ personal,\ contractual\ y\ administrativa\ com\u00FAn\ a\ todos\r\n\ los\ perfiles\ profesionales\ (Operarios,\ Mec\u00E1nicos,\ Administradores\ y\ Gestores).\r\n\ *\ Como\ clase\ abstracta,\ no\ permite\ su\ instanciaci\u00F3n\ directa,\ obligando\ a\ definir\r\n\ el\ comportamiento\ espec\u00EDfico\ en\ sus\ clases\ hijas.\r\n\ *\ @author\ Nicol\u00E1s\ M\u00EDguez\ Ramos\r\n\ @version\ 1.0\r\n
 comment1.params=nombre\ apellidos\ direccion\ DNI\ numSeguridadSocial\ puesto\ salario\ fechaIngreso
 comment1.target=Trabajador(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ int,\ java.lang.String,\ double,\ java.lang.String)
+comment1.text=\r\n\ Constructor\ para\ la\ clase\ Trabajador.\r\n\ *\ @param\ nombre\ \ \ \ \ \ \ \ \ \ \ \ \ \ Nombre\ del\ empleado.\r\n\ @param\ apellidos\ \ \ \ \ \ \ \ \ \ \ Apellidos\ completos.\r\n\ @param\ direccion\ \ \ \ \ \ \ \ \ \ \ Residencia\ habitual.\r\n\ @param\ DNI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Identificador\ fiscal\ \u00FAnico.\r\n\ @param\ numSeguridadSocial\ \ N\u00FAmero\ de\ afiliaci\u00F3n.\r\n\ @param\ puesto\ \ \ \ \ \ \ \ \ \ \ \ \ \ Rol\ profesional\ dentro\ de\ la\ f\u00E1brica.\r\n\ @param\ salario\ \ \ \ \ \ \ \ \ \ \ \ \ Sueldo\ bruto.\r\n\ @param\ fechaIngreso\ \ \ \ \ \ \ \ Fecha\ de\ alta\ en\ el\ sistema.\r\n
 comment10.params=direccion
 comment10.target=void\ setDireccion(java.lang.String)
 comment11.params=
@@ -19,6 +20,7 @@ comment16.params=fechaIngreso
 comment16.target=void\ setFechaIngreso(java.lang.String)
 comment17.params=
 comment17.target=java.lang.String\ toString()
+comment17.text=\r\n\ Representaci\u00F3n\ textual\ de\ los\ datos\ b\u00E1sicos\ del\ trabajador.\r\n\ @return\ Cadena\ con\ la\ ficha\ del\ empleado.\r\n
 comment2.params=
 comment2.target=java.lang.String\ getPuesto()
 comment3.params=
