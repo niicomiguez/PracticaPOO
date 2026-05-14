@@ -353,7 +353,7 @@ public class Planificador implements IPlanificador{
                 Motor m = dao.getMotores().remove(0);
                 // --- SETTER MOTOR ---
                 v.setMotor(m);
-                dao.registrarEvento(new Evento(segundoActual, v, idV, "Motor " + m.getTipoMotor() + " instalado"));
+                dao.registrarEvento(new Evento(segundoActual, m, idV, "Motor " + m.getTipoMotor() + " instalado"));
                 return true;
             }
             case 2 -> { // Estación de Tapicería
@@ -383,7 +383,7 @@ public class Planificador implements IPlanificador{
                 Tapiceria t = dao.getTapicerias().remove(0);
                 // --- SETTER TAPICERÍA ---
                 v.setTapiceria(t);
-                dao.registrarEvento(new Evento(segundoActual, v, idV, "Tapicería " + t.getColor() + " montada"));
+                dao.registrarEvento(new Evento(segundoActual, t, idV, "Tapicería " + t.getColor() + " montada"));
                 return true;
             }
             case 3 -> { // Estación de Ruedas
@@ -421,7 +421,7 @@ public class Planificador implements IPlanificador{
 
                 // --- SETTER RUEDAS ---
                 v.setRuedas(ruedasParaVehiculo);
-                dao.registrarEvento(new Evento(segundoActual, v, idV, "4 Ruedas montadas"));
+                dao.registrarEvento(new Evento(segundoActual, ruedasParaVehiculo.get(0), idV, "4 Ruedas montadas"));
                 return true;
             }
         }

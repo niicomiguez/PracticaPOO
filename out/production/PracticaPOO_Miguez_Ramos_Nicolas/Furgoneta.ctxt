@@ -1,5 +1,7 @@
 #BlueJ class context
 comment0.target=Furgoneta
+comment0.text=\r\n\ Clase\ que\ representa\ un\ veh\u00EDculo\ de\ tipo\ Furgoneta.\r\n\ Especializaci\u00F3n\ de\ la\ clase\ Vehiculo\ dise\u00F1ada\ para\ el\ transporte\ de\ carga\r\n\ o\ pasajeros,\ permitiendo\ configurar\ el\ n\u00FAmero\ de\ plazas\ seg\u00FAn\ el\ modelo.\r\n\ *\ @author\ Nicol\u00E1s\ M\u00EDguez\ Ramos\r\n\ @version\ 1.0\r\n
 comment1.params=color\ plazas\ taraVehiculo\ pesoMax
 comment1.target=Furgoneta(java.lang.String,\ int,\ int,\ double)
+comment1.text=\r\n\ Constructor\ para\ la\ clase\ Furgoneta.\r\n\ *\ @param\ color\ \ \ \ \ \ \ \ Color\ de\ la\ carrocer\u00EDa.\r\n\ @param\ plazas\ \ \ \ \ \ \ N\u00FAmero\ de\ asientos\ configurados\ para\ el\ veh\u00EDculo.\r\n\ @param\ taraVehiculo\ Peso\ del\ veh\u00EDculo\ en\ vac\u00EDo\ (kg).\r\n\ @param\ pesoMax\ \ \ \ \ \ Peso\ m\u00E1ximo\ autorizado\ (kg).\r\n
 numComments=2

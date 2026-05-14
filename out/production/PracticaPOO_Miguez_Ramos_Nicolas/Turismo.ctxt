@@ -1,5 +1,7 @@
 #BlueJ class context
 comment0.target=Turismo
+comment0.text=\r\n\ Clase\ que\ representa\ un\ veh\u00EDculo\ de\ tipo\ Turismo\ dentro\ de\ la\ f\u00E1brica.\r\n\ El\ Turismo\ es\ el\ modelo\ est\u00E1ndar\ de\ producci\u00F3n,\ caracterizado\ por\ una\r\n\ configuraci\u00F3n\ de\ plazas\ y\ dimensiones\ equilibradas\ para\ el\ uso\ particular.\r\n\ *\ Hereda\ toda\ la\ estructura\ funcional\ de\ la\ clase\ abstracta\ Vehiculo,\r\n\ permitiendo\ su\ paso\ por\ las\ distintas\ estaciones\ de\ la\ cadena\ de\ montaje.\r\n\ *\ @author\ Nicol\u00E1s\ M\u00EDguez\ Ramos\r\n\ @version\ 1.0\r\n
 comment1.params=color\ plazas\ taraVehiculo\ pesoMax
 comment1.target=Turismo(java.lang.String,\ int,\ int,\ double)
+comment1.text=\r\n\ Constructor\ para\ la\ clase\ Turismo.\r\n\ *\ @param\ color\ \ \ \ \ \ \ \ \ Color\ de\ la\ carrocer\u00EDa\ del\ chasis.\r\n\ @param\ plazas\ \ \ \ \ \ \ \ N\u00FAmero\ de\ asientos\ disponibles.\r\n\ @param\ taraVehiculo\ \ Peso\ del\ veh\u00EDculo\ en\ vac\u00EDo\ (kg).\r\n\ @param\ pesoMax\ \ \ \ \ \ \ Peso\ m\u00E1ximo\ autorizado\ (kg).\r\n
 numComments=2

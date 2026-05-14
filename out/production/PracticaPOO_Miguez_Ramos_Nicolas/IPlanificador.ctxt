@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=IPlanificador
+comment0.text=\r\n\ Interfaz\ que\ define\ las\ operaciones\ del\ motor\ de\ simulaci\u00F3n\ de\ la\ f\u00E1brica.\r\n\ Permite\ desacoplar\ el\ control\ de\ la\ l\u00F3gica\ de\ producci\u00F3n\ de\ su\ implementaci\u00F3n\ concreta,\r\n\ facilitando\ la\ gesti\u00F3n\ de\ diferentes\ niveles\ de\ complejidad.\r\n\ *\ @author\ Nicol\u00E1s\ M\u00EDguez\ Ramos\r\n\ @version\ 1.0\r\n
+comment1.params=
+comment1.target=void\ comenzarSimulacion()
+comment1.text=\r\n\ Inicia\ el\ bucle\ principal\ de\ ejecuci\u00F3n\ de\ la\ simulaci\u00F3n.\r\n\ Coordina\ la\ asignaci\u00F3n\ inicial\ y\ el\ avance\ temporal\ segundo\ a\ segundo.\r\n
+comment2.params=
+comment2.target=boolean\ finalizado()
+comment2.text=\r\n\ Verifica\ si\ la\ simulaci\u00F3n\ ha\ completado\ todas\ las\ tareas\ pendientes.\r\n\ @return\ true\ si\ no\ quedan\ veh\u00EDculos\ en\ almac\u00E9n\ ni\ en\ las\ cadenas\ de\ montaje.\r\n
+comment3.params=
+comment3.target=void\ modoSimple()
+comment3.text=\r\n\ Ejecuta\ la\ l\u00F3gica\ de\ simulaci\u00F3n\ de\ nivel\ b\u00E1sico.\r\n\ Gesti\u00F3n\ secuencial\ sin\ aver\u00EDas\ ni\ imprevistos.\r\n
+comment4.params=
+comment4.target=void\ modoComplejo()
+comment4.text=\r\n\ Ejecuta\ la\ l\u00F3gica\ de\ simulaci\u00F3n\ de\ nivel\ intermedio.\r\n\ Introduce\ la\ gesti\u00F3n\ de\ aver\u00EDas\ mec\u00E1nicas\ y\ reparaciones.\r\n
+comment5.params=
+comment5.target=void\ modoMuyComplejo()
+comment5.text=\r\n\ Ejecuta\ la\ l\u00F3gica\ de\ simulaci\u00F3n\ de\ nivel\ avanzado.\r\n\ Incluye\ eventos\ catastr\u00F3ficos\ como\ apagones\ generales\ gestionados\ por\ administraci\u00F3n.\r\n
+comment6.params=
+comment6.target=void\ asignarPersonal()
+comment6.text=\r\n\ Distribuye\ de\ forma\ aleatoria\ u\ optimizada\ el\ personal\ disponible\r\n\ en\ las\ diferentes\ estaciones\ de\ las\ cadenas\ de\ montaje.\r\n
+comment7.params=
+comment7.target=void\ asignarVehiculos()
+comment7.text=\r\n\ Introduce\ nuevos\ chasis\ desde\ el\ almac\u00E9n\ a\ la\ primera\ estaci\u00F3n\ libre\r\n\ de\ cada\ cadena\ de\ montaje\ correspondiente.\r\n
+numComments=8

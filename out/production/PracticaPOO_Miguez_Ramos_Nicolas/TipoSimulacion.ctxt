@@ -1,4 +1,4 @@
 #BlueJ class context
 comment0.target=TipoSimulacion
-comment0.text=\r\n\ Enumeration\ class\ TipoSimulacion\ -\ write\ a\ description\ of\ the\ enum\ class\ here\r\n\ \r\n\ @author\ (your\ name\ here)\r\n\ @version\ (version\ number\ or\ date\ here)\r\n
+comment0.text=\r\n\ Define\ los\ niveles\ de\ dificultad\ y\ realismo\ de\ la\ simulaci\u00F3n.\r\n\ Determina\ qu\u00E9\ l\u00F3gica\ de\ eventos\ y\ fallos\ se\ aplicar\u00E1\ durante\ la\ ejecuci\u00F3n\r\n\ del\ Planificador\ en\ la\ f\u00E1brica.\r\n\ *\ @author\ Nicol\u00E1s\ M\u00EDguez\ Ramos\r\n\ @version\ 1.0\r\n
 numComments=1

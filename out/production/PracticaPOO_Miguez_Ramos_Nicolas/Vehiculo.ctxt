@@ -1,8 +1,9 @@
 #BlueJ class context
 comment0.target=Vehiculo
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Vehiculo\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Clase\ abstracta\ que\ define\ la\ estructura\ y\ el\ comportamiento\ de\ un\ Veh\u00EDculo.\r\n\ Representa\ el\ "chasis"\ inicial\ que\ evoluciona\ a\ medida\ que\ atraviesa\ las\r\n\ distintas\ estaciones\ de\ montaje,\ incorporando\ componentes\ (Motor,\ Ruedas,\ Tapicer\u00EDa)\r\n\ y\ actualizando\ su\ estado\ interno\ de\ fabricaci\u00F3n.\r\n\ *\ @author\ Nicol\u00E1s\ M\u00EDguez\ Ramos\r\n\ @version\ 1.0\r\n
 comment1.params=color\ plazas\ taraVehiculo\ pesoMax
 comment1.target=Vehiculo(java.lang.String,\ int,\ int,\ double)
+comment1.text=\r\n\ Constructor\ para\ la\ clase\ Vehiculo.\r\n\ Inicializa\ el\ chasis\ con\ sus\ propiedades\ f\u00EDsicas\ y\ establece\ el\ estado\ inicial\ como\ ND.\r\n\ *\ @param\ color\ \ \ \ \ \ \ \ \ Color\ de\ la\ carrocer\u00EDa.\r\n\ @param\ plazas\ \ \ \ \ \ \ \ Capacidad\ de\ pasajeros.\r\n\ @param\ taraVehiculo\ \ Peso\ en\ vac\u00EDo.\r\n\ @param\ pesoMax\ \ \ \ \ \ \ Peso\ m\u00E1ximo\ t\u00E9cnico.\r\n
 comment10.params=
 comment10.target=int\ getTaraVehiculo()
 comment11.params=taraVehiculo
@@ -25,8 +26,10 @@ comment19.params=ruedas
 comment19.target=void\ setRuedas(java.util.List)
 comment2.params=
 comment2.target=void\ siguienteEstado()
+comment2.text=\r\n\ Hace\ avanzar\ al\ veh\u00EDculo\ a\ la\ siguiente\ fase\ del\ proceso\ de\ montaje.\r\n\ Utiliza\ el\ orden\ definido\ en\ el\ enumerado\ EstadoVehiculo.\r\n
 comment20.params=
 comment20.target=java.lang.String\ toString()
+comment20.text=\r\n\ Proporciona\ una\ visi\u00F3n\ r\u00E1pida\ del\ estado\ de\ ensamblaje\ del\ veh\u00EDculo.\r\n\ @return\ Cadena\ con\ el\ tipo\ de\ veh\u00EDculo,\ color\ y\ componentes\ instalados.\r\n
 comment3.params=
 comment3.target=int\ getId()
 comment4.params=

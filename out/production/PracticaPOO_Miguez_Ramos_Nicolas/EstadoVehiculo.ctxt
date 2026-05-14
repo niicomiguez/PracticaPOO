@@ -1,4 +1,4 @@
 #BlueJ class context
 comment0.target=EstadoVehiculo
-comment0.text=\r\n\ Enumeration\ class\ EstadoVehiculo\ -\ write\ a\ description\ of\ the\ enum\ class\ here\r\n\ \r\n\ @author\ (your\ name\ here)\r\n\ @version\ (version\ number\ or\ date\ here)\r\n
+comment0.text=\r\n\ Clase\ de\ enumeraci\u00F3n\ que\ define\ los\ posibles\ estados\ de\ montaje\ de\ un\ veh\u00EDculo.\r\n\ Estos\ estados\ representan\ las\ fases\ secuenciales\ por\ las\ que\ debe\ pasar\ cada\r\n\ unidad\ en\ la\ l\u00EDnea\ de\ producci\u00F3n\ para\ garantizar\ un\ ensamblaje\ correcto.\r\n\ *\ @author\ Nicol\u00E1s\ M\u00EDguez\ Ramos\r\n\ @version\ 1.0\r\n
 numComments=1

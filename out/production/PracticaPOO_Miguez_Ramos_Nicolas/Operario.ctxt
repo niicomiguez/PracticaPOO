@@ -1,14 +1,19 @@
 #BlueJ class context
 comment0.target=Operario
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Operario\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Clase\ que\ representa\ a\ un\ Operario\ de\ l\u00EDnea\ en\ la\ f\u00E1brica.\r\n\ El\ operario\ es\ el\ encargado\ de\ ejecutar\ las\ tareas\ de\ montaje\ de\ componentes.\r\n\ Su\ productividad\ evoluciona\ con\ la\ experiencia\:\ a\ partir\ de\ un\ umbral\ de\r\n\ montajes\ realizados,\ reduce\ significativamente\ el\ tiempo\ necesario\ para\r\n\ completar\ su\ tarea,\ optimizando\ la\ cadena\ de\ producci\u00F3n.\r\n\ *\ @author\ Nicol\u00E1s\ M\u00EDguez\ Ramos\r\n\ @version\ 1.0\r\n
 comment1.params=nombre\ apellidos\ direccion\ DNI\ numSeguridadSocial\ salario\ fechaIngreso
 comment1.target=Operario(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ int,\ double,\ java.lang.String)
+comment1.text=\r\n\ Constructor\ para\ la\ clase\ Operario.\r\n\ *\ @param\ nombre\ \ \ \ \ \ \ \ \ \ \ \ \ \ Nombre\ del\ operario.\r\n\ @param\ apellidos\ \ \ \ \ \ \ \ \ \ \ Apellidos\ del\ operario.\r\n\ @param\ direccion\ \ \ \ \ \ \ \ \ \ \ Direcci\u00F3n\ postal.\r\n\ @param\ DNI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Documento\ Nacional\ de\ Identidad.\r\n\ @param\ numSeguridadSocial\ \ N\u00FAmero\ de\ afiliaci\u00F3n\ a\ la\ Seguridad\ Social.\r\n\ @param\ salario\ \ \ \ \ \ \ \ \ \ \ \ \ Sueldo\ base.\r\n\ @param\ fechaIngreso\ \ \ \ \ \ \ \ Fecha\ de\ incorporaci\u00F3n\ a\ la\ f\u00E1brica.\r\n
 comment2.params=
 comment2.target=boolean\ esEficiente()
+comment2.text=\r\n\ Eval\u00FAa\ si\ el\ operario\ ha\ alcanzado\ el\ estatus\ de\ eficiencia.\r\n\ *\ @return\ true\ si\ ha\ superado\ los\ 10\ montajes\ realizados;\ false\ en\ caso\ contrario.\r\n
 comment3.params=
 comment3.target=int\ getTiempoTarea()
+comment3.text=\r\n\ Calcula\ el\ tiempo\ (en\ segundos\ de\ simulaci\u00F3n)\ que\ el\ operario\ tarda\ en\ montar\ un\ componente.\r\n\ *\ @return\ 1\ segundo\ si\ es\ eficiente,\ 3\ segundos\ si\ a\u00FAn\ est\u00E1\ en\ fase\ de\ aprendizaje.\r\n
 comment4.params=
 comment4.target=int\ getNumMontajes()
+comment4.text=\r\n\ @return\ El\ n\u00FAmero\ total\ de\ montajes\ realizados\ hasta\ el\ momento.\r\n
 comment5.params=
 comment5.target=void\ incrementarMontajes()
+comment5.text=\r\n\ Incrementa\ el\ contador\ de\ montajes\ tras\ finalizar\ con\ \u00E9xito\ la\ tarea\ asignada.\r\n
 numComments=6

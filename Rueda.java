@@ -40,7 +40,7 @@ public class Rueda {
      * @param indiceCarga     Capacidad de carga.
      * @param codigoVelocidad Límite de velocidad.
      */
-    public Rueda(TipoRueda tipoRueda, int ancho, int diametro, int indiceCarga, int codigoVelocidad) {
+    public Rueda(TipoRueda tipoRueda, double ancho, double diametro, int indiceCarga, int codigoVelocidad) {
         this.id = contadorId++;
         this.tipoRueda = tipoRueda;
         this.ancho = ancho;

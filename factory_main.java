@@ -33,9 +33,9 @@ public class factory_main {
             System.out.println("4. Planificador (Simulación)");
             System.out.println("5. Consultar Registros");
             System.out.println("0. Salir");
-            System.out.print("Seleccione una opción: ");
+            System.out.print("Seleccione una opción: (Ejemplo: 1) ");
 
-            int opcion = sc.nextInt();
+            int opcion = leerEnteroSeguro(sc);
             switch (opcion) {
                 case 1: menuAlmacen(dao, sc); break;
                 case 2: menuTrabajadores(dao, sc); break;
@@ -61,9 +61,9 @@ public class factory_main {
             System.out.println("2. Gestión de Tapicerías");
             System.out.println("3. Gestión de Ruedas");
             System.out.println("0. Volver");
-            System.out.print("Seleccione una opción: ");
+            System.out.print("Seleccione una opción: (Ejemplo: 1) ");
 
-            int opcion = sc.nextInt();
+            int opcion = leerEnteroSeguro(sc);
             if (opcion == 0) salir = true;
             else if (opcion >= 1 && opcion <= 3) {
                 menuGestionAlmacen(dao, sc, opcion);
@@ -91,10 +91,9 @@ public class factory_main {
             System.out.println("2. Añadir nuevo/a " + nombre.toLowerCase());
             System.out.println("3. Borrar por ID");
             System.out.println("0. Volver");
-            System.out.print("Opción: ");
+            System.out.print("Seleccione una opción: (Ejemplo: 1) ");
 
-            int opcion = sc.nextInt();
-            sc.nextLine();
+            int opcion = leerEnteroSeguro(sc);
 
             switch (opcion) {
                 case 1 -> {
@@ -104,8 +103,8 @@ public class factory_main {
                 }
                 case 2 -> crearComponente(dao, sc, tipoComponente);
                 case 3 -> {
-                    System.out.print("Introduce ID a borrar: ");
-                    int id = sc.nextInt();
+                    System.out.print("Introduce ID a borrar: (Ejemplo: 1) ");
+                    int id = leerEnteroSeguro(sc);
                     String resultado = switch (tipoComponente) {
                         case 1 -> dao.borrarMotorPorId(id, segundoActual);
                         case 2 -> dao.borrarTapiceriaPorId(id, segundoActual);
@@ -131,29 +130,29 @@ public class factory_main {
         switch (tipo) {
             case 1 -> { // MOTORES
                 System.out.println("1. GASOLINA | 2. ELECTRICO | 3. HIBRIDO");
-                int tInt = sc.nextInt();
+                int tInt = leerEnteroSeguro(sc);
                 TipoMotor tm = (tInt == 2) ? TipoMotor.ELECTRICO : (tInt == 3) ? TipoMotor.HIBRIDO : TipoMotor.GASOLINA;
-                System.out.print("Cilindrada: "); double cil = sc.nextDouble();
-                System.out.print("Potencia: "); double pot = sc.nextDouble();
-                System.out.print("Cilindros: "); int cils = sc.nextInt();
+                System.out.print("Cilindrada: (Ejemplo: 5.2) "); double cil = leerDecimalSeguro(sc);
+                System.out.print("Potencia: (Ejemplo: 2.3) "); double pot = leerDecimalSeguro(sc);
+                System.out.print("Cilindros: (Ejemplo: 3) "); int cils = leerEnteroSeguro(sc);
                 dao.anadirMotor(new Motor(tm, cil, pot, cils), segundoActual);
             }
             case 2 -> { // TAPICERÍA
                 System.out.println("1. TELA | 2. CUERO | 3. ALCANTARA");
-                int tInt = sc.nextInt();
+                int tInt = leerEnteroSeguro(sc);
                 TipoTapiceria tt = (tInt == 2) ? TipoTapiceria.CUERO : (tInt == 3) ? TipoTapiceria.ALCANTARA : TipoTapiceria.TELA;
-                System.out.print("Color: "); String col = sc.next();
-                System.out.print("Plazas: "); int plz = sc.nextInt();
+                System.out.print("Color: (Ejemplo: rojo) "); String col = sc.nextLine();
+                System.out.print("Metros: (Ejemplo: 2) "); int plz = leerEnteroSeguro(sc);
                 dao.anadirTapiceria(new Tapiceria(tt, col, plz), segundoActual);
             }
             case 3 -> { // RUEDAS
                 System.out.println("1. NORMAL | 2. DEPORTIVO | 3. TODOTERRENO");
-                int tInt = sc.nextInt();
+                int tInt = leerEnteroSeguro(sc);
                 TipoRueda tr = (tInt == 2) ? TipoRueda.DEPORTIVO : (tInt == 3) ? TipoRueda.TODOTERRENO : TipoRueda.NORMAL;
-                System.out.print("Anchura: "); int anc = sc.nextInt();
-                System.out.print("Diámetro: "); int diam = sc.nextInt();
-                System.out.print("Carga: "); int carg = sc.nextInt();
-                System.out.print("Vel. Máx: "); int vel = sc.nextInt();
+                System.out.print("Anchura: (Ejemplo: 2.3) "); double anc = leerDecimalSeguro(sc);
+                System.out.print("Diámetro: (Ejemplo: 5.2) "); double diam = leerDecimalSeguro(sc);
+                System.out.print("Carga: (Ejemplo: 4) "); int carg = leerEnteroSeguro(sc);
+                System.out.print("Vel. Máx: (Ejemplo: 20) "); int vel = leerEnteroSeguro(sc);
                 dao.anadirRueda(new Rueda(tr, anc, diam, carg, vel), segundoActual);
             }
         }
@@ -176,10 +175,9 @@ public class factory_main {
             System.out.println("3. Añadir nuevo trabajador");
             System.out.println("4. Borrar trabajador por DNI");
             System.out.println("0. Volver");
-            System.out.print("Seleccione una opción: ");
+            System.out.print("Seleccione una opción: (Ejemplo: 1) ");
 
-            int opcion = sc.nextInt();
-            sc.nextLine();
+            int opcion = leerEnteroSeguro(sc);
 
             switch (opcion) {
                 case 1:
@@ -225,7 +223,7 @@ public class factory_main {
             System.out.println("0. Volver");
             System.out.print("Seleccione una opción: ");
 
-            int opcion = sc.nextInt();
+            int opcion = leerEnteroSeguro(sc);
             switch (opcion) {
                 case 1:
                     System.out.println(dao.listarTrabajadores());
@@ -267,9 +265,9 @@ public class factory_main {
             System.out.println("2. Ordenar alfabéticamente (por Apellido)");
             System.out.println("3. Ordenar por productividad (Ranking montajes)");
             System.out.println("0. Volver");
-            System.out.print("Seleccione una opción: ");
+            System.out.print("Seleccione una opción: (Ejemplo: 1) ");
 
-            int opcion = sc.nextInt();
+            int opcion = leerEnteroSeguro(sc);
             switch (opcion) {
                 case 1:
                     imprimirLista(dao.obtenerSoloOperarios(), "Operarios - Orden General");
@@ -301,10 +299,9 @@ public class factory_main {
         System.out.println("2. Administrador");
         System.out.println("3. Gestor de Planta");
         System.out.println("4. Mecánico");
-        System.out.print("Opción: ");
+        System.out.print("Seleccione una opción: (Ejemplo: 1) ");
 
-        int tipo = sc.nextInt();
-        sc.nextLine();
+        int tipo = leerEnteroSeguro(sc);
 
         System.out.print("Nombre: ");
         String nombre = sc.nextLine();
@@ -319,8 +316,7 @@ public class factory_main {
         String direccion = sc.nextLine();
 
         System.out.print("Sueldo Base: ");
-        double sueldo = sc.nextDouble();
-        sc.nextLine();
+        double sueldo = leerDecimalSeguro(sc);
 
         System.out.print("Fecha de ingreso/alta (AAAA-MM-DD): ");
         String fecha = sc.nextLine();
@@ -361,8 +357,7 @@ public class factory_main {
             System.out.println("0. Volver");
             System.out.print("Seleccione una opción: ");
 
-            int opcion = sc.nextInt();
-            sc.nextLine();
+            int opcion = leerEnteroSeguro(sc);
 
             switch (opcion) {
                 case 1:
@@ -379,7 +374,7 @@ public class factory_main {
 
                 case 3:
                     System.out.print("Introduce el segundo exacto a consultar: ");
-                    int seg = sc.nextInt();
+                    int seg = leerEnteroSeguro(sc);
                     List<Evento> porFecha = dao.consultarEventosPorFecha(seg);
                     imprimirEventos(porFecha, "Eventos en el segundo: " + seg);
                     break;
@@ -403,15 +398,22 @@ public class factory_main {
         int ops = dao.obtenerSoloOperarios().size();
         int mecs = dao.obtenerSoloMecanicos().size();
         int ads = dao.obtenerSoloAdministradores().size();
+        int numVehiculos = dao.getVehiculos().size();
 
+        System.out.println("NUMERO DE VEHICULOS "+ numVehiculos);
         // Necesitamos 12 operarios (4 por cada una de las 3 cadenas), 1 mecánico y 1 administrador
-        if (ops < 12 || mecs < 4 || ads < 1) {
-            System.out.println("\n ERROR: PLANTILLA INCOMPLETA PARA SIMULACIÓN");
+        if (ops < 12 || mecs < 4 || ads < 1 || numVehiculos == 0) {
+            System.out.println("\n ERROR: REQUISITOS PREVIOS NO CUMPLIDOS");
             System.out.println("--------------------------------------------------");
-            System.out.println("Estado actual: " + ops + " Operarios, " + mecs + " Mecánicos, " + ads + " Administradores.");
-            System.out.println("Requisito mín: 12 Operarios, 4 Mecánicos, 1 Administrador.");
+            System.out.println("Personal: " + ops + " Operarios, " + mecs + " Mecánicos, " + ads + " Admin.");
+            System.out.println("Stock: " + numVehiculos + " chasis disponibles.");
             System.out.println("--------------------------------------------------");
-            System.out.println("Vuelva al menú de trabajadores para completar la plantilla.");
+
+            if (numVehiculos == 0) {
+                System.out.println("MOTIVO: No hay chasis en el almacén. Por favor, añada vehículos en el Menú 3.");
+            } else {
+                System.out.println("MOTIVO: Plantilla incompleta (Mín: 12 Ops, 4 Mec, 1 Admin).");
+            }
             return;
         }
         boolean volver = false;
@@ -423,8 +425,7 @@ public class factory_main {
             System.out.println("0. Volver");
             System.out.print("Seleccione una opción: ");
 
-            int opcion = sc.nextInt();
-            sc.nextLine(); // Limpiar buffer
+            int opcion = leerEnteroSeguro(sc);
 
             if (opcion == 0) {
                 volver = true;
@@ -449,25 +450,31 @@ public class factory_main {
             String confirmacion = sc.nextLine().trim().toUpperCase();
 
             if (confirmacion.equals("S")) {
-                System.out.println("Iniciando simulación " + modo + "...");
-                Planificador planificador;
+                // RE-COMPROBACIÓN DE STOCK JUSTO ANTES DE ARRANCAR
+                if (dao.getVehiculos().isEmpty()) {
+                    System.out.println("\n [!] ERROR: No quedan Vehículos en el almacén para una nueva simulación.");
+                    System.out.println(" Finalice esta simulación o añada vehículos en el menú de Gestión de Vehículos.");
+                    // No salimos del bucle, pero impedimos que arranque el Planificador
+                } else {
+                    System.out.println("Iniciando simulación " + modo + "...");
+                    Planificador planificador;
 
-                switch (opcion) {
-                    case 1:
-                        planificador = new Planificador(TipoSimulacion.SIMPLE, dao);
-                        planificador.comenzarSimulacion();
-                        break;
-                    case 2:
-                        planificador = new Planificador(TipoSimulacion.COMPLEJA, dao);
-                        planificador.comenzarSimulacion();
-                        break;
-                    case 3:
-                        planificador = new Planificador(TipoSimulacion.MUY_COMPLEJA, dao);
-                        planificador.comenzarSimulacion();
-                        break;
+                    switch (opcion) {
+                        case 1 -> {
+                            planificador = new Planificador(TipoSimulacion.SIMPLE, dao);
+                            planificador.comenzarSimulacion();
+                        }
+                        case 2 -> {
+                            planificador = new Planificador(TipoSimulacion.COMPLEJA, dao);
+                            planificador.comenzarSimulacion();
+                        }
+                        case 3 -> {
+                            planificador = new Planificador(TipoSimulacion.MUY_COMPLEJA, dao);
+                            planificador.comenzarSimulacion();
+                        }
+                    }
+                    System.out.println("Simulación finalizada con éxito.");
                 }
-
-                System.out.println("Simulación finalizada con éxito.");
             } else if (confirmacion.equals("N")) {
                 System.out.println("Simulación cancelada. Volviendo al menú...");
             } else {
@@ -491,8 +498,9 @@ public class factory_main {
             System.out.println("4. Furgonetas");
             System.out.println("5. Vehículos Ensamblados");
             System.out.println("0. Volver");
+            System.out.print("Seleccione una opción: (Ejemplo: 1) ");
 
-            int opcion = sc.nextInt();
+            int opcion = leerEnteroSeguro(sc);
             switch (opcion) {
                 case 1 -> System.out.println(dao.listarVehiculos());
                 case 2 -> menuGestionVehiculos(dao, sc, 1);
@@ -519,9 +527,9 @@ public class factory_main {
             System.out.println("4. Tasas de montaje (Configuraciones más exitosas)");
             System.out.println("5. Filtrar por fecha (segundo de simulación)");
             System.out.println("0. Volver");
-            System.out.print("Opción: ");
+            System.out.print("Seleccione una opción: (Ejemplo: 1) ");
 
-            int opcion = sc.nextInt();
+            int opcion = leerEnteroSeguro(sc);
             switch (opcion) {
                 case 1 -> System.out.println(dao.listarVehiculosEnsamblados());
                 case 2 -> System.out.println(dao.listarVehiculosEnsambladosAlfabetico());
@@ -529,7 +537,7 @@ public class factory_main {
                 case 4 -> System.out.println(dao.listarConfiguracionesMasEnsambladas());
                 case 5 -> {
                     System.out.print("Introduzca el segundo exacto de la simulación: ");
-                    int fecha = sc.nextInt();
+                    int fecha = leerEnteroSeguro(sc);
                     System.out.println(dao.listarProduccionPorFecha(fecha));
                 }
                 case 0 -> volver = true;
@@ -549,25 +557,25 @@ public class factory_main {
         System.out.println("2. Por Tapicería");
         System.out.println("3. Por Ruedas");
         System.out.println("0. Cancelar");
-        System.out.print("Seleccione componente: ");
+        System.out.print("Seleccione una opción: (Ejemplo: 1) ");
 
-        int comp = sc.nextInt();
+        int comp = leerEnteroSeguro(sc);
         switch (comp) {
             case 1 -> {
                 System.out.println("Seleccione tipo de Motor: 1. ELÉCTRICO | 2. GASOLINA | 3. HÍBRIDO");
-                int tipo = sc.nextInt();
+                int tipo = leerEnteroSeguro(sc);
                 TipoMotor tm = (tipo == 1) ? TipoMotor.ELECTRICO : (tipo == 3) ? TipoMotor.HIBRIDO : TipoMotor.GASOLINA;
                 System.out.println(dao.listarVehiculosPorTipoMotor(tm));
             }
             case 2 -> {
                 System.out.println("Seleccione tipo de Tapicería: 1. TELA | 2. CUERO | 3. ALCANTARA");
-                int tipo = sc.nextInt();
+                int tipo = leerEnteroSeguro(sc);
                 TipoTapiceria tt = (tipo == 2) ? TipoTapiceria.CUERO : (tipo == 3) ? TipoTapiceria.ALCANTARA : TipoTapiceria.TELA;
                 System.out.println(dao.listarVehiculosPorTipoTapiceria(tt));
             }
             case 3 -> {
                 System.out.println("Seleccione tipo de Rueda: 1. NORMAL | 2. DEPORTIVO | 3. TODOTERRENO");
-                int tipo = sc.nextInt();
+                int tipo = leerEnteroSeguro(sc);
                 TipoRueda tr = (tipo == 2) ? TipoRueda.DEPORTIVO : (tipo == 3) ? TipoRueda.TODOTERRENO : TipoRueda.NORMAL;
                 System.out.println(dao.listarVehiculosPorTipoRueda(tr));
             }
@@ -593,10 +601,9 @@ public class factory_main {
             System.out.println("2. Añadir nuevo " + nombre.toLowerCase());
             System.out.println("3. Borrar por ID");
             System.out.println("0. Volver");
-            System.out.print("Opción: ");
+            System.out.print("Seleccione una opción: (Ejemplo: 1) ");
 
-            int opcion = sc.nextInt();
-            sc.nextLine();
+            int opcion = leerEnteroSeguro(sc);
 
             switch (opcion) {
                 case 1 -> {
@@ -617,7 +624,7 @@ public class factory_main {
                 case 2 -> crearVehiculo(dao, sc, tipoVehiculo);
                 case 3 -> {
                     System.out.print("ID a borrar: ");
-                    int id = sc.nextInt();
+                    int id = leerEnteroSeguro(sc);
                     System.out.println(dao.borrarVehiculoPorId(id, segundoActual));
                 }
                 case 0 -> volver = true;
@@ -635,20 +642,20 @@ public class factory_main {
     private static void crearVehiculo(GestionFabricaDAO dao, Scanner sc, int tipo) {
         System.out.println("\n-- Datos del nuevo chasis --");
 
-        System.out.print("Color: ");
+        System.out.print("Color: (Ejemplo: azul) ");
         String color = sc.nextLine();
 
         int plazas = 2; // Valor por defecto para Biplazas
         if (tipo != 2) {
-            System.out.print("Número de plazas: ");
-            plazas = sc.nextInt();
+            System.out.print("Número de plazas: (Ejemplo: 2) ");
+            plazas = leerEnteroSeguro(sc);
         }
 
-        System.out.print("Tara (kg): ");
-        int tara = sc.nextInt();
+        System.out.print("Tara (kg): (Ejemplo: 5) ");
+        int tara = leerEnteroSeguro(sc);
 
-        System.out.print("Peso Máximo (kg): ");
-        double pesoMax = sc.nextDouble();
+        System.out.print("Peso Máximo (kg): (Ejemplo: 20) ");
+        double pesoMax = leerDecimalSeguro(sc);
 
         Vehiculo nuevo = null;
         switch (tipo) {
@@ -659,7 +666,7 @@ public class factory_main {
 
         if (nuevo != null) {
             dao.anadirVehiculo(nuevo);
-            System.out.println("\n Registrado con ID: " + nuevo.getId());
+            System.out.println("\n Registrado nuevo vehículo con ID: " + nuevo.getId());
         }
     }
 
@@ -691,6 +698,32 @@ public class factory_main {
         } else {
             for (Evento e : eventos) {
                 System.out.println(e.toString());
+            }
+        }
+    }
+    /**
+     * Lee un entero de la consola de forma segura, evitando excepciones
+     * si el usuario introduce texto en lugar de números.
+     */
+    private static int leerEnteroSeguro(Scanner sc) {
+        while (true) {
+            try {
+                return Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Por favor, introduzca un número entero válido.");
+            }
+        }
+    }
+
+    /**
+     * Lee un decimal de la consola de forma segura.
+     */
+    private static double leerDecimalSeguro(Scanner sc) {
+        while (true) {
+            try {
+                return Double.parseDouble(sc.nextLine().replace(",", "."));
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Introduzca un número decimal válido (Ej: 5.2).");
             }
         }
     }

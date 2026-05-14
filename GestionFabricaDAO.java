@@ -206,8 +206,12 @@ public class GestionFabricaDAO implements IGestionDatos {
      */
     public List<Evento> consultarEventosPorComponente(String tipo) {
         List<Evento> filtrados = new ArrayList<>();
+        String busqueda = tipo.trim().toLowerCase();
+
         for (Evento e : historialMontaje) {
-            if (e.getTipoComponente().equalsIgnoreCase(tipo)) {
+            String tipoEvento = e.getTipoComponente().toLowerCase();
+
+            if (tipoEvento.contains(busqueda)) {
                 filtrados.add(e);
             }
         }

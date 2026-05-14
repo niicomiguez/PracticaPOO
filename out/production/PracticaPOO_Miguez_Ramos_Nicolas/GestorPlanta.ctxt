@@ -1,6 +1,7 @@
 #BlueJ class context
 comment0.target=GestorPlanta
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ GestorPlanta\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Clase\ que\ representa\ a\ un\ Gestor\ de\ Planta\ dentro\ de\ la\ f\u00E1brica.\r\n\ El\ Gestor\ de\ Planta\ es\ responsable\ de\ supervisar\ el\ flujo\ operativo,\r\n\ coordinar\ los\ recursos\ y\ asegurar\ que\ los\ objetivos\ de\ producci\u00F3n\ se\ cumplan\r\n\ seg\u00FAn\ el\ cronograma\ de\ la\ simulaci\u00F3n.\r\n\ *\ @author\ Nicol\u00E1s\ M\u00EDguez\ Ramos\r\n\ @version\ 1.0\r\n
 comment1.params=nombre\ apellidos\ direccion\ DNI\ numSeguridadSocial\ salario\ fechaIngreso
 comment1.target=GestorPlanta(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ int,\ double,\ java.lang.String)
+comment1.text=\r\n\ Constructor\ para\ la\ clase\ GestorPlanta.\r\n\ *\ @param\ nombre\ \ \ \ \ \ \ \ \ \ \ \ \ \ Nombre\ de\ pila\ del\ gestor.\r\n\ @param\ apellidos\ \ \ \ \ \ \ \ \ \ \ Apellidos\ del\ gestor.\r\n\ @param\ direccion\ \ \ \ \ \ \ \ \ \ \ Direcci\u00F3n\ postal\ de\ residencia.\r\n\ @param\ DNI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Documento\ Nacional\ de\ Identidad.\r\n\ @param\ numSeguridadSocial\ \ N\u00FAmero\ de\ afiliaci\u00F3n\ a\ la\ Seguridad\ Social.\r\n\ @param\ salario\ \ \ \ \ \ \ \ \ \ \ \ \ Sueldo\ bruto\ asignado.\r\n\ @param\ fechaIngreso\ \ \ \ \ \ \ \ Fecha\ de\ contrataci\u00F3n\ en\ la\ f\u00E1brica.\r\n
 numComments=2

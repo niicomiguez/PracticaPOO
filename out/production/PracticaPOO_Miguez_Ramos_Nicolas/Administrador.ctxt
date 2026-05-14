@@ -1,6 +1,7 @@
 #BlueJ class context
 comment0.target=Administrador
-comment0.text=\r\n\ Clase\ que\ representa\ al\ Administrador\ del\ Sistema.\r\n\ Encargado\ de\ restaurar\ el\ software\ y\ las\ cadenas\ tras\ errores\ o\ apagones.\r\n
+comment0.text=\r\n\ Clase\ que\ representa\ al\ Administrador\ del\ Sistema\ dentro\ de\ la\ factor\u00EDa.\r\n\ *\ Se\ encarga\ de\ la\ gesti\u00F3n\ t\u00E9cnica\ y\ de\ la\ restauraci\u00F3n\ operativa\ de\ las\r\n\ cadenas\ de\ montaje\ ante\ fallos\ cr\u00EDticos\ de\ software\ o\ sistemas\ el\u00E9ctricos.\r\n\ *\ @author\ Nicol\u00E1s\ M\u00EDguez\ Ramos\r\n\ @version\ 1.0\r\n
 comment1.params=nombre\ apellidos\ direccion\ DNI\ numSeguridadSocial\ salario\ fechaIngreso
 comment1.target=Administrador(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ int,\ double,\ java.lang.String)
+comment1.text=\r\n\ Constructor\ para\ la\ clase\ Administrador.\r\n\ *\ @param\ nombre\ \ \ \ \ \ \ \ \ \ \ \ \ Nombre\ del\ administrador.\r\n\ @param\ apellidos\ \ \ \ \ \ \ \ \ \ Apellidos\ del\ administrador.\r\n\ @param\ direccion\ \ \ \ \ \ \ \ \ \ Direcci\u00F3n\ de\ residencia.\r\n\ @param\ DNI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Documento\ Nacional\ de\ Identidad.\r\n\ @param\ numSeguridadSocial\ N\u00FAmero\ de\ la\ Seguridad\ Social.\r\n\ @param\ salario\ \ \ \ \ \ \ \ \ \ \ \ Salario\ base\ del\ trabajador.\r\n\ @param\ fechaIngreso\ \ \ \ \ \ \ Fecha\ de\ incorporaci\u00F3n\ a\ la\ empresa.\r\n
 numComments=2

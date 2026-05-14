@@ -1,15 +1,19 @@
 #BlueJ class context
 comment0.target=Mecanico
-comment0.text=\r\n\ Clase\ que\ representa\ al\ Mec\u00E1nico\ de\ Cinta.\r\n\ Su\ velocidad\ de\ reparaci\u00F3n\ depende\ de\ la\ experiencia\ acumulada.\r\n
+comment0.text=\r\n\ Clase\ que\ representa\ al\ Mec\u00E1nico\ de\ Cinta\ dentro\ de\ la\ f\u00E1brica.\r\n\ El\ mec\u00E1nico\ es\ el\ encargado\ de\ solventar\ las\ aver\u00EDas\ en\ las\ l\u00EDneas\ de\ montaje.\r\n\ Su\ eficiencia\ est\u00E1\ ligada\ a\ la\ experiencia\ acumulada\:\ a\ mayor\ n\u00FAmero\ de\r\n\ reparaciones\ realizadas,\ menor\ es\ el\ tiempo\ necesario\ para\ completar\ una\ intervenci\u00F3n.\r\n\ *\ @author\ Nicol\u00E1s\ M\u00EDguez\ Ramos\r\n\ @version\ 1.0\r\n
 comment1.params=nombre\ apellidos\ direccion\ DNI\ numSS\ salario\ fechaIngreso
 comment1.target=Mecanico(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ int,\ double,\ java.lang.String)
+comment1.text=\r\n\ Constructor\ para\ la\ clase\ Mecanico.\r\n\ *\ @param\ nombre\ \ \ \ \ \ \ \ \ \ \ \ \ \ Nombre\ del\ mec\u00E1nico.\r\n\ @param\ apellidos\ \ \ \ \ \ \ \ \ \ \ Apellidos\ del\ mec\u00E1nico.\r\n\ @param\ direccion\ \ \ \ \ \ \ \ \ \ \ Direcci\u00F3n\ de\ residencia.\r\n\ @param\ DNI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Documento\ Nacional\ de\ Identidad.\r\n\ @param\ numSS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ N\u00FAmero\ de\ la\ Seguridad\ Social.\r\n\ @param\ salario\ \ \ \ \ \ \ \ \ \ \ \ \ Sueldo\ asignado.\r\n\ @param\ fechaIngreso\ \ \ \ \ \ \ \ Fecha\ de\ alta\ en\ la\ empresa.\r\n
 comment2.params=
 comment2.target=int\ calcularTiempoReparacion()
-comment2.text=\r\n\ Calcula\ el\ tiempo\ de\ reparaci\u00F3n\ basado\ en\ la\ experiencia.\r\n\ >\ 20\ reparaciones\ \=\ 1\ segundo.\r\n\ <\=\ 20\ reparaciones\ \=\ aleatorio\ entre\ 2\ y\ 5\ segundos.\r\n
+comment2.text=\r\n\ Determina\ el\ tiempo\ de\ inactividad\ de\ la\ cinta\ durante\ una\ reparaci\u00F3n.\r\n\ La\ l\u00F3gica\ de\ negocio\ establece\ que\:\r\n\ -\ Si\ ha\ realizado\ m\u00E1s\ de\ 20\ reparaciones\:\ se\ considera\ veterano\ (1\ segundo).\r\n\ -\ Si\ ha\ realizado\ 20\ o\ menos\:\ es\ junior\ (aleatorio\ entre\ 2\ y\ 5\ segundos).\r\n\ *\ @return\ int\ Segundos\ que\ durar\u00E1\ la\ reparaci\u00F3n.\r\n
 comment3.params=
 comment3.target=void\ incrementarReparaciones()
+comment3.text=\r\n\ Incrementa\ en\ una\ unidad\ el\ historial\ de\ reparaciones\ del\ mec\u00E1nico.\r\n\ Este\ m\u00E9todo\ debe\ llamarse\ cada\ vez\ que\ una\ aver\u00EDa\ sea\ solventada\ con\ \u00E9xito.\r\n
 comment4.params=
 comment4.target=int\ getReparacionesRealizadas()
+comment4.text=\r\n\ @return\ El\ n\u00FAmero\ total\ de\ reparaciones\ acumuladas.\r\n
 comment5.params=reparacionesRealizadas
 comment5.target=void\ setReparacionesRealizadas(int)
+comment5.text=\r\n\ Permite\ ajustar\ manualmente\ el\ n\u00FAmero\ de\ reparaciones\ (\u00FAtil\ para\ carga\ de\ datos).\r\n\ @param\ reparacionesRealizadas\ Nuevo\ valor\ para\ el\ contador\ de\ experiencia.\r\n
 numComments=6
